@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   get "supports/new"
   get "supports/tasks/:id", to: "supports#index", as: 'supports_index'
   patch 'tasks/candidate/:id', to: "tasks#candidate", as: 'tasks_candidate'
-  get "quizzes/answer/:quizzes_id", to: "quizzes#answer", as: 'quizzes_answer'
+  get "quizzes/:quizzes_id/answer", to: "quizzes#answer", as: 'quizzes_answer'
+  patch "quizzes/:quizzes_id/answer", to: "quizzes#answer"
+  get "quizzes/:quizzes_id/answer2", to: "quizzes#answer2", as: 'quizzes_answer2'
   get "quizzes/new", to: "quizzes#new", as: 'quizzes_new'
   get "quizzes/index2"
   get "quizzes/:id", to: "quizzes#show"

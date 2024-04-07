@@ -10,11 +10,15 @@ class TasksController < ApplicationController
       user_id: current_user.id,
       status: '実行中'
       )
-    if @task.amount_bet < @current_user.dice_point
+    if @task.deadline_at.nil?
+      flash.now[:alert] ="今日以降の日付を入力してください。"
+      render 'new', status: :unprocessable_entity
+    elsif @task.amount_bet <= @current_user.dice_point
       @current_user.dice_point = @current_user.dice_point - @task.amount_bet
       @current_user.save
       @task.save
       redirect_to task_path(@task[:id])
+    
     else
       flash.now[:alert] = "ダイスが足りません。"
       render 'new', status: :unprocessable_entity

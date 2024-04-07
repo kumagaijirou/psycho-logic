@@ -1,14 +1,15 @@
-<%= @quiz.question %> 
+<%= @quiz.question %>
 
 <%= form_with url: {controller: 'quizzes', action: 'answer' } do  |f| %>
 
-  <%= f.label :答えの入力 %>
-  <%= f.text_field :user.final_answer, class: 'form-control' %>
+  <%= f.label :解答 %>
+  <%= f.text_field :final_answer, class: 'form-control' %>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
 
-<span class="user">名前 <%= link_to quizzes.user.name, quizzes.user %></span>
-  <span class="number_of_times_solved"> <%= quizzes.number_of_times_solved %></span>
-  <span class="number_of_correct_answers"> <%= quizzes.number_of_correct_answers %></span>
-  <span class="number_of_times_we_saw_the_answer"> <%= quizzes.number_of_times_we_saw_the_answer %></span>
+
+<span class="user">名前 <%= link_to @quiz.user.name, @quiz.user %></span>
+  <span class="number_of_times_solved"> <%= @quiz.number_of_times_solved %></span>
+  <span class="number_of_correct_answers"> <%= @quiz.number_of_correct_answers %></span>
+  <span class="number_of_times_we_saw_the_answer"> <%= @quiz.number_of_times_we_saw_the_answer %></span>

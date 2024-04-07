@@ -17,12 +17,11 @@ class QuizzesController < ApplicationController
 
   def index
     @quizzes = Quiz.where(user_id: current_user.id).paginate(page: params[:page])
-    @quiz = Quiz.find_by(id: params[:id])
   end
 
   def index2
     @quizzes = Quiz.all.paginate(page: params[:page])
-    @quiz = Quiz.find_by(id: params[:id])
+
   end
   
   def show
@@ -33,13 +32,20 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new
   end
 
-  
-
   def answer
     @quiz = Quiz.find(params[:quizzes_id])
-    #@user.update!(final_answer: params[:final_answer])
+    @user = User.find(current_user.id)
+    if @user.update!(user_params)
+    redirect_to quizzes_answer2_path(@quiz)
+    else
+
+    end
   end
-end
+
+  def answer2
+    @quiz = Quiz.find(params[:quizzes_id])
+    @user = User.find(current_user.id) 
+   end
 
   private
 
@@ -48,9 +54,9 @@ end
   end
 
   def user_params
-    params.require(:user).permit(:final_answer)
+    params.permit(:users => [:final_answer])
   end
-      
+  
  # ログイン済みユーザーかどうか確認
   def logged_in_user
     unless logged_in?
@@ -59,3 +65,4 @@ end
       redirect_to login_url, status: :see_other
     end
   end
+end

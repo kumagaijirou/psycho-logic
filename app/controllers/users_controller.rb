@@ -53,6 +53,17 @@ class UsersController < ApplicationController
     redirect_to users_url, status: :see_other
   end
 
+
+  def answer
+    @quiz = Quiz.find(params[:quiz_id])
+    @user = User.find(current_user.id)
+    if @user.update!(user_params)
+    redirect_to quizzes_answer2_path(@quiz)
+    else
+
+    end
+  end
+  
   private
 
     def user_params
