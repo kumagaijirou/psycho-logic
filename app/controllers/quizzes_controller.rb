@@ -19,7 +19,7 @@ class QuizzesController < ApplicationController
     @quizzes = Quiz.where(user_id: current_user.id).paginate(page: params[:page])
   end
 
-  def index2
+  def index_all
     @quizzes = Quiz.all.paginate(page: params[:page])
 
   end
@@ -35,14 +35,19 @@ class QuizzesController < ApplicationController
   def answer
     @quiz = Quiz.find(params[:quizzes_id])
     @user = User.find(current_user.id)
+  end
+
+  def create_answer
+    @quiz = Quiz.find(params[:quizzes_id])
+    @user = User.find(current_user.id)
     if @user.update!(user_params)
-    redirect_to quizzes_answer2_path(@quiz)
+      redirect_to quizzes_answer_result_path(@quiz)
     else
 
     end
   end
 
-  def answer2
+  def answer_result
     @quiz = Quiz.find(params[:quizzes_id])
     @user = User.find(current_user.id) 
    end
@@ -54,7 +59,7 @@ class QuizzesController < ApplicationController
   end
 
   def user_params
-    params.permit(:users => [:final_answer])
+    params.permit(:final_answer)
   end
   
  # ログイン済みユーザーかどうか確認

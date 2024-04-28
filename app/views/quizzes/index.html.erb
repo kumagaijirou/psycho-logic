@@ -1,16 +1,13 @@
 <% provide(:title, 'みんなの問題') %>
 <h1>みんなの問題</h1>
 
-<%= link_to "問題を見る", quizzes_index2_path %><br>
+<%= link_to "問題を見る", quizzes_index_all_path %><br>
 <%= link_to "問題を作る", quizzes_new_path %><br>
 
 <%= will_paginate %>
 
 <ul class="quizzes">
   <%= render @quizzes %>
-  <% @quizzes.each do |quiz| %>
-    <li><%= link_to quiz.question, quizzes_answer_path(quiz) %></li>
-  <% end %>
 </ul>
 
 <%= will_paginate @quizzes %>
