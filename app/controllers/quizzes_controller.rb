@@ -50,7 +50,15 @@ class QuizzesController < ApplicationController
   def answer_result
     @quiz = Quiz.find(params[:quizzes_id])
     @user = User.find(current_user.id) 
-   end
+  end
+
+  def see_answer
+    @quiz = Quiz.find(params[:quizzes_id])
+    #@quiz.user_id = Quiz.find(params[:quizzes_id]).user_id
+    
+    #@user = User.find(current_user.id) 
+    
+  end
 
   private
 

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   patch "quizzes/:quizzes_id/create_answer", to: "quizzes#create_answer"
   get "quizzes/:quizzes_id/answer_result", to: "quizzes#answer_result", as: 'quizzes_answer_result'
   get "quizzes/new", to: "quizzes#new", as: 'quizzes_new'
+  get "quizzes/:quizzes_id/see_answer", to: "quizzes#see_answer", as: 'quizzes_see_answer'
   get "quizzes/index_all"
   get "quizzes/:id", to: "quizzes#show"
   get "quizzes/index"

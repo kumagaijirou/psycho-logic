@@ -2,5 +2,7 @@
 <% if @quiz.answer == @user.final_answer %>
 正解！！
 <% else %>
-残念
+残念<br>
+<br>
+<%= link_to "答えを見る(100ダイスかかります)", quizzes_see_answer_path %><br>
 <% end %>
