@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     @quiz = Quiz.find(params[:quiz_id])
     @user = User.find(current_user.id)
     if @user.update!(user_params)
-    redirect_to quizzes_answer2_path(@quiz)
+      redirect_to quizzes_answer_result_path(@quiz)
     else
 
     end

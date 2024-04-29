@@ -22,13 +22,16 @@ Rails.application.routes.draw do
   get "supports/tasks/:id", to: "supports#index", as: 'supports_index'
   patch 'tasks/candidate/:id', to: "tasks#candidate", as: 'tasks_candidate'
   get "quizzes/:quizzes_id/answer", to: "quizzes#answer", as: 'quizzes_answer'
-  patch "quizzes/:quizzes_id/answer", to: "quizzes#answer"
-  get "quizzes/:quizzes_id/answer2", to: "quizzes#answer2", as: 'quizzes_answer2'
+  patch "quizzes/:quizzes_id/create_answer", to: "quizzes#create_answer"
+  get "quizzes/:quizzes_id/answer_result", to: "quizzes#answer_result", as: 'quizzes_answer_result'
   get "quizzes/new", to: "quizzes#new", as: 'quizzes_new'
-  get "quizzes/index2"
+  get "quizzes/index_all"
   get "quizzes/:id", to: "quizzes#show"
   get "quizzes/index"
+  get "novels/new"
+  get "novels/:novels_id", to: "novels#show", as:'novels_show'
   
+  resources :novels,              only: [:new, :create, :show, :index, :update]
   resources :quizzes,             only: [:new, :create, :show, :index, :update]
   resources :users
   resources :account_activations, only: [:edit]

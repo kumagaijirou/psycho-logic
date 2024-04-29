@@ -1,0 +1,16 @@
+<% provide(:title, '小説の感想') %>
+<h1>小説の感想</h1>
+
+<%= link_to "小説へのリンク集", novels_path %><br>
+<%= link_to "感想を募集する", novels_new_path %><br>
+
+<%= will_paginate %>
+
+<ul class="novels">
+  <%= render @novels %>
+  <% @novels.each do |novel| %>
+    <li><%= link_to novel.work_name, novels_show_path(novel) %></li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>
