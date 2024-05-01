@@ -1,11 +1,14 @@
 class QuizzesController < ApplicationController
-  #before_action :logged_in_user, only: [:create, :index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:create, :index, :edit, :update, :destroy]
 
   def create
     @quiz = Quiz.new(
     question: params[:question],
     answer: params[:answer],
-    user_id: current_user.id
+    user_id: current_user.id,
+    number_of_times_solved: 0,
+    number_of_correct_answers: 0,
+    number_of_times_we_saw_the_answer: 0
     )
     if @quiz.save!
       redirect_to quizzes_path(@quiz[:id])
@@ -39,6 +42,8 @@ class QuizzesController < ApplicationController
 
   def create_answer
     @quiz = Quiz.find(params[:quizzes_id])
+    @quiz.number_of_times_solved = @quiz.number_of_times_solved + 1
+    @quiz.save!
     @user = User.find(current_user.id)
     if @user.update!(user_params)
       redirect_to quizzes_answer_result_path(@quiz)
@@ -54,20 +59,43 @@ class QuizzesController < ApplicationController
 
   def see_answer
     @quiz = Quiz.find(params[:quizzes_id])
-    #@quiz.user_id = Quiz.find(params[:quizzes_id]).user_id
-    
-    #@user = User.find(current_user.id) 
-    
+    @user = User.find(current_user.id) 
+    @quiz.number_of_times_we_saw_the_answer = @quiz.number_of_times_we_saw_the_answer + 1
+    @quiz.save!
+    @quiz.user.dice_point = @quiz.user.dice_point + 90
+    @quiz.user.save!
+    @user.dice_point = @user.dice_point - 100
+    @user.save! 
   end
+
+  def edit
+    @quiz = Quiz.find(params[:quizzes_id])
+  end
+
+  def update
+    @quiz = Quiz.find(params[:quizzes_id])
+    if @quiz.update(update_params)
+      flash[:success] = "問題を変更しました。"
+      redirect_to @quiz
+    else
+      flash.now[:danger] = "編集に失敗しました"
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
 
   private
 
   def quiz_params
-    params.permit(:quizzes => [:question, :answer])
+    params.permit(:question, :answer)
   end
 
   def user_params
     params.permit(:final_answer)
+  end
+
+  def update_params
+    params.require(:quiz).permit(:question, :answer)
   end
   
  # ログイン済みユーザーかどうか確認

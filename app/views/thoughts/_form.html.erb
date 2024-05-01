@@ -1,0 +1,6 @@
+<%= form_with model: @thought, local: true do |f| %>
+  <%= f.label :感想 %>
+  <%= f.text_field :thought, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

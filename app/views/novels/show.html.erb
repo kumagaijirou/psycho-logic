@@ -14,10 +14,9 @@
         <%= @novel.status %>個の感想を募集中<br><br>
         <% if @novel.user_id =! current_user.id %>
         あなたはこの小説の作者なので、感想は書けません。
-        <% elsif @novel.status.to_i == 1 %>
-          <%= button_to '感想を書く', task_status_run_path(@task), method: :patch, class: 'btn btn-primary' %>
-          <%= link_to '応援', new_task_support_path(task_id: @task.id), method: :get %>
-          <%= button_to '立候補する', tasks_candidate_path(@task),method: :patch, class:'btn btn-primary' %>
+        <% elsif @novel.status.to_i >= 1 %>
+          <%= link_to '感想を書く', thoughts_new_path, method: :patch, class: 'btn btn-primary' %>
+        
           <% else %>
             この小説の作者は今現在感想を求めていません。
           <% end %>

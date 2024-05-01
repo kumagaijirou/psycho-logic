@@ -1,8 +1,20 @@
 <%= @user.final_answer %>
-<% if @quiz.answer == @user.final_answer %>
-正解！！
+<% if @quiz.answer == @user.final_answer %><br>
+<% @quiz.number_of_correct_answers = @quiz.number_of_correct_answers + 1 %>
+<% @quiz.save! %>
+正解！！<br><br>
+<span class="user">出題者 <%= link_to @quiz.user.name, @quiz.user %></span><br>
+<span class="number_of_times_solved">解答された回数 <%= @quiz.number_of_times_solved %></span><br>
+<span class="number_of_correct_answers">正解の回数 <%= @quiz.number_of_correct_answers %></span><br>
+<span class="number_of_times_we_saw_the_answer">答えを見られた回数 <%= @quiz.number_of_times_we_saw_the_answer %></span><br>
+
 <% else %>
 残念<br>
+<br>
+<span class="user">出題者 <%= link_to @quiz.user.name, @quiz.user %></span><br>
+<span class="number_of_times_solved">解答された回数 <%= @quiz.number_of_times_solved %></span><br>
+<span class="number_of_correct_answers">正解の回数 <%= @quiz.number_of_correct_answers %></span><br>
+<span class="number_of_times_we_saw_the_answer">答えを見られた回数 <%= @quiz.number_of_times_we_saw_the_answer %></span><br>
 <br>
 <%= link_to "答えを見る(100ダイスかかります)", quizzes_see_answer_path %><br>
 <% end %>

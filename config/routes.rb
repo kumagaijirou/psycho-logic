@@ -29,15 +29,22 @@ Rails.application.routes.draw do
   get "quizzes/index_all"
   get "quizzes/:id", to: "quizzes#show"
   get "quizzes/index"
+  get "quizzes/:quizzes_id/edit", to: "quizzes#edit", as: 'quizzes_edit'
+  get "quizzes/:quizzes_id/update", to: "quizzes#update", as: 'quizzes_update'
   get "novels/new"
   get "novels/:novels_id", to: "novels#show", as:'novels_show'
+  get "thoughts/new", to: "thoughts#new", as: 'thoughts_new'
   
-  resources :novels,              only: [:new, :create, :show, :index, :update]
-  resources :quizzes,             only: [:new, :create, :show, :index, :update]
+  
+  resources :novels,              only: [:new, :create, :show, :index, :update] 
+  resources :thoughts,          only: [:new, :create, :show, :index]
+  resources :quizzes,             only: [:new, :create, :edit, :show, :index, :update]
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :tasks,               only: [:create, :edit, :show, :update, :destroy ,:index, :new] do
     resources :supports,            only: [:new, :create, :show, :index]
   end
+
+
 end

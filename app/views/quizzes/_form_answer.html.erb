@@ -6,7 +6,7 @@
 <% end %>
 
 
-<span class="user">名前 <%= link_to @quiz.user.name, @quiz.user %></span>
-<span class="number_of_times_solved"> <%= @quiz.number_of_times_solved %></span>
-<span class="number_of_correct_answers"> <%= @quiz.number_of_correct_answers %></span>
-<span class="number_of_times_we_saw_the_answer"> <%= @quiz.number_of_times_we_saw_the_answer %></span>
+<span class="user">名前 <%= link_to @quiz.user.name, @quiz.user %></span><br>
+<span class="number_of_times_solved">解答された回数 <%= @quiz.number_of_times_solved %></span><br>
+<span class="number_of_correct_answers">正解の回数 <%= @quiz.number_of_correct_answers %></span><br>
+<span class="number_of_times_we_saw_the_answer">答えを見られた回数 <%= @quiz.number_of_times_we_saw_the_answer %></span><br>
