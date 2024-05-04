@@ -8,7 +8,7 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(quiz.created_at) %> ago.<br>
   <% if quiz.user.id == current_user.id %>
-  <%= link_to "問題を編集する", quizzes_edit_path(quiz) %><br>
+  <%= link_to "問題を編集する", edit_quiz_path(quiz) %><br>
   <% else %>
 
   <% end %>  
