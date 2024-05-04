@@ -28,7 +28,7 @@ class QuizzesController < ApplicationController
   end
   
   def show
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.find(params[:quizzes_id])
   end
   
   def new
@@ -76,7 +76,7 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:quizzes_id])
     if @quiz.update(update_params)
       flash[:success] = "問題を変更しました。"
-      redirect_to @quiz
+      redirect_to quiz_path(quizzes_id: @quiz.id)
     else
       flash.now[:danger] = "編集に失敗しました"
       render 'edit', status: :unprocessable_entity

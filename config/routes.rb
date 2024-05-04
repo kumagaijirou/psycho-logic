@@ -24,21 +24,16 @@ Rails.application.routes.draw do
   get "quizzes/:quizzes_id/answer", to: "quizzes#answer", as: 'quizzes_answer'
   patch "quizzes/:quizzes_id/create_answer", to: "quizzes#create_answer"
   get "quizzes/:quizzes_id/answer_result", to: "quizzes#answer_result", as: 'quizzes_answer_result'
-  get "quizzes/new", to: "quizzes#new", as: 'quizzes_new'
   get "quizzes/:quizzes_id/see_answer", to: "quizzes#see_answer", as: 'quizzes_see_answer'
   get "quizzes/index_all"
-  get "quizzes/:id", to: "quizzes#show"
-  get "quizzes/index"
-  get "quizzes/:quizzes_id/edit", to: "quizzes#edit", as: 'quizzes_edit'
-  get "quizzes/:quizzes_id/update", to: "quizzes#update", as: 'quizzes_update'
   get "novels/new"
   get "novels/:novels_id", to: "novels#show", as:'novels_show'
   get "thoughts/new", to: "thoughts#new", as: 'thoughts_new'
   
   
-  resources :novels,              only: [:new, :create, :show, :index, :update] 
+  resources :novels,              only: [:new, :create, :show, :index, :update]
   resources :thoughts,          only: [:new, :create, :show, :index]
-  resources :quizzes,             only: [:new, :create, :edit, :show, :index, :update]
+  resources :quizzes, param: :quizzes_id, only: [:new, :create, :edit, :show, :index, :update]
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

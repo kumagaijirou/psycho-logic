@@ -1,4 +1,4 @@
-<%= form_with(model: @quiz) do |f| %>
+<%= form_with(model: @quiz, url: quiz_path(@quiz, quizzes_id: @quiz.id), method: :patch) do |f| %>
   
   <%= f.label :問題 %>
   <%= f.text_field :question, class: 'form-control' %>
