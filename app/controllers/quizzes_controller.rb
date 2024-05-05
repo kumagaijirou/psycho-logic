@@ -60,12 +60,21 @@ class QuizzesController < ApplicationController
   def see_answer
     @quiz = Quiz.find(params[:quizzes_id])
     @user = User.find(current_user.id) 
-    @quiz.number_of_times_we_saw_the_answer = @quiz.number_of_times_we_saw_the_answer + 1
+    @quiz.number_of_times_we_saw_the_answer += 1
     @quiz.save!
-    @quiz.user.dice_point = @quiz.user.dice_point + 90
-    @quiz.user.save!
-    @user.dice_point = @user.dice_point - 100
-    @user.save! 
+
+    # 問題作成者と答えを見る
+    if @quiz.user.id == @user.id
+      net_change = 90 - 100
+      @user.dice_point += net_change
+      @user.save!
+    else
+      # @quiz.user と @user が異なる場合
+      @quiz.user.dice_point += 90
+      @quiz.user.save!
+      @user.dice_point -= 100
+      @user.save!
+    end
   end
 
   def edit
