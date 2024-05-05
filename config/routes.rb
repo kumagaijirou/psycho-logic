@@ -29,10 +29,12 @@ Rails.application.routes.draw do
   get "novels/new"
   get "novels/:novels_id", to: "novels#show", as:'novels_show'
   get "thoughts/new", to: "thoughts#new", as: 'thoughts_new'
+
   
   
-  resources :novels,              only: [:new, :create, :show, :index, :update]
-  resources :thoughts,          only: [:new, :create, :show, :index]
+  resources :novels,              only: [:new, :create, :show, :index, :update] do
+    resources :thoughts,  param: :thoughts_id,only: [:create, :new, :show, :index]
+  end
   resources :quizzes, param: :quizzes_id, only: [:new, :create, :edit, :show, :index, :update]
   resources :users
   resources :account_activations, only: [:edit]

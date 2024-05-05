@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_21_234257) do
     t.string "url2"
     t.string "url3"
     t.integer "accumulation_dice_point"
-    t.string "status"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

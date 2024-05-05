@@ -8,7 +8,7 @@ class CreateNovels < ActiveRecord::Migration[7.0]
       t.string :url2
       t.string :url3
       t.integer :accumulation_dice_point
-      t.string :status
+      t.integer :status
 
       t.timestamps
     end

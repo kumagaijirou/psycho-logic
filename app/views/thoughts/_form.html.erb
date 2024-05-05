@@ -1,4 +1,6 @@
-<%= form_with model: @thought, local: true do |f| %>
+ <%= form_for(model:@thought, url: thoughts_create_path, method: :post) do |f| %>
+  <%= f.hidden_field :novel_id, value: @novel.id %>
+
   <%= f.label :感想 %>
   <%= f.text_field :thought, class: 'form-control' %>
 
