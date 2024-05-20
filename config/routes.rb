@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   get "novels/new"
   get "novels/:novels_id", to: "novels#show", as:'novels_show'
   get "thoughts/new", to: "thoughts#new", as: 'thoughts_new'
-
+  get "thoughts/:thoughts_id", to: "thoughts#show", as: 'thoughts_show'
   
   
   resources :novels,              only: [:new, :create, :show, :index, :update] do

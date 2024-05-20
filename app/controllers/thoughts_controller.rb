@@ -1,13 +1,16 @@
 class ThoughtsController < ApplicationController
 
   def create
+    @novel = Novel.find(params[:novel_id])
     @thought = Thought.new(
-    thoughts: params[:thoughts],
-    novel_id: params[:novel_id],
-    user_id: current_user.id,
+      thoughts: params[:thoughts],
+      novel_id: @novel.id,
+      user_id: current_user.id,
     )
     if @thought.save!
-      redirect_to novel_path(@novel_id)
+      @novel.status = @novel.status - 1 
+      @novel.save!
+      redirect_to novel_path(@novel)
     else
       flash.now[:alert] = "問題と答えがないとクイズはできません"
       render 'new', status: :unprocessable_entity
@@ -15,6 +18,8 @@ class ThoughtsController < ApplicationController
   end
 
   def new
+    @novel = Novel.find(params[:novel_id])
     @thought = Thought.new
   end
+
 end

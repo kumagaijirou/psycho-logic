@@ -1,8 +1,8 @@
- <%= form_for(model:@thought, url: thoughts_create_path, method: :post) do |f| %>
+ <<%= form_with url: {controller: 'thoughts', action: 'create' } do  |f| %>
   <%= f.hidden_field :novel_id, value: @novel.id %>
 
   <%= f.label :感想 %>
-  <%= f.text_field :thought, class: 'form-control' %>
+  <%= f.text_field :thoughts, class: 'form-control' %>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

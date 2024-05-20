@@ -20,11 +20,12 @@ class NovelsController < ApplicationController
   end
   
   def index
-    @novels = Novel.where(user_id: current_user.id).paginate(page: params[:page])
+    @novels = Novel.all.paginate(page: params[:page])
   end
 
   def show
-    @novel = Novel.find(params[:novels_id])
+    @novel = Novel.find(params[:novels_id]) 
+    @thoughts = @novel.thoughts
   end
 
   private
