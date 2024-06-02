@@ -17,7 +17,7 @@ class TasksController < ApplicationController
       @current_user.dice_point = @current_user.dice_point - @task.amount_bet
       @current_user.save
       @task.save
-      redirect_to task_path(@task[:id])
+      redirect_to task_path(@task)
     
     else
       flash.now[:alert] = "ダイスが足りません。"

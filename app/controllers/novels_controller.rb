@@ -26,6 +26,8 @@ class NovelsController < ApplicationController
   def show
     @novel = Novel.find(params[:novels_id]) 
     @thoughts = @novel.thoughts
+    @thought1 = Thought.find_by(user_id: current_user.id)
+    @thought = @novel.thoughts.find_by(user_id: current_user.id) if current_user
   end
 
   private

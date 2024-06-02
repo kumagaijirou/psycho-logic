@@ -8,9 +8,7 @@
 
 <ul class="novels">
   <%= render @novels %>
-  <% @novels.each do |novel| %>
-    <li><%= link_to novel.work_name, novels_show_path(novel) %></li>
-  <% end %>
+  
 </ul>
 
 <%= will_paginate %>

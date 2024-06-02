@@ -1,4 +1,4 @@
-  <%= form_with url: {controller: 'thoughts', action: 'create' } do  |f| %>
+  <%= form_with url: {controller: 'thoughts', action: 'update' } do  |f| %>
   <%= f.hidden_field :novel_id, value: @novel.id %>
 
   <%= f.label :感想 %>
