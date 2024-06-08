@@ -1,5 +1,5 @@
-  <%= form_with url: {controller: 'thoughts', action: 'create' } do  |f| %>
-  <%= f.hidden_field :novel_id, value: @novel.id %>
+<%= form_with url: {controller: 'thoughts', action: 'create' } do  |f| %>
+  <%= f.hidden_field :novel_id, value: novel.id %>
 
   <%= f.label :感想 %>
   <%= f.text_field :thoughts, class: 'form-control' %>

@@ -6,29 +6,36 @@ class ThoughtsController < ApplicationController
     @thought.novel_id = @novel.id
     @thought.user_id = current_user.id
     if @thought.save!
+      redirect_to edit_novel_thought_path(@novel, @thought)
     else
       flash.now[:alert] = "問題と答えがないとクイズはできません"
       render 'new', status: :unprocessable_entity
     end
   end
 
+  def edit
+    @novel = Novel.find(params[:novel_id])
+    @thought = Thought.find(params[:thought_id])
+  end
+
   def update
     @novel = Novel.find(params[:novel_id])
     Rails.logger.debug params.inspect
-      @thought = Thought.find(params[:thought_id])
-      if @thought.update!(update_params)
-        redirect_to @thought
-      else
-        render :edit
-      end
-    if #@thought.save!
-      #@novel.status = @novel.status - 1 
-      @novel.save!
+    @thought = Thought.find(params[:thought_id])
+    if @thought.update!(update_params)
+      @novel.status -= 1
       redirect_to novel_path(@novel)
     else
-      flash.now[:alert] = "問題と答えがないとクイズはできません"
-      render 'new', status: :unprocessable_entity
+      render :edit
     end
+    # if #@thought.save!
+    #   #@novel.status = @novel.status - 1 
+    #   @novel.save!
+    #   redirect_to novel_path(@novel)
+    # else
+    #   flash.now[:alert] = "問題と答えがないとクイズはできません"
+    #   render 'new', status: :unprocessable_entity
+    # end
   end
 
   def new
@@ -40,5 +47,5 @@ end
 
 private
 def update_params
-  params.require(:thought).permit(:thought)
+  params.require(:thought).permit(:thoughts)
 end
