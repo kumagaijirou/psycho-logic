@@ -27,14 +27,14 @@ Rails.application.routes.draw do
   get "quizzes/:quizzes_id/see_answer", to: "quizzes#see_answer", as: 'quizzes_see_answer'
   get "quizzes/index_all"
   get "novels/new"
-  get "novels/:novels_id", to: "novels#show", as:'novels_show'
+  get "novels/:novel_id", to: "novels#show", as:'novels_show'
   get "thoughts/new", to: "thoughts#new", as: 'thoughts_new'
-  get "thoughts/:thoughts_id", to: "thoughts#show", as: 'thoughts_show'
-  get "novels/:novel_id/thoughts/:thoughts_id/update", to: "thoughts#update", as: 'thoughts_update'
+  get "thoughts/:thought_id", to: "thoughts#show", as: 'thoughts_show'
+  get "novels/:novel_id/thoughts/:thought_id/update", to: "thoughts#update", as: 'thoughts_update'
   
   
   resources :novels,              only: [:new, :create, :show, :index, :update] do
-    resources :thoughts,  param: :thoughts_id,only: [:create, :new, :show, :index, :update, :edit]
+    resources :thoughts, param: :thought_id, only: [:create, :new, :show, :index, :update, :edit]
   end
   resources :quizzes, param: :quizzes_id, only: [:new, :create, :edit, :show, :index, :update]
   resources :users
