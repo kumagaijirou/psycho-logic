@@ -22,8 +22,8 @@ User.create!(name:  "Example User",
 end
 
   #タスクを生成する
-  Task.create!(content: "programming",
-              user_id: 1,
-              bet_user_id: 2,
-              deadline_at: Time.zone.now,
-              amount_bet: 2000)
+  #Task.create!(content: "programming",
+  #            user_id: 1,
+  #            bet_user_id: 2,
+  #            deadline_at: Time.zone.now,
+  #            amount_bet: 2000)

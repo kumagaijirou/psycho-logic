@@ -1,5 +1,6 @@
-  <%= form_with url: {controller: 'thoughts', action: 'update' } do  |f| %>
-  <%= f.hidden_field :novel_id, value: @novel.id %>
+  <%= form_with model: [novel, thought], local: true do |f| %>
+  <%= f.hidden_field :novel_id, value: novel.id %>
+  <%= f.hidden_field :thought_id, value: thought.id %>
 
   <%= f.label :感想 %>
   <%= f.text_field :thoughts, class: 'form-control' %>
