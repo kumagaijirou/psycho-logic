@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   get "thoughts/new", to: "thoughts#new", as: 'thoughts_new'
   get "thoughts/:thought_id", to: "thoughts#show", as: 'thoughts_show'
   get "novels/:novel_id/thoughts/:thought_id/update", to: "thoughts#update", as: 'thoughts_update'
-  
+  get "users/:id/point_logs", to: "users#point_logs", as: 'users_point_logs'
   
   resources :novels,              only: [:new, :create, :show, :index, :update] do
     resources :thoughts, param: :thought_id,only: [:create, :new, :show, :index, :update, :edit]

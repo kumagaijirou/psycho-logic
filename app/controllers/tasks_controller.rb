@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
+    @task = Task.find(params[:user_id])
     @supports = @task.supports
   end
 

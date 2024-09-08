@@ -7,6 +7,12 @@ class UsersController < ApplicationController
     @users = User.where(activated: true).paginate(page: params[:page])
   end
 
+
+  def point_logs
+    @user = User.find(params[:id])
+    @point_logs = PointLog.where(user_id: current_user.id)
+  end
+ 
   def ranking
     @users = User.all.order(dice_point: "DESC").paginate(page: params[:page])
   end

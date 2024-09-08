@@ -68,12 +68,38 @@ class QuizzesController < ApplicationController
         net_change = 90 - 100
         @user.dice_point += net_change
         @user.save!
+        PointLog.create({
+          user_id: @quiz.user_id,
+          service_name: "クイズ",
+          category: "制作した問題の答え閲覧",
+          dice_point: 90}
+        )
+        PointLog.create({
+          user_id: current_user.id,
+          service_name: "クイズ",
+          category: "答えの閲覧",
+          dice_point: -100}
+        )
       else
         # @quiz.user と @user が異なる場合
         @quiz.user.dice_point += 90
         @quiz.user.save!
+        PointLog.create({
+          user_id: @quiz.user_id,
+          service_name: "クイズ",
+          category: "制作した問題の答え閲覧",
+          dice_point: 90}
+        )
+        @point_log.save!
         @user.dice_point -= 100
         @user.save!
+        PointLog.create({
+          user_id: current_user.id,
+          service_name: "クイズ",
+          category: "答えの閲覧",
+          dice_point: -100}
+        )
+        @point_log.save!
       end
     else 
     end

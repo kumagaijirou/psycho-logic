@@ -1,0 +1,2 @@
+class PointLog < ApplicationRecord
+end

@@ -7,13 +7,7 @@
         <%= @user.name %>
         <%= @user.dice_point %><br>
         <%= @user.profile %><br>
-        <%= "タスク成功回数" %>
-        <%= @tasks = Task.where(user_id: params[:id], status: "成功").count %>
-        <%= "回" %><br>
-        <%= "タスク失敗回数" %>
-        <%= @tasks = Task.where(user_id: params[:id], status: "失敗").count %>
-        <%= "回" %>
-
+        <%= link_to 'ポイントのログ', users_point_logs_path(user_id: @user.id) %>
 
       </h1>
     </section>

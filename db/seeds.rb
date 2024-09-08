@@ -1,8 +1,9 @@
 # メインのサンプルユーザーを1人作成する
-User.create!(name:  "Example User",
-             email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
+User.create!(name:  "psycho-logic",
+             email: "kumagaijirou1981@gmail.com",
+             password:              "purindaisuki1109",
+             password_confirmation: "purindaisuki1109",
+             dice_point: "10000",
              admin:     true,
              activated: true,
              activated_at: Time.zone.now)
