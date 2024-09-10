@@ -1,0 +1,13 @@
+<%= form_with url: {controller: 'point_logs', action: 'create'} do |f| %>
+  
+  <%= f.label :user_id %>
+  <%= f.number_field :user_id, class: 'form-control' %>
+
+  <%= f.label :category %>
+  <%= f.text_field :category, class: 'form-control' %>
+
+  <%= f.label :プラスするポイント数 %>
+  <%= f.number_field :dice_point, class: 'form-control',value: '10000' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

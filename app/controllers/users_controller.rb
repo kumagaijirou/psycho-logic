@@ -8,11 +8,10 @@ class UsersController < ApplicationController
   end
 
 
-  def point_logs
-    @user = User.find(params[:id])
-    @point_logs = PointLog.where(user_id: current_user.id)
-  end
- 
+  
+
+  
+
   def ranking
     @users = User.all.order(dice_point: "DESC").paginate(page: params[:page])
   end
@@ -46,8 +45,6 @@ class UsersController < ApplicationController
     if@user.dice_point = @user.dice_point + 1000 
       @user.update(user_params)
       # 更新に成功した場合を扱う
-      flash[:success] = "Profile updated"
-      flash[:notice] = "1000 dice_point 入手しました。"
       redirect_to @user
     else
       render 'edit', status: :unprocessable_entity

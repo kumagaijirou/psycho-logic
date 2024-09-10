@@ -6,6 +6,8 @@ class ThoughtsController < ApplicationController
     @thought.novel_id = @novel.id
     @thought.user_id = current_user.id
     if @thought.save!
+      @novel.status = @novel.status - 1 
+      @novel.save!
       redirect_to edit_novel_thought_path(@novel, @thought)
     else
       flash.now[:alert] = "問題と答えがないとクイズはできません"
@@ -23,8 +25,11 @@ class ThoughtsController < ApplicationController
     Rails.logger.debug params.inspect
       @thought = Thought.find(params[:thought_id])
       @thought = Thought.find(params[:thought_id])
-      if @thought.update!(update_params)
-        @novel.status -= 1
+      if @thought.update!(update_params) && @thought.open == false 
+        @user.dice_point += 2000
+        @user.save!
+        @thought.open = true
+        @thought.save!
       redirect_to novel_path(@novel)
     else
       render :edit
@@ -49,4 +54,8 @@ end
 private
 def update_params
   params.require(:thought).permit(:thoughts)
+end
+
+def thought_params
+  params.require(:thought).permit(:novel_id, :thought_id, :thoughts)
 end

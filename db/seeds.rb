@@ -13,11 +13,12 @@ User.create!(name:  "psycho-logic",
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
-  password = "password"
+  password = "password",
   User.create!(name:  name,
                email: email,
                password:              password,
                password_confirmation: password,
+               dice_point: "0",
                activated: true,
                activated_at: Time.zone.now)
 end

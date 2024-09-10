@@ -60,6 +60,7 @@ class QuizzesController < ApplicationController
   def see_answer
     @quiz = Quiz.find(params[:quizzes_id])
     @user = User.find(current_user.id) 
+    @user1 = User.find(1)
     @quiz.number_of_times_we_saw_the_answer = @quiz.number_of_times_we_saw_the_answer + 1
     @quiz.save!
     if @user.dice_point > 100
@@ -80,6 +81,14 @@ class QuizzesController < ApplicationController
           category: "答えの閲覧",
           dice_point: -100}
         )
+        @user1.dice_point += 10
+        @user1.save!
+        PointLog.create({
+          user_id: 1,
+          service_name: "クイズ",
+          category: "答えの閲覧手数料",
+          dice_point: 10}
+        )
       else
         # @quiz.user と @user が異なる場合
         @quiz.user.dice_point += 90
@@ -90,7 +99,6 @@ class QuizzesController < ApplicationController
           category: "制作した問題の答え閲覧",
           dice_point: 90}
         )
-        @point_log.save!
         @user.dice_point -= 100
         @user.save!
         PointLog.create({
@@ -99,7 +107,14 @@ class QuizzesController < ApplicationController
           category: "答えの閲覧",
           dice_point: -100}
         )
-        @point_log.save!
+        @user1.dice_point += 10
+        @user1.save!
+        PointLog.create({
+          user_id: 1,
+          service_name: "クイズ",
+          category: "答えの閲覧手数料",
+          dice_point: 10}
+        )
       end
     else 
     end

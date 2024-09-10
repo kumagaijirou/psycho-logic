@@ -11,10 +11,19 @@ class NovelsController < ApplicationController
     user_id: current_user.id,
     status: params[:status]
     )
-    if @novel.save!
+    if @novel.status * 2000 <= @current_user.dice_point
+      @current_user.dice_point = @current_user.dice_point - @novel.status * 2000
+      @current_user.save
+      @novel.save!
+      PointLog.create({
+          user_id: @current_user.id,
+          service_name: "小説感想",
+          category: "#{@novel.status}個の小説の感想を募集",
+          dice_point: -2000 * @novel.status }
+        )
       redirect_to novel_path(@novel.id)
     else
-      flash.now[:alert] = "問題と答えがないとクイズはできません"
+      flash.now[:alert] = "ダイスポイントが足りません"
       render 'new', status: :unprocessable_entity
     end
   end

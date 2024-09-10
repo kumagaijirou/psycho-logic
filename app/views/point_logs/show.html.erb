@@ -9,7 +9,8 @@
         <% @point_logs.each do |point_logs| %>
           <%= point_logs.service_name %>
           <%= point_logs.category %>
-          <%= point_logs.dice_point %><br>
+          <%= point_logs.dice_point %>
+          <%= point_logs.created_at.strftime('%Y/%m/%d %H:%M:%S') %><br>
         <% end %>
 
               </h1>
