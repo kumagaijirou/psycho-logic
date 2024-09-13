@@ -15,20 +15,20 @@
         <% if @novel.user_id == current_user.id %>
           あなたはこの小説の作者なので、感想は書けません。<br><br>
         <% elsif @novel.status >= 1  %>
-        <% if @thought1 || (@thought && @thought.open == false) %>
-        <% if @thought %>
-        <%= link_to '感想を書く', edit_novel_thought_path(@novel, @thought), class: 'btn btn-primary' %><br>
-        <% else %>
-        <%= link_to '感想を書くのを予約する', new_novel_thought_path(@novel), class: 'btn btn-primary' %><br>
+        <%= link_to '感想を書く', new_novel_thought_path(@novel), class: 'btn btn-primary' %><br>
         <% end %>
-        <% else %>
-        <%= link_to '感想を書くのを予約する', new_novel_thought_path(@novel), class: 'btn btn-primary' %><br>
-        <% end %>
-      <% end %>
-感想<br>
+
+        <% if @thoughts.size >= 1 %>
+            <%= puts = "【感想】" %><br>
+        <br>
+<% end %>
         <% @thoughts.each do |thought| %>
           <%= thought.user.name %><br>
           <%= thought.thoughts %><br>
+          <% if thought.user_id == current_user.id %>
+          <%= link_to '感想を再編集する', edit_novel_thought_path(@novel, thought) %><br>
+          <% end %>
+          <br>
         <% end %>
 
       </h1>

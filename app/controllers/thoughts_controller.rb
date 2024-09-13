@@ -2,13 +2,23 @@ class ThoughtsController < ApplicationController
 
   def create
     @novel = Novel.find(params[:novel_id])
-    @thought = Thought.new(thoughts: "現在感想の予約中です。")
-    @thought.novel_id = @novel.id
-    @thought.user_id = current_user.id
+    @thought = Thought.new(
+          thoughts: params[:thoughts],
+          user_id: current_user.id,
+          novel_id: @novel.id
+    )
     if @thought.save!
       @novel.status = @novel.status - 1 
       @novel.save!
-      redirect_to edit_novel_thought_path(@novel, @thought)
+      @thought.user.dice_point += 2000
+      @thought.user.save!
+      PointLog.create({
+        user_id: @thought.user_id,
+        service_name: "小説感想",
+        category: "小説の感想を書いた",
+        dice_point: 2000 }
+      )
+      redirect_to novel_path(@novel)
     else
       flash.now[:alert] = "問題と答えがないとクイズはできません"
       render 'new', status: :unprocessable_entity
@@ -22,26 +32,13 @@ class ThoughtsController < ApplicationController
   
   def update
     @novel = Novel.find(params[:novel_id])
-    Rails.logger.debug params.inspect
-      @thought = Thought.find(params[:thought_id])
-      @thought = Thought.find(params[:thought_id])
-      if @thought.update!(update_params) && @thought.open == false 
-        @user.dice_point += 2000
-        @user.save!
-        @thought.open = true
-        @thought.save!
-      redirect_to novel_path(@novel)
+    @thought = Thought.find(params[:thought_id])
+    if @thought.update!(update_params) 
+        redirect_to novel_path(@novel)
     else
       render :edit
     end
-     # if #@thought.save!
-    #   #@novel.status = @novel.status - 1 
-    #   @novel.save!
-    #   redirect_to novel_path(@novel)
-    # else
-    #   flash.now[:alert] = "問題と答えがないとクイズはできません"
-    #   render 'new', status: :unprocessable_entity
-    # end
+
   end
 
   def new
