@@ -1,0 +1,19 @@
+<% provide(:title, @quiz.user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+
+        ユーザーID <%= @quiz.user_id %><br>
+        名前 <%= link_to @quiz.user.name, @quiz.user %><br>
+        制作された時間<%= @quiz.created_at %><br>
+        問題 <%= @quiz.question %><br>
+        解かれた回数<%= @quiz.number_of_times_solved %><br>
+        正解された回数 <%= @quiz.number_of_correct_answers %><br>
+        答えが見られた回数<%= @quiz.number_of_times_we_saw_the_answer %><br>
+        <span class="timestamp">
+        Posted <%= time_ago_in_words(@quiz.created_at) %> ago.
+      </h1>
+    </section>
+  </aside>
+</div>

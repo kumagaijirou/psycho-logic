@@ -1,0 +1,7 @@
+<li><%= link_to novel.work_name, novels_show_path(novel) %></li>
+<span class="user">名前 <%= link_to novel.user.name, novel.user %></span><br>
+  <span class="synopsis"> <%= novel.synopsis %></span><br>
+  <span class="url1"> url1 <%= novel.url1 %></span><br>
+  <span class="url2"> url2 <%= novel.url2 %></span><br>
+  <span class="url3"> url3 <%= novel.url3 %></span><br>
+  <span class="status"> <%= novel.status %><%= "個の感想募集中" %></span><br><br>

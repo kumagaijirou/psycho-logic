@@ -7,9 +7,17 @@ class UsersController < ApplicationController
     @users = User.where(activated: true).paginate(page: params[:page])
   end
 
+
+  
+
+  
+
+  def ranking
+    @users = User.all.order(dice_point: "DESC").paginate(page: params[:page])
+  end
+
   def show
     @user = User.find(params[:id])
-    #@task = @user.task.paginate(page: params[:page])
   end
   
   def new
@@ -18,6 +26,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.dice_point = 0
     if @user.save
       @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
@@ -33,9 +42,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if@user.dice_point = @user.dice_point + 1000 
+      @user.update(user_params)
       # 更新に成功した場合を扱う
-      flash[:success] = "Profile updated"
       redirect_to @user
     else
       render 'edit', status: :unprocessable_entity
@@ -48,11 +57,22 @@ class UsersController < ApplicationController
     redirect_to users_url, status: :see_other
   end
 
+
+  def answer
+    @quiz = Quiz.find(params[:quiz_id])
+    @user = User.find(current_user.id)
+    if @user.update!(user_params)
+      redirect_to quizzes_answer_result_path(@quiz)
+    else
+
+    end
+  end
+  
   private
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
+                                 :password_confirmation,:profile,:dice_point)
     end
 
         # beforeフィルタ

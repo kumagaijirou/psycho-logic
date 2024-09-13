@@ -1,0 +1,11 @@
+  ※小説の感想を書き込む場合、<br>
+  一時保存して枠を確保したのちに、<br>
+  あらためて読んで再編集することを推奨しています。<br>
+  <%= form_with url: {controller: 'thoughts', action: 'create' } do  |f| %>
+  <%= f.hidden_field :novel_id, value: novel.id %>
+
+  <%= f.label :感想 %>
+  <%= f.text_field :thoughts, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

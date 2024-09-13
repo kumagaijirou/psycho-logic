@@ -1,0 +1,8 @@
+<% if @user.dice_point >= 100 %>
+<%= @quiz.question %><br>
+答え<br>
+<%= @quiz.answer %><br>
+<%= @quiz.user.email %>
+<% else %>
+ダイスポイントが足りません。
+<% end %>

@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  work_name: MyText
+  user_id: 1
+  synopsis: MyText
+  url1: MyString
+  url2: MyString
+  url3: MyString
+  accumulation_dice_point: 1
+  status: MyString
+
+two:
+  work_name: MyText
+  user_id: 1
+  synopsis: MyText
+  url1: MyString
+  url2: MyString
+  url3: MyString
+  accumulation_dice_point: 1
+  status: MyString

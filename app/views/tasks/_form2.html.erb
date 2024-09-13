@@ -1,0 +1,7 @@
+<%= form_with url: tasks_last_message_path(task), method: :patch, local: true do |f| %>
+  <%= f.label :タスクを終えて一言 %>
+  <%= f.text_field :last_message, class: 'form-control' %>
+  
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+
+<% end %>

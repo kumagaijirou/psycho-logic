@@ -1,0 +1,15 @@
+  <%= link_to quiz.id, quizzes_answer_path(quiz) %><br>
+  <%= link_to quiz.question, quizzes_answer_path(quiz) %><br>
+  <%= link_to gravatar_for(quiz.user, size: 50), quiz.user %><br>  
+  <span class="user">名前 <%= link_to quiz.user.name, quiz.user %></span><br>
+  <span class="number_of_times_solved">解答された回数 <%= quiz.number_of_times_solved %></span><br>
+  <span class="number_of_correct_answers">正解の回数 <%= quiz.number_of_correct_answers %></span><br>
+  <span class="number_of_times_we_saw_the_answer">答えを見られた回数 <%= quiz.number_of_times_we_saw_the_answer %></span><br>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(quiz.created_at) %> ago.<br>
+  <% if quiz.user.id == current_user.id %>
+  <%= link_to "問題を編集する", edit_quiz_path(quiz) %><br>
+  <% else %>
+
+  <% end %>  
+  </span>

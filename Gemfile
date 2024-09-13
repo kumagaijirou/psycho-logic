@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.2"
+ruby "3.2.5"
 
 gem "rails",           "7.0.4.3"
 gem "bcrypt",          "3.1.18"
@@ -18,8 +18,14 @@ gem "jbuilder",        "2.11.5"
 gem "puma",            "5.6.5"
 gem "bootsnap",        "1.16.0", require: false
 gem "sqlite3",         "1.6.1"
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
+  gem 'pry-byebug'
   gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
 end
 

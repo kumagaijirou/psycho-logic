@@ -1,0 +1,10 @@
+<%= form_with url: {controller: 'quizzes', action: 'create' } do  |f| %>
+  
+  <%= f.label :問題 %>
+  <%= f.text_field :question, class: 'form-control' %>
+
+  <%= f.label :答えの入力 %>
+  <%= f.text_field :answer, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

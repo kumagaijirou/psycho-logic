@@ -10,7 +10,77 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_07_205054) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_08_070144) do
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.integer "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "novels", force: :cascade do |t|
+    t.text "work_name"
+    t.integer "user_id"
+    t.text "synopsis"
+    t.string "url1"
+    t.string "url2"
+    t.string "url3"
+    t.integer "accumulation_dice_point"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "point_logs", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "service_name"
+    t.string "category"
+    t.integer "dice_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "question"
+    t.text "answer"
+    t.integer "number_of_times_solved"
+    t.integer "number_of_correct_answers"
+    t.integer "number_of_times_we_saw_the_answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "supports", force: :cascade do |t|
+    t.integer "task_id"
+    t.integer "user_id"
+    t.integer "support_fee"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.text "task_content"
     t.integer "task_user_ID"
@@ -20,7 +90,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_07_205054) do
     t.boolean "Task_success_failure"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_time_at"
+    t.text "last_message"
     t.index ["task_user_ID", "created_at"], name: "index_Tasks_on_task_user_id_and_created_at"
+  end
+
+  create_table "thoughts", force: :cascade do |t|
+    t.integer "novel_id"
+    t.integer "user_id"
+    t.text "thoughts"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "open"
   end
 
   create_table "users", force: :cascade do |t|
@@ -38,7 +119,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_07_205054) do
     t.datetime "reset_sent_at"
     t.text "profile"
     t.integer "dice_point"
+    t.text "final_answer"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 end

@@ -1,15 +1,15 @@
 class CreateTasks < ActiveRecord::Migration[7.0]
-  def change
-    create_table :tasks do |t|
-      t.text :task_content
-      t.integer :task_user_ID
-      t.integer :task_bet_user_ID
-      t.datetime :task_deadline_at
-      t.integer :Amount_bet
-      t.boolean :Task_success_failure
+  def change  
+    create_table :tasks do |t|  
+      t.text :content  
+      t.integer :user_id  
+      t.integer :bet_user_id  
+      t.datetime :deadline_at  
+      t.integer :amount_bet  
+      t.string :status  
 
-      t.timestamps
-    end
-    add_index :Tasks, [:task_user_id, :created_at]
+      t.timestamps  
+    end  
+    add_index :tasks, :user_id  
   end
 end

@@ -1,6 +1,11 @@
 class User < ApplicationRecord
   #has_many :Tasks, dependent: :destroy
   has_many :Tasks
+  has_many :supports
+  has_many :quizzes
+  has_many :novels
+  has_many :thoughts
+  has_many :point_logs
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest

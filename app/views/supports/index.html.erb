@@ -1,0 +1,28 @@
+<% provide(:title, @task.user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+
+        ユーザーID　<%= @task.user_id %><br>
+        名前　<%= @task.user.name %><br>
+        タスクの内容　<%= @task.content %><br>
+        かけるユーザーのID　<%= @task.bet_user_id %><br>
+        タスクの締切　<%= @task.deadline_at %><br>
+        かけるダイス数　<%= @task.amount_bet %><br>
+        <% if @task.status == '実行中' %>
+          <%= button_to '実行完了？', task_status_run_path(@task), method: :patch, class: 'btn btn-primary' %>
+          <%= link_to '応援', new_support_path(task_id: @task.id)), method: :get %>
+        <% else %>
+
+          <%# コメント：成功か失敗を表示する %>
+          <%= @task.status %><br>
+        <% end %>
+        <% @supports.each do |support| %>
+        <%= link_to 'support.comment', support_path(support.id), method: :get %><br>
+        <%= support.support_fee %><br>
+        <% end %><br>
+        
+    </section>
+  </aside>
+</div>

@@ -1,16 +1,39 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, @task.user.name) %>
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-        <%= @task.task_content %>
-        <%= @task.task_user_ID %>
-        <%= @task.task_bet_user_ID %>
-        <%= @task.task_deadline_at %>
-        <%= @task.amount_bet %>
 
+        ユーザーID　<%= @task.user_id %><br>
+        名前　<%= @task.user.name %><br>
+        タスクの内容　<%= @task.content %><br>
+        かけるユーザーのID　<%= @task.bet_user_id %><br>
+        タスクの締切　<%= @task.deadline_at.strftime('%Y/%m/%d %H:%M:%S') %><br>
+        かけるダイス数　<%= @task.amount_bet %><br>
+        <% if @task.status == '実行中' %>
+          <%= button_to '実行完了？', task_status_run_path(@task), method: :patch, class: 'btn btn-primary' %>
+          <%= link_to '応援', new_task_support_path(task_id: @task.id), method: :get %>
+          <%= button_to '立候補する', tasks_candidate_path(@task),method: :patch, class:'btn btn-primary' %>
+        <% else %>
+
+          <%# コメント：成功か失敗を表示する %>
+
+          <%= "このタスクは" %>
+          <%= @task.last_time_at.strftime('%Y/%m/%d %H:%M:%S') %><br>
+          <%= @task.status %>
+          <%= "で終了しました。" %><br><br>
+          <% if @task.last_message == nil %>
+          <%= link_to '最後のメッセージを入力する', tasks_last_message_path(task_id: @task.id), method: :get %>
+          <% else %>
+          <b><%= "タスクを終えての感想" %></b><br>
+          <%= @task.last_message %><br>
+          <% end %>
+        <% end %>
+        
+        <% @supports.each do |support| %>
+          <%= support.comment %>
+          <%= support.support_fee %>
+        <% end %>
       </h1>
     </section>
   </aside>
