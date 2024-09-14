@@ -10,14 +10,23 @@ class ThoughtsController < ApplicationController
     if @thought.save!
       @novel.status = @novel.status - 1 
       @novel.save!
-      @thought.user.dice_point += 2000
+      @thought.user.dice_point += 1900
       @thought.user.save!
       PointLog.create({
         user_id: @thought.user_id,
         service_name: "小説感想",
         category: "小説の感想を書いた",
-        dice_point: 2000 }
+        dice_point: 1900 }
       )
+      @user1 = User.find(1)
+      @user1.dice_point += 100
+        @user1.save!
+        PointLog.create({
+          user_id: 1,
+          service_name: "小説感想",
+          category: "小説の感想を書いた手数料",
+          dice_point: 100 }
+        )
       redirect_to novel_path(@novel)
     else
       flash.now[:alert] = "問題と答えがないとクイズはできません"

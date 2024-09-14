@@ -11,12 +11,18 @@ class TasksController < ApplicationController
       status: '実行中'
       )
     if @task.deadline_at.nil?
-      flash.now[:alert] ="今日以降の日付を入力してください。"
+      flash.now[:alert] ="今日の今以降の時間を入力してください。"
       render 'new', status: :unprocessable_entity
     elsif @task.amount_bet <= @current_user.dice_point
       @current_user.dice_point = @current_user.dice_point - @task.amount_bet
       @current_user.save
       @task.save
+      PointLog.create({
+          user_id: current_user.id,
+          service_name: "タスク",
+          category: "タスクの設定",
+          dice_point: -@task.amount_bet }
+        )
       redirect_to task_path(@task)
     
     else
@@ -39,7 +45,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:user_id])
+    @task = Task.find(params[:id])
     @supports = @task.supports
   end
 
@@ -47,13 +53,24 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.status == '実行中' && Time.now < @task.deadline_at
       @task.status = '成功'
-
+      PointLog.create({
+          user_id: current_user.id,
+          service_name: "タスク",
+          category: "タスクの成功",
+          dice_point: @task.amount_bet }
+        )
       # 問題の箇所１
       # タスクに紐づく全ての応援費の合計を算出
       support_fees = 0
       @task.supports.each do |support|
         if support.present?
           support_fees += support.support_fee
+          PointLog.create({
+            user_id: current_user.id,
+            service_name: "タスク",
+            category: "タスクの成功の応援",
+            dice_point: support.support_fee }
+        )
         end
       end
 
@@ -70,12 +87,24 @@ class TasksController < ApplicationController
       bet_user = User.find(bet_user_id)
       bet_user.dice_point = bet_user.dice_point.present? ? bet_user.dice_point + @task.amount_bet : @task.amount_bet
       bet_user.save!
+      PointLog.create({
+          user_id: @task.bet_user_id,
+          service_name: "タスク",
+          category: "賭けていたタスクの失敗",
+          dice_point: @task.amount_bet }
+          )
       @task.supports.each do |support|
         if support.present?
           support_user_id = support.user_id
           support_user = User.find(support_user_id)
           if support.present?
             support_user.dice_point = support_user.dice_point.present? ? support_user.dice_point + support.support_fee : support.support_fee
+            PointLog.create({
+          user_id: support.user_id,
+          service_name: "タスク",
+          category: "応援したタスクの失敗",
+          dice_point: support.support_fee }
+          )
           end
         end
         support_user.save!
