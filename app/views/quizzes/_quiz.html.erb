@@ -1,4 +1,4 @@
-  <%= link_to quiz.id, quizzes_answer_path(quiz) %><br>
+  <b>問題ID</b> <%= link_to quiz.id, quizzes_answer_path(quiz) %><br>
   <%= link_to quiz.question, quizzes_answer_path(quiz) %><br>
   <%= link_to gravatar_for(quiz.user, size: 50), quiz.user %><br>  
   <span class="user">名前 <%= link_to quiz.user.name, quiz.user %></span><br>

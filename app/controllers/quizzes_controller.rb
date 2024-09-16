@@ -35,6 +35,18 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new
   end
 
+  def search
+  end
+
+  def search_result
+    @range = params[:range]
+    if @range == "quiz_id"
+      @quizzes = Quiz.where(id:params[:id_number]).paginate(page: params[:page])
+    else
+      @quizzes = Quiz.where(user_id:params[:id_number]).paginate(page: params[:page])
+    end
+  end
+
   def favorites_delete
     @quiz = Quiz.find(params[:id])
     Favorite.where(user_id: current_user.id, service_name: "クイズ" , service_id: @quiz.id).destroy_all

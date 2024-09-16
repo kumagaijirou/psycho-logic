@@ -1,0 +1,7 @@
+<div class="id search_form">
+    <%= form_with url: quizzes_search_result_path, local: true, method: :get do |f| %>
+      <%= f.number_field :id_number %>
+      <%= f.select :range, options_for_select([["クイズのIDを入力する","quiz_id"], ["クイズの制作者IDを検索する","user_id"]]) %>
+      <%= f.submit "検索", class: "btn btn-primary" %>
+    <% end %>
+  </div>

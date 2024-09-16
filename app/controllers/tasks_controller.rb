@@ -51,6 +51,18 @@ class TasksController < ApplicationController
     @favorite = Favorite.where(user_id: current_user.id, service_name: "タスク" , service_id: @task.id)
   end
 
+  def search
+  end
+
+  def search_result
+    @range = params[:range]
+    if @range == "task_id"
+      @tasks = Task.where(id:params[:id_number]).paginate(page: params[:page])
+    else
+      @tasks = Task.where(user_id:params[:id_number]).paginate(page: params[:page])
+    end
+  end
+
   def favorites_delete
     @task = Task.find(params[:id])
     Favorite.where(user_id: current_user.id, service_name: "タスク" , service_id: @task.id).destroy_all

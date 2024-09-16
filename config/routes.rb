@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   patch "tasks/:id/last_message", to: "tasks#update_last_message"
   patch 'tasks/:id/status_run/', to: "tasks#status_run", as: 'task_status_run'
   get "tasks/:id/favorites_add/", to: "tasks#favorites_add", as: 'tasks_favorites_add'
+  get "tasks/search/", to: "tasks#search", as: 'tasks_search'
+  get "tasks/search_result/", to: "tasks#search_result", as: 'tasks_search_result'
   delete "tasks/:id/favorites_delete/", to: "tasks#favorites_delete", as: 'tasks_favorites_delete'
   get "supports/new"
   get "supports/tasks/:id", to: "supports#index", as: 'supports_index'
@@ -29,8 +31,12 @@ Rails.application.routes.draw do
   patch "quizzes/:quizzes_id/create_answer", to: "quizzes#create_answer"
   get "quizzes/:quizzes_id/answer_result", to: "quizzes#answer_result", as: 'quizzes_answer_result'
   get "quizzes/:quizzes_id/see_answer", to: "quizzes#see_answer", as: 'quizzes_see_answer'
+  get "quizzes/search/", to: "quizzes#search", as: 'quizzes_search'
+  get "quizzes/search_result/", to: "quizzes#search_result", as: 'quizzes_search_result'
   get "quizzes/index_all"
   get "novels/new"
+  get "novels/search_result/", to: "novels#search_result", as: 'novels_search_result'
+  get "novels/search/", to: "novels#search", as: 'novels_search'
   get "novels/:novel_id", to: "novels#show", as:'novels_show'
   get "novels/:id/favorites_add/", to: "novels#favorites_add", as: 'novels_favorites_add'
   delete "novels/:id/favorites_delete/", to: "novels#favorites_delete", as: 'novels_favorites_delete'
