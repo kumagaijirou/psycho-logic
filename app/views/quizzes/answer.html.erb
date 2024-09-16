@@ -5,6 +5,11 @@
   <div class="col-md-6 col-md-offset-3">
     <%= render 'form_answer' %><br><br>
     <%= link_to "答えを見る（１００ダイスかかります）", quizzes_see_answer_path %><br>
-  </div><br>
-
+  
+  <% if @favorite.present? %>
+    <%= button_to 'お気に入りを削除', quizzes_favorites_delete_path(@quiz), method: :delete,class: 'btn btn-primary' %>
+  <% else %>
+    <%= button_to 'お気に入りに追加', quizzes_favorites_add_path(@quiz), method: :get, class: 'btn btn-primary' %>
+  <% end %>
+  </div>
 </div>

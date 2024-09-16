@@ -8,6 +8,7 @@
         名前　<%= @task.user.name %><br>
         タスクの内容　<%= @task.content %><br>
         かけるユーザーのID　<%= @task.bet_user_id %><br>
+        名前 <%= @user.name %><br>
         タスクの締切　<%= @task.deadline_at.strftime('%Y/%m/%d %H:%M:%S') %><br>
         かけるダイス数　<%= @task.amount_bet %><br>
         <% if @task.status == '実行中' %>
@@ -33,6 +34,12 @@
         <% @supports.each do |support| %>
           <%= support.comment %>
           <%= support.support_fee %><br>
+        <% end %>
+
+        <% if @favorite.present? %>
+          <%= button_to 'お気に入りを削除', tasks_favorites_delete_path(@task), method: :delete,class: 'btn btn-primary' %>
+        <% else %>
+          <%= button_to 'お気に入りに追加', tasks_favorites_add_path(@task), method: :get, class: 'btn btn-primary' %>
         <% end %>
       </h1>
     </section>

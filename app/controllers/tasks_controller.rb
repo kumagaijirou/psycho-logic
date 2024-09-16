@@ -46,7 +46,25 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+    @user = User.find(@task.bet_user_id)
     @supports = @task.supports
+    @favorite = Favorite.where(user_id: current_user.id, service_name: "タスク" , service_id: @task.id)
+  end
+
+  def favorites_delete
+    @task = Task.find(params[:id])
+    Favorite.where(user_id: current_user.id, service_name: "タスク" , service_id: @task.id).destroy_all
+    redirect_to tasks_path(@task[:id])
+  end
+
+  def favorites_add
+    @task = Task.find(params[:id])
+    Favorite.create({
+      user_id: current_user.id,
+      service_name: "タスク",
+      service_id: @task.id}
+    )
+    redirect_to tasks_path(@task[:id])
   end
 
   def status_run

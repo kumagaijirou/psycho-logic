@@ -35,9 +35,26 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new
   end
 
+  def favorites_delete
+    @quiz = Quiz.find(params[:id])
+    Favorite.where(user_id: current_user.id, service_name: "クイズ" , service_id: @quiz.id).destroy_all
+    redirect_to quizzes_path(@quiz[:id])
+  end
+
+  def favorites_add
+    @quiz = Quiz.find(params[:id])
+    Favorite.create({
+      user_id: current_user.id,
+      service_name: "クイズ",
+      service_id: @quiz.id}
+    )
+    redirect_to quizzes_path(@quiz[:id])
+  end
+
   def answer
     @quiz = Quiz.find(params[:quizzes_id])
     @user = User.find(current_user.id)
+    @favorite = Favorite.where(user_id: current_user.id, service_name: "クイズ" , service_id: @quiz.id)
   end
 
   def create_answer

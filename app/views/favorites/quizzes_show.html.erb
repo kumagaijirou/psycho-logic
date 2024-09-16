@@ -1,0 +1,12 @@
+<% provide(:title, 'お気に入りのクイズ') %>
+<h1>お気に入りのクイズ</h1>
+<%= link_to "問題を見る", quizzes_index_all_path %><br>
+<%= link_to "問題を作る", new_quiz_path %><br>
+
+<%= will_paginate %>
+
+<ul class="quizzes">
+  <%= render @quizzes %>
+</ul>
+
+<%= will_paginate %>

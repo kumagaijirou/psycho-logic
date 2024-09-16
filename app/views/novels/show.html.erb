@@ -21,7 +21,7 @@
         <% if @thoughts.size >= 1 %>
             <%= puts = "【感想】" %><br>
         <br>
-<% end %>
+            <% end %>
         <% @thoughts.each do |thought| %>
           <%= thought.user.name %><br>
           <%= thought.thoughts %><br>
@@ -31,6 +31,11 @@
           <br>
         <% end %>
 
+        <% if @favorite.present? %>
+          <%= button_to 'お気に入りを削除', novels_favorites_delete_path(@novel), method: :delete,class: 'btn btn-primary' %>
+        <% else %>
+          <%= button_to 'お気に入りに追加', novels_favorites_add_path(@novel), method: :get, class: 'btn btn-primary' %>
+        <% end %>
       </h1>
     </section>
   </aside>

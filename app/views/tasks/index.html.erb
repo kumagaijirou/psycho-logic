@@ -1,6 +1,7 @@
 <% provide(:title, 'my tasks') %>
 <h1>my tasks</h1>
-<%= link_to "みんなのタスクを見る", tasks_index2_path %>
+<%= link_to "タスクを作る", tasks_new_path %><br>
+<%= link_to "みんなのタスクを見る", tasks_index2_path %><br>
 <%= will_paginate %>
 
 <ul class="tasks">

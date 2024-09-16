@@ -28,6 +28,23 @@ class NovelsController < ApplicationController
     end
   end
   
+  def favorites_delete
+    @novel = Novel.find(params[:id])
+    Favorite.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id).destroy_all
+    redirect_to novels_path(@novel[:id])
+  end
+
+  def favorites_add
+    @novel = Novel.find(params[:id])
+    Favorite.create({
+      user_id: current_user.id,
+      service_name: "小説感想",
+      service_id: @novel.id}
+    )
+    redirect_to novels_path(@novel[:id])
+  end
+
+
   def index
     @novels = Novel.all.paginate(page: params[:page])
   end
@@ -37,6 +54,7 @@ class NovelsController < ApplicationController
     @thoughts = @novel.thoughts
     @thought1 = Thought.find_by(user_id: current_user.id)
     @thought = @novel.thoughts.find_by(user_id: current_user.id) if current_user
+    @favorite = Favorite.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id)
   end
 
   private
