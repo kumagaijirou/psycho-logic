@@ -46,14 +46,14 @@ Rails.application.routes.draw do
   get "favorites/:user_id/tasks_show", to:"favorites#tasks_show", as: 'favorites_tasks_show'
   get "favorites/:user_id/quizzes_show", to:"favorites#quizzes_show", as: 'favorites_quizzes_show'
   get "favorites/:user_id/novels_show", to:"favorites#novels_show", as: 'favorites_novels_show'
-  get "favorites/:user_id/thoughts_show", to:"favorites#thoughts_show", as: 'favorites_thoughts_show'
-
-
+  get "point_mails/index2"
+  
   resources :novels,              only: [:new, :create, :show, :index, :update] do
     resources :thoughts, param: :thought_id,only: [:create, :new, :show, :index, :update, :edit]
   end
   resources :quizzes, param: :quizzes_id, only: [:new, :create, :edit, :show, :index, :update]
   resources :point_logs,          only: [:new, :create, :show]
+  resources :point_mails,         only: [:new, :create, :index, :show]
   resources :favorites,           only: [:index]
   resources :users
   resources :account_activations, only: [:edit]

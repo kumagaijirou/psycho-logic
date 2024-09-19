@@ -1,0 +1,22 @@
+<%= form_with url: {controller: 'point_mails', action: 'create' } do  |f| %>
+
+  <%= f.label :送るユーザーID %>
+  <%= f.number_field :send_user_id, class: 'form-control' %>
+
+  <%= f.label :送るユーザーのemailアドレス（ユーザーが未登録の場合） %>
+  <%= f.email_field :send_user_email, class: 'form-control' %>
+
+  <%= f.label :タイトル %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <%= f.label :メールの本文 %>
+  <%= f.text_field :content, class: 'form-control' %>
+
+  <%= f.label :送るダイスポイント %>
+  <%= f.number_field :send_dice_point, class: 'form-control' %>
+
+  <%= f.label :送る日付 %>
+  <%= f.datetime_field :send_date, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

@@ -6,6 +6,8 @@
   <span class="content">内容 <%= task.content %></span>  
   <span class="user">名前 <%= link_to task.user.name, task.user %></span>
   <span class="bet_user_id">あげるかもしれないユーザーID <%= task.bet_user_id %></span>
+  <% usera = User.find(task.bet_user_id) %>
+  <span class="usera.name">名前 <%= usera.name %></span>
   <span class="deadline">締切 <%= task.deadline_at.strftime('%Y/%m/%d %H:%M:%S') %></span>
   <span class="amount_bet">かけるダイス <%= task.amount_bet %></span>
   <span class="status">状況 <%= task.status %></span>

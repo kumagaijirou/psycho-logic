@@ -1,0 +1,17 @@
+<% if Time.now > @point_mail.send_date %>
+  <li id="point_mails-<%= @point_mail.id %>">
+    <%= link_to gravatar_for(@point_mail.user, size: 50), @point_mail.user %><br>
+    <% @usera = User.find(@point_mail.user_id) %><br>
+    <span class="user_name">送ったユーザー名 <%= @usera.name %></span><br>
+    <span class="title">タイトル <%= @point_mail.title %></span><br><br>
+    <span class="content">本文 <%= @point_mail.content %></span><br><br><br>
+    <span class="send_dice_point">送られたダイスポイント <%= @point_mail.send_dice_point %></span><br>
+    <span class="send_date">送られた日付 <%= @point_mail.send_date.strftime('%Y/%m/%d %H:%M:%S') %></span><br>
+  
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@point_mail.created_at) %> ago.
+   </span><br>
+  
+  </li>
+  <% else %>
+<% end %>

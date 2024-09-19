@@ -1,0 +1,14 @@
+<% provide(:title, 'ポイント付メール') %>
+<h1>ポイント付メール</h1>
+
+<%= link_to "メールを作成する", new_point_mail_path %><br>
+<%= link_to "自分が貰ったメールを見る", point_mails_path %><br>
+
+<%= will_paginate %>
+
+<ul class="point_mails">
+  <%= render @point_mails %>
+  
+</ul>
+
+<%= will_paginate %>
