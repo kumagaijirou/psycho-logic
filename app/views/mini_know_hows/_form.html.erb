@@ -1,0 +1,13 @@
+<%= form_with url: {controller: 'mini_know_hows', action: 'create' } do  |f| %>
+
+  <%= f.label :タイトル %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <%= f.label :本文 %>
+  <%= f.text_field :content, class: 'form-control' %>
+
+  <%= f.label :設定したい閲覧料 %>
+  <%= f.number_field :viewing_fee, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

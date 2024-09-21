@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_18_061257) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_20_085354) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_18_061257) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "mini_know_hows", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title"
+    t.text "content"
+    t.integer "viewing_fee"
+    t.integer "number_of_times_seen"
+    t.integer "number_of_refunds"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_mini_know_hows_on_user_id"
+  end
+
   create_table "novels", force: :cascade do |t|
     t.text "work_name"
     t.integer "user_id"
@@ -65,6 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_18_061257) do
   create_table "point_logs", force: :cascade do |t|
     t.integer "user_id"
     t.string "service_name"
+    t.integer "service_id"
     t.string "category"
     t.integer "dice_point"
     t.datetime "created_at", null: false
@@ -143,6 +156,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_18_061257) do
     t.datetime "reset_sent_at"
     t.text "profile"
     t.integer "dice_point"
+    t.datetime "dice_point_expiry_date"
     t.text "final_answer"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
@@ -150,5 +164,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_18_061257) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "users"
+  add_foreign_key "mini_know_hows", "users"
   add_foreign_key "point_mails", "users"
 end

@@ -46,8 +46,14 @@ Rails.application.routes.draw do
   get "favorites/:user_id/tasks_show", to:"favorites#tasks_show", as: 'favorites_tasks_show'
   get "favorites/:user_id/quizzes_show", to:"favorites#quizzes_show", as: 'favorites_quizzes_show'
   get "favorites/:user_id/novels_show", to:"favorites#novels_show", as: 'favorites_novels_show'
+  get "favorites/:user_id/mini_know_hows_show", to:"favorites#mini_know_hows_show", as: 'favorites_mini_know_hows_show'
   get "point_mails/index2"
-  
+  get "mini_know_hows/:id/favorites_add/", to: "mini_know_hows#favorites_add", as: 'mini_know_hows_favorites_add'
+  delete "mini_know_hows/:id/favorites_delete/", to: "mini_know_hows#favorites_delete", as: 'mini_know_hows_favorites_delete'
+  delete "mini_know_hows/:id/refund", to:"mini_know_hows#refund", as: 'mini_know_hows_refund'
+  get "mini_know_hows/search_result/", to: "mini_know_hows#search_result", as: 'mini_know_hows_search_result'
+  get "mini_know_hows/search/", to: "mini_know_hows#search", as: 'mini_know_hows_search'
+
   resources :novels,              only: [:new, :create, :show, :index, :update] do
     resources :thoughts, param: :thought_id,only: [:create, :new, :show, :index, :update, :edit]
   end
@@ -55,6 +61,7 @@ Rails.application.routes.draw do
   resources :point_logs,          only: [:new, :create, :show]
   resources :point_mails,         only: [:new, :create, :index, :show]
   resources :favorites,           only: [:index]
+  resources :mini_know_hows,      only: [:new, :create, :index, :show]
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

@@ -19,4 +19,9 @@ class FavoritesController < ApplicationController
     @novels = Novel.where(id: @favorites.pluck(:service_id))
   end
 
+  def mini_know_hows_show
+    @favorites = Favorite.where(user_id: current_user.id, service_name: "ミニノウハウ").paginate(page: params[:page]) 
+    @mini_know_hows = MiniKnowHow.where(id: @favorites.pluck(:service_id))
+  end
+
 end

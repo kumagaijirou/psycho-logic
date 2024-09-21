@@ -1,0 +1,13 @@
+<% provide(:title, 'お気に入りのミニノウハウ') %>
+<h1>お気に入りのミニノウハウを見る</h1>
+
+<%= link_to "ミニノウハウを作成する", new_mini_know_how_path %><br>
+
+<%= will_paginate %>
+
+<ul class="mini_know_how">
+  <%= render @mini_know_hows %>
+  
+</ul>
+
+<%= will_paginate %>

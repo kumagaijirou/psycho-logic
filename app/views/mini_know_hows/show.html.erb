@@ -1,0 +1,56 @@
+<% if PointLog.find_by(service_name: "ミニノウハウ",service_id:@mini_know_how.id).present? %>
+<li id="mini_know_how-<%= @mini_know_how.id %>">
+    <%= link_to gravatar_for(@mini_know_how.user, size: 50), @mini_know_how.user %><br>
+    <% @usera = User.find(@mini_know_how.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= @usera.name %></span><br>
+    <span class="title">タイトル<%= @mini_know_how.title %></span><br><br>
+    <span class="content">内容<%= @mini_know_how.content %></span><br><br>
+
+    <span class="viewing_fee">閲覧に必要なポイント <%= @mini_know_how.viewing_fee %><br>
+    <span class="number_of_times_seen">見られた回数 <%= @mini_know_how.number_of_times_seen %> 回<br>
+    <span class="number_of_refunds">返金された回数 <%= @mini_know_how.number_of_refunds %> 回<br>  
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@mini_know_how.created_at) %> ago.
+    </span><br>
+    <% if Time.now < @point_log.created_at + 1800 %>
+    <%= button_to '返品する', mini_know_hows_refund_path(@mini_know_how), method: :delete, class: 'btn btn-primary' %>
+    <% end %>
+
+    <% if @favorite.present? %>
+        <%= button_to 'お気に入りを削除', mini_know_hows_favorites_delete_path(@mini_know_how), method: :delete,class: 'btn btn-primary' %>
+      <% else %>
+        <%= button_to 'お気に入りに追加', mini_know_hows_favorites_add_path(@mini_know_how), method: :get, class: 'btn btn-primary' %>
+    <% end %>
+
+</li>
+<% elsif @usera.dice_point >=  @mini_know_how.viewing_fee %>
+<li id="mini_know_how-<%= @mini_know_how.id %>">
+    <%= link_to gravatar_for(@mini_know_how.user, size: 50), @mini_know_how.user %><br>
+    <% @usera = User.find(@mini_know_how.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= @usera.name %></span><br>
+    <span class="title">タイトル<%= @mini_know_how.title %></span><br><br>
+    <span class="content">内容<%= @mini_know_how.content %></span><br><br>
+
+    <span class="viewing_fee">閲覧に必要なポイント <%= @mini_know_how.viewing_fee %><br>
+    <span class="number_of_times_seen">見られた回数 <%= @mini_know_how.number_of_times_seen %> 回<br>
+    <span class="number_of_refunds">返金された回数 <%= @mini_know_how.number_of_refunds %> 回<br>
+      
+
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@mini_know_how.created_at) %> ago.
+    </span><br>
+
+    <% if Time.now < @point_log.created_at + 1800 %>
+    <%= button_to '返品する', mini_know_hows_refund_path(@mini_know_how), method: :delete, class: 'btn btn-primary' %>
+    <% end %>
+    <% if @favorite.present? %>
+        <%= button_to 'お気に入りを削除', mini_know_hows_favorites_delete_path(@mini_know_how), method: :delete,class: 'btn btn-primary' %>
+      <% else %>
+        <%= button_to 'お気に入りに追加', mini_know_hows_favorites_add_path(@mini_know_how), method: :get, class: 'btn btn-primary' %>
+    <% end %>
+
+
+</li>
+<% else %>
+ダイスポイントが足りません。
+<% end %>

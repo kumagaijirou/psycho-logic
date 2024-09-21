@@ -3,6 +3,7 @@ class CreatePointLogs < ActiveRecord::Migration[7.0]
     create_table :point_logs do |t|
       t.integer :user_id
       t.string :service_name
+      t.integer :service_id
       t.string :category
       t.integer :dice_point
 

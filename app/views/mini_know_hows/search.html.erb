@@ -1,0 +1,7 @@
+<div class="id search_form">
+    <%= form_with url: mini_know_hows_search_result_path, local: true, method: :get do |f| %>
+      <%= f.number_field :id_number %>
+      <%= f.select :range, options_for_select([["ミニノウハウのIDを入力する","mini_know_how_id"], ["ミニノウハウの制作者IDを検索する","user_id"]]) %>
+      <%= f.submit "検索", class: "btn btn-primary" %>
+    <% end %>
+  </div>
