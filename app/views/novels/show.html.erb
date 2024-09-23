@@ -8,9 +8,9 @@
         <%= @novel.work_name %><br>
         <%= @novel.user.name %><br>
         <%= @novel.synopsis %><br>
-        <%= @novel.url1 %><br>
-        <%= @novel.url2 %><br>
-        <%= @novel.url3 %><br>
+        <%= link_to @novel.url1 , @novel.url1 %><br>
+        <%= link_to @novel.url2 , @novel.url2 %><br>
+        <%= link_to @novel.url3 , @novel.url3 %><br>
         <%= @novel.status %>個の感想を募集中<br><br>
         <% if @novel.user_id == current_user.id %>
           あなたはこの小説の作者なので、感想は書けません。<br><br>
