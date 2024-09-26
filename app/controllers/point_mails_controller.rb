@@ -11,7 +11,27 @@ class PointMailsController < ApplicationController
     send_date: params[:send_date],
     open: false
     )
-    if @point_mail.send_dice_point <= @current_user.dice_point
+    if @point_mail.send_dice_point <= @current_user.dice_point && @point_mail.send_user_id == nil
+      @current_user.dice_point = @current_user.dice_point - @point_mail.send_dice_point
+      @current_user.save
+      @point_mail.save
+      PointLog.create({
+          user_id: current_user.id,
+          service_name: "メール",
+          category: "ポイント送付メールの作成",
+          dice_point: -@point_mail.send_dice_point }
+        )
+        chars = ('a'..'z').to_a
+        @codea = 12.times.map{ chars.sample }.join
+      @point_code = PointCode.create({
+          code: @codea,
+          point: @point_mail.send_dice_point,
+          user_id: @point_mail.user_id }
+      )
+      @point_mail.send_point_send_email
+      redirect_to point_mails_path(@point_mail[:id])
+      
+    elsif @point_mail.send_dice_point <= @current_user.dice_point  
       @current_user.dice_point = @current_user.dice_point - @point_mail.send_dice_point
       @current_user.save
       @point_mail.save

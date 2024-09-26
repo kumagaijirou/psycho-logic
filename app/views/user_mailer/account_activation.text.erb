@@ -1,5 +1,5 @@
-Hi <%= @user.name %>,
+初めまして <%= @user.name %>,
 
-Welcome to the Sample App! Click on the link below to activate your account:
+サイコ・ロジックへようこそ! 下のリンクをコピペしてサイトに入り、アカウントを有効にして下さい。:
 
 <%= edit_account_activation_url(@user.activation_token,email:@user.email)%>

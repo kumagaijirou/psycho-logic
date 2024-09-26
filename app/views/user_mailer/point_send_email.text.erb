@@ -1,0 +1,30 @@
+
+こんにちわ,初めまして。
+
+
+あなたは <% usera = User.find(@point_mail.user_id) %><%= usera.name %> さんによってサイコロジックに招待されました。
+下記のコードをサイト登録時に入力することによって、<%= @point_mail.send_dice_point %>
+(<%= @point_mail.send_dice_point * 0.1%>円相当)が <% usera = User.find(@point_mail.user_id) %><%= usera.name %> からプレゼントされてます。
+ぜひこの機会にサイコロジックのサービスを楽しんでください。
+よろしくお願いします！！
+
+招待コード：
+
+<%= @point_code.code %>
+
+送られるダイスポイント : <%= @point_code.code %>
+
+ポイントの有効期限 : <% usera.dice_point_expiry_date %>
+
+
+--------------------------------------------------------------------------------------
+
+<% usera = User.find(@point_mail.user_id) %><%= usera.name %>さんがあなたに宛てたメール本文。
+
+メールタイトル
+<%= @point_mail.title %>
+
+本文
+<%= @point_mail.content %>
+
+

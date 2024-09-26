@@ -27,10 +27,20 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.dice_point = 0
-    if @user.save
-      @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
-      redirect_to root_url
+      if @user.save && @user.final_answer == nil
+        flash[:info] = "入力したアドレスで届いたメールをチェックしてアカウントを有効にして下さい。"
+        @user.send_activation_email
+        redirect_to root_url
+      elsif @user.save
+        flash[:info] = "入力したアドレスで届いたメールをチェックしてアカウントを有効にして下さい。"
+        @user.send_activation_email
+        point = PointCode.find_by!(code: params[:user][:final_answer], used_at: nil).point
+        @user.dice_point += point
+        @user.save
+        code = PointCode.find_by!(code: params[:user][:final_answer], used_at: nil)
+        code.used_at = Time.now
+        code.save
+        redirect_to root_url
     else
       render 'new', status: :unprocessable_entity
     end
@@ -57,7 +67,6 @@ class UsersController < ApplicationController
     redirect_to users_url, status: :see_other
   end
 
-
   def answer
     @quiz = Quiz.find(params[:quiz_id])
     @user = User.find(current_user.id)
@@ -72,7 +81,8 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation,:profile,:dice_point)
+                                 :password_confirmation,:profile,:dice_point,
+                                 :final_answer)
     end
 
         # beforeフィルタ
