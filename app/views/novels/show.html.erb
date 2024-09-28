@@ -5,12 +5,13 @@
       <%= link_to "小説へのリンク集", novels_path %><br>
       <%= link_to "感想を募集する", novels_new_path %><br><br>
       <h1>
-        <%= @novel.work_name %><br>
-        <%= @novel.user.name %><br>
-        <%= @novel.synopsis %><br>
-        <%= link_to @novel.url1 , @novel.url1 %><br>
-        <%= link_to @novel.url2 , @novel.url2 %><br>
-        <%= link_to @novel.url3 , @novel.url3 %><br>
+        小説名 <%= @novel.work_name %><br>
+        作者 <%= @novel.user.name %><br>
+        あらすじ <%= @novel.synopsis %><br>
+        URL1 <%= link_to @novel.url1 , @novel.url1 %><br>
+        URL2 <%= link_to @novel.url2 , @novel.url2 %><br>
+        URL3 <%= link_to @novel.url3 , @novel.url3 %><br>
+        今までもらった応援ダイスポイント<%= @novel.accumulation_dice_point %><br>
         <%= @novel.status %>個の感想を募集中<br><br>
         <% if @novel.user_id == current_user.id %>
           あなたはこの小説の作者なので、感想は書けません。<br><br>
@@ -30,6 +31,23 @@
           <% end %>
           <br>
         <% end %>
+
+        <% if @novel.user_id == current_user.id %>
+          あなたはこの小説の作者なので、応援はできません。
+        <% elsif NovelsSupport.find_by(id:@novel.id, user_id:current_user).present? %>
+          この小説を応援できるのは一回だけです。 
+        <% else%>
+        <%= link_to '応援する', new_novel_novels_support_path(@novel), class: 'btn btn-primary' %><br>
+        <% end %>
+          <% if @novels_supports.size >= 1 %>
+            <%= puts = "【応援コメント】" %><br>
+        <br>
+            <% end %>
+        <% @novels_supports.each do |novels_support| %>
+          <%= novels_support.comment %>
+          <%= novels_support.support_fee %><br>
+        <% end %>
+
 
         <% if @favorite.present? %>
           <%= button_to 'お気に入りを削除', novels_favorites_delete_path(@novel), method: :delete,class: 'btn btn-primary' %>

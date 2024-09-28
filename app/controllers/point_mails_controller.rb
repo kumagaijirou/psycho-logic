@@ -19,7 +19,8 @@ class PointMailsController < ApplicationController
           user_id: current_user.id,
           service_name: "メール",
           category: "ポイント送付メールの作成",
-          dice_point: -@point_mail.send_dice_point }
+          dice_point: -@point_mail.send_dice_point,
+          service_id: @point_mail.id }
         )
         chars = ('a'..'z').to_a
         @codea = 12.times.map{ chars.sample }.join
@@ -39,7 +40,8 @@ class PointMailsController < ApplicationController
           user_id: current_user.id,
           service_name: "メール",
           category: "ポイント送付メールの作成",
-          dice_point: -@point_mail.send_dice_point }
+          dice_point: -@point_mail.send_dice_point,
+          service_id: @point_mail.id }
         )
       redirect_to point_mails_path(@point_mail[:id])
     else
@@ -63,7 +65,7 @@ class PointMailsController < ApplicationController
   def show
     @point_mail = PointMail.find((params[:id]))
     @user = current_user
-    if @point_mail.open == false
+    if  @point_mail.open == false && @point_mail.send_user_email == ""
     @user.dice_point = @user.dice_point + @point_mail.send_dice_point
     @user.save
     @point_mail.open = true
@@ -72,8 +74,12 @@ class PointMailsController < ApplicationController
           user_id: @user.id,
           service_name: "メール",
           category: "ポイント送付メールの受け取り",
-          dice_point: @point_mail.send_dice_point }
+          dice_point: @point_mail.send_dice_point,
+          service_id: @point_mail.id }
           )
+    else
+      @point_mail.open = true
+      @point_mail.save
     end
   end
 end

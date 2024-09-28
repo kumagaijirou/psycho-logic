@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  novel_id: 1
+  user: one
+  support_fee: 1
+  comment: MyText
+
+two:
+  novel_id: 1
+  user: two
+  support_fee: 1
+  comment: MyText

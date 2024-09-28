@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_24_051726) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_28_103609) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -72,6 +72,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_24_051726) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "novels_supports", force: :cascade do |t|
+    t.integer "novel_id"
+    t.integer "user_id", null: false
+    t.integer "support_fee"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_novels_supports_on_user_id"
   end
 
   create_table "point_codes", force: :cascade do |t|
@@ -174,5 +184,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_24_051726) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "users"
   add_foreign_key "mini_know_hows", "users"
+  add_foreign_key "novels_supports", "users"
   add_foreign_key "point_mails", "users"
 end

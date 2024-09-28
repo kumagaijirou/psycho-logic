@@ -1,0 +1,12 @@
+<%= form_with model: @novels_support, url: {controller: 'novels_supports', action: 'create' } do  |f| %>
+  <%= f.hidden_field :novel_id, value: @novel.id %>
+
+  <%= f.label :コメント %>
+  <%= f.text_field :comment, class: 'form-control' %>
+
+  <%= f.label :応援するダイスポイント数 %>
+  <%= f.number_field :support_fee, class: 'form-control',value: '1000' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+
+<% end %>

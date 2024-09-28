@@ -40,6 +40,13 @@ class UsersController < ApplicationController
         code = PointCode.find_by!(code: params[:user][:final_answer], used_at: nil)
         code.used_at = Time.now
         code.save
+        PointLog.create({
+          user_id: current_user.id,
+          service_name: "ポイントメール",
+          category: "ポイント送付メールのポイント",
+          dice_point: point,
+          service_id: PointCode.id }
+        )
         redirect_to root_url
     else
       render 'new', status: :unprocessable_entity

@@ -9,7 +9,8 @@ class NovelsController < ApplicationController
     url2: params[:url2],
     url3: params[:url3],
     user_id: current_user.id,
-    status: params[:status]
+    status: params[:status],
+    accumulation_dice_point: 0,
     )
     if @novel.status * 2000 <= @current_user.dice_point
       @current_user.dice_point = @current_user.dice_point - @novel.status * 2000
@@ -67,6 +68,7 @@ class NovelsController < ApplicationController
     @thought1 = Thought.find_by(user_id: current_user.id)
     @thought = @novel.thoughts.find_by(user_id: current_user.id) if current_user
     @favorite = Favorite.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id)
+    @novels_supports = @novel.novels_supports
   end
 
   private

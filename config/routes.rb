@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
   resources :novels,              only: [:new, :create, :show, :index, :update] do
     resources :thoughts, param: :thought_id,only: [:create, :new, :show, :index, :update, :edit]
+    resources :novels_supports,            only: [:new, :create, :show, :index]
   end
   resources :quizzes, param: :quizzes_id, only: [:new, :create, :edit, :show, :index, :update]
   resources :point_logs,          only: [:new, :create, :show]
