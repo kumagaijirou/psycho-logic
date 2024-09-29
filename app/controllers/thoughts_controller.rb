@@ -16,7 +16,8 @@ class ThoughtsController < ApplicationController
         user_id: @thought.user_id,
         service_name: "小説感想",
         category: "小説の感想を書いた",
-        dice_point: 1900 }
+        dice_point: 1900,
+        service_id: @thought.id }
       )
       @user1 = User.find(1)
       @user1.dice_point += 100
@@ -25,8 +26,15 @@ class ThoughtsController < ApplicationController
           user_id: 1,
           service_name: "小説感想",
           category: "小説の感想を書いた手数料",
-          dice_point: 100 }
+          dice_point: 100,
+          service_id: @thought.id }
         )
+        @user = current_user
+        if @user.dice_point_expiry_date.nil?
+          @usera = User.find(@novel.user_id)
+          @user.dice_point_expiry_date = @usera.dice_point_expiry_date
+          @user.save
+        end
       redirect_to novel_path(@novel)
     else
       flash.now[:alert] = "問題と答えがないとクイズはできません"

@@ -1,0 +1,7 @@
+<%= form_with url: novels_status_path(@novel), method: :patch, local: true do |f| %>
+  <%= f.label :status %>
+  <%= f.number_field :status, class: 'form-control' %>
+  <%= "個の感想が新たに欲しい。" %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

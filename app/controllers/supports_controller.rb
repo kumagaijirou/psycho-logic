@@ -15,7 +15,8 @@ class SupportsController < ApplicationController
           user_id: current_user.id,
           service_name: "タスク",
           category: "タスクの応援の費用",
-          dice_point: -@support.support_fee }
+          dice_point: -@support.support_fee,
+          service_id: @support.id  }
         )
       redirect_to task_path(@task[:id])
     else

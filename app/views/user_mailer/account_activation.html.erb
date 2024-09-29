@@ -3,7 +3,7 @@
 <p><%= @user.name %>さん</p>
 
 <p>
-サイコ・ロジックへようこそ! 下のリンクをクリックしてサイトに入り、アカウントを有効にして下さい。
+サイコ・ロジックへようこそ! 下のリンクをクリックしてアカウントを有効にして下さい。:
 </p>
 
-<%= link_to "activate",edit_account_activation_url(@user.activation_token,email:@user.email)%>
+<%= link_to "アカウントを有効にする",edit_account_activation_url(@user.activation_token,email:@user.email)%>

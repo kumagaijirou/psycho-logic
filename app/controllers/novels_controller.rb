@@ -20,7 +20,8 @@ class NovelsController < ApplicationController
           user_id: @current_user.id,
           service_name: "小説感想",
           category: "#{@novel.status}個の小説の感想を募集",
-          dice_point: -2000 * @novel.status }
+          dice_point: -2000 * @novel.status,
+          service_id: @novel.id }
         )
       redirect_to novel_path(@novel.id)
     else
@@ -59,7 +60,7 @@ class NovelsController < ApplicationController
   end
 
   def index
-    @novels = Novel.all.paginate(page: params[:page])
+    @novels = Novel.all.order(accumulation_dice_point: "DESC").paginate(page: params[:page])
   end
 
   def show
@@ -69,6 +70,32 @@ class NovelsController < ApplicationController
     @thought = @novel.thoughts.find_by(user_id: current_user.id) if current_user
     @favorite = Favorite.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id)
     @novels_supports = @novel.novels_supports
+    @novels_support = NovelsSupport.find_by(user_id: current_user.id)
+  end
+
+  def status
+    @novel = Novel.find(params[:id])
+  end
+
+  def update_status
+    @user = current_user
+    @novel = Novel.find(params[:id])
+    @novel.update!(status: params[:status])
+    if @user.dice_point < @novel.status * 2000
+       @novel.update!(status: 0 )
+       flash.now[:alert] = "ダイスが足りません。"
+    else
+      @user.dice_point -= @novel.status * 2000
+      @user.save
+      PointLog.create({
+          user_id: @current_user.id,
+          service_name: "小説感想",
+          category: "#{@novel.status}個の小説の感想を募集",
+          dice_point: -2000 * @novel.status,
+          service_id: @novel.id }
+        )
+    end
+    redirect_to novel_path(@novel[:id])
   end
 
   private

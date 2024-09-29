@@ -1,0 +1,19 @@
+<%= form_with url: {controller: 'novels', action: 'update' } do  |f| %>
+  
+  <%= f.label :小説タイトル %>
+  <%= f.text_field :work_name, class: 'form-control' %>
+
+  <%= f.label :あらすじ %>
+  <%= f.text_field :synopsis, class: 'form-control' %>
+
+  <%= f.label :URL1 %>
+  <%= f.text_field :url1, class: 'form-control' %>
+
+  <%= f.label :URL2 %>
+  <%= f.text_field :url2, class: 'form-control' %>
+
+  <%= f.label :URL3 %>
+  <%= f.text_field :url3, class: 'form-control' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

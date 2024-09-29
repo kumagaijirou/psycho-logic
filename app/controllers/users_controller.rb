@@ -18,6 +18,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @task1 = Task.where(user_id: params[:user_id], status: "成功" )
+    @task2 = Task.where(user_id: params[:user_id], status: "失敗" )
   end
   
   def new
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.dice_point = 0
-      if @user.save && @user.final_answer == nil
+      if @user.save && @user.final_answer == ""
         flash[:info] = "入力したアドレスで届いたメールをチェックしてアカウントを有効にして下さい。"
         @user.send_activation_email
         redirect_to root_url
@@ -35,18 +37,25 @@ class UsersController < ApplicationController
         flash[:info] = "入力したアドレスで届いたメールをチェックしてアカウントを有効にして下さい。"
         @user.send_activation_email
         point = PointCode.find_by!(code: params[:user][:final_answer], used_at: nil).point
+        if point == nil
+          point = 0
+        else
+        end
         @user.dice_point += point
         @user.save
         code = PointCode.find_by!(code: params[:user][:final_answer], used_at: nil)
         code.used_at = Time.now
         code.save
         PointLog.create({
-          user_id: current_user.id,
+          user_id: @user.id,
           service_name: "ポイントメール",
           category: "ポイント送付メールのポイント",
           dice_point: point,
-          service_id: PointCode.id }
+          service_id: code.id }
         )
+          @usera = User.find(code.user_id)
+          @user.dice_point_expiry_date = @usera.dice_point_expiry_date
+          @user.save
         redirect_to root_url
     else
       render 'new', status: :unprocessable_entity

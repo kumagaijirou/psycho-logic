@@ -11,7 +11,13 @@ class PointMailsController < ApplicationController
     send_date: params[:send_date],
     open: false
     )
-    if @point_mail.send_dice_point <= @current_user.dice_point && @point_mail.send_user_id == nil
+    if !@point_mail.send_user_id.nil? && @point_mail.send_user_email != "" 
+      flash.now[:alert] = "送るユーザーIDか送るメールアドレスはどちらか一つだけ入力して下さい。"
+      render 'new', status: :unprocessable_entity
+    elsif @point_mail.send_user_id.nil? && @point_mail.send_user_email == "" 
+      flash.now[:alert] = "送るユーザーIDか送るメールアドレスはどちらか一つだけ入力して下さい。"
+      render 'new', status: :unprocessable_entity
+    elsif  @point_mail.send_dice_point <= @current_user.dice_point && @point_mail.send_user_id == nil
       @current_user.dice_point = @current_user.dice_point - @point_mail.send_dice_point
       @current_user.save
       @point_mail.save
@@ -66,20 +72,24 @@ class PointMailsController < ApplicationController
     @point_mail = PointMail.find((params[:id]))
     @user = current_user
     if  @point_mail.open == false && @point_mail.send_user_email == ""
-    @user.dice_point = @user.dice_point + @point_mail.send_dice_point
-    @user.save
-    @point_mail.open = true
-    @point_mail.save
-    PointLog.create({
-          user_id: @user.id,
-          service_name: "メール",
-          category: "ポイント送付メールの受け取り",
-          dice_point: @point_mail.send_dice_point,
-          service_id: @point_mail.id }
-          )
-    else
+      if @point_mail.user_id != @user.id
+      @user.dice_point = @user.dice_point + @point_mail.send_dice_point
+      @user.save
       @point_mail.open = true
       @point_mail.save
+        PointLog.create({
+            user_id: @user.id,
+            service_name: "メール",
+            category: "ポイント送付メールの受け取り",
+            dice_point: @point_mail.send_dice_point,
+            service_id: @point_mail.id }
+            )
+        if @user.dice_point_expiry_date.nil?
+          @usera = User.find(@point_mail.user_id)
+          @user.dice_point_expiry_date = @usera.dice_point_expiry_date
+          @user.save
+        end
+      end
     end
   end
 end

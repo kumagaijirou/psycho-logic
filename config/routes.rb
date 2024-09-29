@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   get "novels/search_result/", to: "novels#search_result", as: 'novels_search_result'
   get "novels/search/", to: "novels#search", as: 'novels_search'
   get "novels/:novel_id", to: "novels#show", as:'novels_show'
+  get "novels/:id/status", to: "novels#status", as:'novels_status'
+  patch "novels/:id/status", to: "novels#update_status"
   get "novels/:id/favorites_add/", to: "novels#favorites_add", as: 'novels_favorites_add'
   delete "novels/:id/favorites_delete/", to: "novels#favorites_delete", as: 'novels_favorites_delete'
   get "thoughts/new", to: "thoughts#new", as: 'thoughts_new'
@@ -54,7 +56,7 @@ Rails.application.routes.draw do
   get "mini_know_hows/search_result/", to: "mini_know_hows#search_result", as: 'mini_know_hows_search_result'
   get "mini_know_hows/search/", to: "mini_know_hows#search", as: 'mini_know_hows_search'
 
-  resources :novels,              only: [:new, :create, :show, :index, :update] do
+  resources :novels,              only: [:new, :create, :show, :edit, :update, :index, :update] do
     resources :thoughts, param: :thought_id,only: [:create, :new, :show, :index, :update, :edit]
     resources :novels_supports,            only: [:new, :create, :show, :index]
   end

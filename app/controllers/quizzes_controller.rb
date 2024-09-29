@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-  before_action :logged_in_user, only: [:create, :index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
 
   def create
     @quiz = Quiz.new(
@@ -102,13 +102,15 @@ class QuizzesController < ApplicationController
           user_id: @quiz.user_id,
           service_name: "クイズ",
           category: "制作した問題の答え閲覧",
-          dice_point: 90}
+          dice_point: 90,
+          service_id: @quiz.id }
         )
         PointLog.create({
           user_id: current_user.id,
           service_name: "クイズ",
           category: "答えの閲覧",
-          dice_point: -100}
+          dice_point: -100,
+          service_id: @quiz.id }
         )
         @user1.dice_point += 10
         @user1.save!
@@ -116,7 +118,8 @@ class QuizzesController < ApplicationController
           user_id: 1,
           service_name: "クイズ",
           category: "答えの閲覧手数料",
-          dice_point: 10}
+          dice_point: 10,
+          service_id: @quiz.id }
         )
       else
         # @quiz.user と @user が異なる場合
@@ -126,7 +129,8 @@ class QuizzesController < ApplicationController
           user_id: @quiz.user_id,
           service_name: "クイズ",
           category: "制作した問題の答え閲覧",
-          dice_point: 90}
+          dice_point: 90,
+          service_id: @quiz.id }
         )
         @user.dice_point -= 100
         @user.save!
@@ -134,7 +138,8 @@ class QuizzesController < ApplicationController
           user_id: current_user.id,
           service_name: "クイズ",
           category: "答えの閲覧",
-          dice_point: -100}
+          dice_point: -100,
+          service_id: @quiz.id }
         )
         @user1.dice_point += 10
         @user1.save!
@@ -142,7 +147,8 @@ class QuizzesController < ApplicationController
           user_id: 1,
           service_name: "クイズ",
           category: "答えの閲覧手数料",
-          dice_point: 10}
+          dice_point: 10,
+          service_id: @quiz.id }
         )
       end
     else 

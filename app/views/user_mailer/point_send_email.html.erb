@@ -3,29 +3,31 @@
 <p>こんにちわ,初めまして。</p>
 
 <p>
-あなたは <% usera = User.find(@point_mail.user_id) %><%= usera.name %> さんによってサイコロジックに招待されました。
-下記のコードをサイト登録時に入力することによって、<%= @point_mail.send_dice_point %>
-(<%= @point_mail.send_dice_point * 0.1%>円相当)が <% usera = User.find(@point_mail.user_id) %><%= usera.name %> からプレゼントされてます。
-ぜひこの機会にサイコロジックのサービスを楽しんでください。
-よろしくお願いします！！
-
+あなたは <% usera = User.find(@point_mail.user_id) %><%= usera.name %> さんによってサイコロジックに招待されました。<br>
+下記の招待コードをサイト登録時に入力することによって、<br>
+<%= @point_mail.send_dice_point %>ダイスポイント
+(<% point = @point_mail.send_dice_point * 0.1 %><%= point.floor %>円相当)が<br>
+<% usera = User.find(@point_mail.user_id) %><%= usera.name %> さんからプレゼントされてます。<br>
+ぜひこの機会にサイコロジックのサービスを楽しんでください。<br>
+よろしくお願いします！！<br>
+<br>
 </p>
-招待コード：
-
-<%= @point_code.code %>
-
-送られるダイスポイント : <%= @point_code.code %>
-
-ポイントの有効期限 : <% usera.dice_point_expiry_date %>
-
---------------------------------------------------------------------------------------
-
-<% usera = User.find(@point_mail.user_id) %><%= usera.name %>さんがあなたに宛てたメール本文。
-
-メールタイトル
-<%= @point_mail.title %>
-
-本文
-<%= @point_mail.content %>
+招待コード：<br>
+<br>
+<%= @point_code.code %><br>
+<br>
+送られるダイスポイント : <%= @point_code.point %><br>
+<br>
+ポイントの有効期限 : <%= usera.dice_point_expiry_date %><br>
+<br>
+--------------------------------------------------------------------------------------<br>
+<br>
+<% usera = User.find(@point_mail.user_id) %><%= usera.name %>さんがあなたに宛てたメール本文。<br>
+<br>
+メールタイトル<br>
+<%= @point_mail.title %><br>
+<br>
+本文<br>
+<%= @point_mail.content %><br>
 
 

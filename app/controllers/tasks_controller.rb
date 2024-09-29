@@ -21,7 +21,8 @@ class TasksController < ApplicationController
           user_id: current_user.id,
           service_name: "タスク",
           category: "タスクの設定",
-          dice_point: -@task.amount_bet }
+          dice_point: -@task.amount_bet,
+          service_id: @task.id }
         )
       redirect_to task_path(@task)
     
@@ -99,7 +100,8 @@ class TasksController < ApplicationController
             user_id: current_user.id,
             service_name: "タスク",
             category: "タスクの成功の応援",
-            dice_point: support.support_fee }
+            dice_point: support.support_fee,
+            service_id: @support.id  }
         )
         end
       end
@@ -121,7 +123,8 @@ class TasksController < ApplicationController
           user_id: @task.bet_user_id,
           service_name: "タスク",
           category: "賭けていたタスクの失敗",
-          dice_point: @task.amount_bet }
+          dice_point: @task.amount_bet,
+          service_id: @task.id  }
           )
       @task.supports.each do |support|
         if support.present?
@@ -133,12 +136,20 @@ class TasksController < ApplicationController
           user_id: support.user_id,
           service_name: "タスク",
           category: "応援したタスクの失敗",
-          dice_point: support.support_fee }
+          dice_point: support.support_fee,
+          service_id: @support.id  }
           )
           end
         end
         support_user.save!
       end
+      @user = User.find(@task.bet_user_id)
+      if @user.dice_point_expiry_date.nil?
+        @usera = User.find(@task.user_id)
+        @user.dice_point_expiry_date = @usera.dice_point_expiry_date
+        @user.save
+      end
+
     end
 
     @task.last_time_at = Time.now
