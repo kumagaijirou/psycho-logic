@@ -22,7 +22,7 @@ module SampleApp
     config.time_zone = 'Tokyo'
     
      # デプロイするサービスのホストを追加する
-    config.hosts << 'xxx.onrender.com'
+    config.hosts << 'psycho-logic.onrender.com'
   end
 end
 
