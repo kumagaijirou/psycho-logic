@@ -20,5 +20,10 @@ module SampleApp
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.time_zone = 'Tokyo'
+    
+     # デプロイするサービスのホストを追加する
+    config.hosts << 'xxx.onrender.com'
   end
 end
+
+    
