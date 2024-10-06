@@ -71,8 +71,8 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     domain: 'gmail.com',
     port: 587,
-    user_name: 'psychologic2024.gmail.com',  #Gmailアドレス（credentials.yml.encに記載）
-    password: 'ngfozimbvwxbkywk',  #アプリパスワード（credentials.yml.encに記載）
+    user_name: ENV['GMAIL_ADDRESS'],
+    password: ENV['GMAIL_PASSWORD'],
     authentication: :plain
   }
 
