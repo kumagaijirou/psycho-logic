@@ -72,7 +72,7 @@ Rails.application.configure do
     domain: 'gmail.com',
     port: 587,
     user_name: 'psychologic2024.gmail.com',  #Gmailアドレス（credentials.yml.encに記載）
-    password: 'ngfo zimb vwxb kywk',  #アプリパスワード（credentials.yml.encに記載）
+    password: 'ngfozimbvwxbkywk',  #アプリパスワード（credentials.yml.encに記載）
     authentication: :plain
   }
 
