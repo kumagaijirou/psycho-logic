@@ -100,6 +100,9 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  # デプロイするサービスのホストを追加する
+  config.hosts << 'https://www.psycho-logic.jp/'
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
