@@ -22,7 +22,7 @@ module SampleApp
     config.time_zone = 'Tokyo'
     
      # デプロイするサービスのホストを追加する
-    config.hosts << "https://psycho-logic-e648758fac84.herokuapp.com/"
+    config.hosts << "psycho-logic-e648758fac84.herokuapp.com"
   end
 end
 
