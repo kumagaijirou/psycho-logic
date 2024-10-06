@@ -71,9 +71,9 @@ Rails.application.configure do
     address: 'smtp.gmail.com',
     domain: 'gmail.com',
     port: 587,
-    user_name: Rails.application.credentials.gmail[:user_name],  #Gmailアドレス（credentials.yml.encに記載）
-    password: Rails.application.credentials.gmail[:password],  #アプリパスワード（credentials.yml.encに記載）
-    authentication: :login
+    user_name: 'psychologic2024.gmail.com',  #Gmailアドレス（credentials.yml.encに記載）
+    password: 'ngfo zimb vwxb kywk',  #アプリパスワード（credentials.yml.encに記載）
+    authentication: :plain
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
