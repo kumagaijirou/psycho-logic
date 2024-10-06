@@ -101,7 +101,7 @@ Rails.application.configure do
   end
 
   # デプロイするサービスのホストを追加する
-  config.hosts << 'https://www.psycho-logic.jp/'
+  config.hosts << 'https://psycho-logic-e648758fac84.herokuapp.com/'
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
