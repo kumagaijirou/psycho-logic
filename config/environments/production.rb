@@ -65,7 +65,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  host = "https://psycho-logic-e648758fac84.herokuapp.com/"
+  host = "https://psycho-logic.jp/"
   config.action_mailer.default_url_options = {  host: 'localhost', port: 3000 }
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
@@ -101,7 +101,7 @@ Rails.application.configure do
   end
 
   # デプロイするサービスのホストを追加する
-  config.hosts << "psycho-logic-e648758fac84.herokuapp.com"
+  config.hosts << "psycho-logic.jp"
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
