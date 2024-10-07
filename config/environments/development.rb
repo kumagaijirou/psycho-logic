@@ -40,10 +40,19 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   host = 'fuzzy-space-orbit-pw7vjjvpp57f6wgq-3000.app.github.dev'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    enable_starttls_auto: true,
+    port:                 587,
+    domain:             'gmail.com',
+    user_name:        'psychologic2024@gmail.com',
+    password:             'ngfozimbvwxbkywk',
+    authentication:       :plain
+  }
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
