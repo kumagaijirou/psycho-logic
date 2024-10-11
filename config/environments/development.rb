@@ -1,8 +1,9 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.hosts << "fuzzy-space-orbit-pw7vjjvpp57f6wgq-3000.app.github.dev"
   # Settings specified here will take precedence over those in config/application.rb.
-
+  
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -40,7 +41,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = false
   host = 'fuzzy-space-orbit-pw7vjjvpp57f6wgq-3000.app.github.dev'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   config.action_mailer.delivery_method = :smtp
@@ -53,6 +54,7 @@ Rails.application.configure do
     password:         ENV['GMAIL_PASSWORD'],
     authentication:       :plain
   }
+  
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
@@ -92,5 +94,5 @@ Rails.application.configure do
   #config.hosts << pf_host
 
   #config.action_cable.allowed_request_origins = ["https://#{pf_host}"]
-  config.hosts << "psycho-logic-e648758fac84.herokuapp.com"
+
 end
