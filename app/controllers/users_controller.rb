@@ -14,8 +14,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @task1 = Task.where(user_id: params[:user_id], status: "成功" )
-    @task2 = Task.where(user_id: params[:user_id], status: "失敗" )
+    @task1 = Task.where(user_id: params[@user.id], status: "成功" )
+    @task2 = Task.where(user_id: params[@user.id], status: "失敗" )
   end
   
   def new

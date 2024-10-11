@@ -9,10 +9,10 @@
         <%= @user.dice_point %><br>
         <%= @user.profile %><br>
         <%= "タスク成功回数" %>
-        <%= @task1.count %>
+        <%= Task.where(user_id: @user.id, status: "成功" ).count %>
         <%= "回" %><br>
         <%= "タスク失敗回数" %>
-        <%= @task2.count %>
+        <%= Task.where(user_id: @user.id, status: "失敗").count %>
         <%= "回" %><br>
 
 
