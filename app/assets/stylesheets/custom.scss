@@ -184,6 +184,7 @@ input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 15px;
+  padding: 8px;
   @include box_sizing;
 }
 
@@ -332,4 +333,24 @@ input[type="password"] {
   background-color: #ffd4d1;
   color: #930403;
   border: solid 1px #930403;
+}
+
+.search_form {
+  .flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  // submit button
+  .submit {
+    max-width: 140px;
+    display: flex;
+    margin-inline: auto;
+  }
 }
