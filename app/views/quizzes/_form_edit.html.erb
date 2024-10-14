@@ -1,6 +1,6 @@
 <%= form_with(model: @quiz, url: quiz_path(@quiz, quizzes_id: @quiz.id), method: :patch) do |f| %>
   <%= f.label :問題 %>
-  <%= f.text_field :question, class: 'form-control' %>
+  <%= f.text_area :question, class: 'form-control', rows: 10 %>
 
   <%= f.label :答えの入力 %>
   <%= f.text_field :answer, class: 'form-control' %>
