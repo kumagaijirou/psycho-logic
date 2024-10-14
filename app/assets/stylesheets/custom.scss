@@ -353,3 +353,16 @@ input[type="password"] {
     margin-inline: auto;
   }
 }
+
+.small-input {
+  max-width: 120px;
+}
+
+.d-flex {
+  display: flex;
+  gap: 8px;
+}
+
+.align-items-center {
+  align-items: center;
+}
