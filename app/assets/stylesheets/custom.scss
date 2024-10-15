@@ -487,3 +487,32 @@ input[type="password"] {
   margin: 0 auto;
   padding: 30px 15px;
 }
+
+.wallper {
+  padding: 0 15px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.log_table {
+  width: 100%;
+
+  table {
+    width: 100%;
+
+    td,
+    th {
+      width: 25%;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      padding: 10px;
+    }
+
+    td {
+      padding: 10px;
+      border: 1px solid #f5f5f5;
+    }
+  }
+}
