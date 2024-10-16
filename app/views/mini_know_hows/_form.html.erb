@@ -1,10 +1,10 @@
 <%= form_with url: {controller: 'mini_know_hows', action: 'create' } do  |f| %>
 
   <%= f.label :タイトル %>
-  <%= f.text_field :title, class: 'form-control' %>
+  <%= f.text_area :title, class: 'form-control', rows: 3 %>
 
   <%= f.label :本文 %>
-  <%= f.text_field :content, class: 'form-control' %>
+  <%= f.text_area :content, class: 'form-control', rows: 20 %>
 
   <%= f.label :設定したい閲覧料 %>
   <%= f.number_field :viewing_fee, class: 'form-control' %>

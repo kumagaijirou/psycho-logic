@@ -1,6 +1,6 @@
 <% provide(:title,  @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="wallper">
     <section class="user_info">
       <h1>
         <%= gravatar_for @user %>
@@ -12,14 +12,43 @@
         <% else %>
         <%= @user.dice_point_expiry_date.strftime('%Y年%m月%d日') %><br><br>
         <% end %>
-        <% @point_logs.each do |point_logs| %>
-          <%= point_logs.service_name %>
-          <%= point_logs.category %>
-          <%= point_logs.dice_point %>
-          <%= point_logs.created_at.strftime('%Y/%m/%d %H:%M:%S') %><br>
-        <% end %>
+      </h1>
 
-              </h1>
+      <!-- ポイントログのテーブル表示 -->
+      <div class="log_table">
+        <table>
+          <thead>
+            <tr>
+              <th>サービス</th>
+              <th>内容</th>
+              <th>ポイント</th>
+              <th>時間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @point_logs.each do |log| %>
+            <tr>
+              <td><%= log.service_name %></td>
+              <td><%= log.category %></td>
+              <td><%= log.dice_point %></td>
+              <td><%= log.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+            </tr>
+            <% end %>
+            <tr>
+              <td>サービスA</td>
+              <td>ポイント獲得</td>
+              <td>100</td>
+              <td>2024/10/12 05:32:17</td>
+            </tr>
+            <tr>
+              <td>サービスB</td>
+              <td>購入によるポイント</td>
+              <td>200</td>
+              <td>2024/10/12 06:15:10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
   </aside>
 </div>

@@ -1,16 +1,15 @@
 <%= form_with url: {controller: 'tasks', action: 'create' } do  |f| %>
-  
-  <%= f.label :内容 %>
-  <%= f.text_field :content, class: 'form-control' %>
+    <%= f.label :内容 %>
+    <%= f.text_area :content, class: 'form-control', rows: 5 %>
 
-  <%= f.label :あげるかもしれないユーザーのID %>
-  <%= f.number_field :bet_user_id, class: 'form-control' %>
+    <%= f.label :あげるかもしれないユーザーのID %>
+    <%= f.number_field :bet_user_id, class: 'form-control' %>
 
-  <%= f.label :タスクの締め切り %>
-  <%= f.datetime_field :deadline_at, class: 'form-control' %>
+    <%= f.label :タスクの締め切り %>
+    <%= f.datetime_field :deadline_at, class: 'form-control' %>
 
-  <%= f.label :かけるダイス数 %>
-  <%= f.number_field :amount_bet, class: 'form-control',value: '2000' %>
+    <%= f.label :かけるダイス数 %>
+    <%= f.number_field :amount_bet, class: 'form-control',value: '2000' %>
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

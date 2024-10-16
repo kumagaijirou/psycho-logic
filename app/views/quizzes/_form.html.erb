@@ -1,7 +1,6 @@
 <%= form_with url: {controller: 'quizzes', action: 'create' } do  |f| %>
-  
   <%= f.label :問題 %>
-  <%= f.text_field :question, class: 'form-control' %>
+  <%= f.text_area :question, class: 'form-control', rows: 10 %>
 
   <%= f.label :答えの入力 %>
   <%= f.text_field :answer, class: 'form-control' %>

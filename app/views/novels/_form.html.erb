@@ -1,10 +1,9 @@
-<%= form_with url: {controller: 'novels', action: 'create' } do  |f| %>
-  
+<%= form_with url: {controller: 'novels', action: 'create' } do |f| %>
   <%= f.label :小説タイトル %>
-  <%= f.text_field :work_name, class: 'form-control' %>
+  <%= f.text_area :work_name, class: 'form-control', rows: 3 %>
 
   <%= f.label :あらすじ %>
-  <%= f.text_field :synopsis, class: 'form-control' %>
+  <%= f.text_area :synopsis, class: 'form-control', rows: 15 %>
 
   <%= f.label :URL1 %>
   <%= f.text_field :url1, class: 'form-control' %>
@@ -16,8 +15,10 @@
   <%= f.text_field :url3, class: 'form-control' %>
 
   <%= f.label :status %>
-  <%= f.number_field :status, class: 'form-control' %>
-  <%= "個の感想が欲しい。" %>
+  <div class="d-flex align-items-center">
+    <%= f.number_field :status, class: 'form-control small-input' %>
+    <span>この感想が欲しい</span>
+  </div>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
