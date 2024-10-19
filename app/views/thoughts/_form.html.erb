@@ -5,7 +5,7 @@
   <%= f.hidden_field :novel_id, value: novel.id %>
 
   <%= f.label :感想 %>
-  <%= f.text_field :thoughts, class: 'form-control' %>
+  <%= f.text_area :thoughts, class: 'form-control', rows: 10 %>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
