@@ -437,44 +437,27 @@ input[type="password"] {
   transition: 0.5s;
   opacity: 0;
   position: absolute;
-  top: 0;
-  left: 55%;
-  transform: scale(0) translateX(-50%);
+  top: 50px;
+  left: 0;
+  transform: scale(0) translateX(0);
+  background-color: #333;
   width: 100%;
-  height: 50px;
-
-  // 998px以下の場合
-  @media (max-width: 998px) {
-    top: 50px;
-    left: 0;
-    transform: scale(0) translateX(0);
-    background-color: #333;
-    opacity: 1;
-    height: auto;
-  }
+  opacity: 1;
+  height: auto;
 
   &.active {
     opacity: 1;
-    transform: scale(1) translateX(-50%);
+    transform: scale(1) translateX(0);
     background-color: #222;
-
-    // 998px以下の場合
-    @media (max-width: 998px) {
-      transform: scale(1) translateX(0);
-    }
   }
 
   .header_nav {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     gap: 12px;
     padding: 4px;
-
-    // 998px以下の場合
-    @media (max-width: 998px) {
-      flex-direction: column;
-    }
 
     li {
       list-style: none;
