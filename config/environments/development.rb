@@ -82,6 +82,8 @@ Rails.application.configure do
     'X-Frame-Options' => "ALLOW-FROM #{pf_domain}"
   }
 
+  config.assets.debug = true
+  
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

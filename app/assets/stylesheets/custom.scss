@@ -382,7 +382,7 @@ input[type="password"] {
 .hamburger {
   display: inline-block;
   position: absolute;
-  right: 15px;
+  right: 16px;
   cursor: pointer;
   padding: 24px 14px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -438,17 +438,23 @@ input[type="password"] {
   opacity: 0;
   position: absolute;
   top: 50px;
-  left: 0;
-  transform: scale(0) translateX(0);
+  right: 16px;
   background-color: #333;
   width: 100%;
-  opacity: 1;
+  max-width: 240px;
+  opacity: 0;
   height: auto;
+  pointer-events: none;
+
+  // 768px以下の時
+  @media (max-width: 768px) {
+    right: 4px;
+  }
 
   &.active {
     opacity: 1;
-    transform: scale(1) translateX(0);
     background-color: #222;
+    pointer-events: auto;
   }
 
   .header_nav {
@@ -457,11 +463,12 @@ input[type="password"] {
     align-items: center;
     flex-direction: column;
     gap: 12px;
-    padding: 4px;
+    padding: 12px 4px;
+    margin-bottom: 0;
 
     li {
       list-style: none;
-      padding: 10px 0;
+      padding: 4px 0;
 
       a {
         color: #fff;
