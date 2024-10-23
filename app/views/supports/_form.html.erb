@@ -1,8 +1,10 @@
+ <h3>タスクの応援コメント</h3>
+
 <%= form_with model: @support, url: {controller: 'supports', action: 'create' } do  |f| %>
   <%= f.hidden_field :task_id, value: @task.id %>
 
   <%= f.label :コメント %>
-  <%= f.text_field :comment, class: 'form-control' %>
+  <%= f.text_area :comment, class: 'form-control', rows: 3 %>
 
   <%= f.label :応援するポイント数 %>
   <%= f.number_field :support_fee, class: 'form-control',value: '1000' %>
