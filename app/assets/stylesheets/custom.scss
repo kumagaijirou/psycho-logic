@@ -382,10 +382,15 @@ input[type="password"] {
 .hamburger {
   display: inline-block;
   position: absolute;
-  right: 16px;
+  right: 120px;
   cursor: pointer;
   padding: 24px 14px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  // 768px以下の時
+  @media (max-width: 768px) {
+    right: 90px;
+  }
 
   .navicon {
     display: block;
@@ -449,6 +454,7 @@ input[type="password"] {
   // 768px以下の時
   @media (max-width: 768px) {
     right: 4px;
+    max-width: 200px;
   }
 
   &.active {
