@@ -3,6 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   config.hosts << "fuzzy-space-orbit-pw7vjjvpp57f6wgq-3000.app.github.dev"
   config.hosts << "cautious-broccoli-rqgwp64rgjqcxpxw-3000.app.github.dev"
+  config.hosts << "shiny-umbrella-j9vrp4p9vx2qrp7-3000.app.github.dev"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
