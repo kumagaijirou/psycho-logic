@@ -379,6 +379,12 @@ input[type="password"] {
   max-height: 100% !important;
 }
 
+.navi_inner {
+  max-width: 1170px;
+  margin: 0 auto;
+  position: relative;
+}
+
 .hamburger {
   display: inline-block;
   position: absolute;
@@ -468,17 +474,31 @@ input[type="password"] {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 12px;
     padding: 12px 4px;
     margin-bottom: 0;
 
     li {
+      display: block;
       list-style: none;
       padding: 4px 0;
+      width: 100%;
 
       a {
+        display: block;
         color: #fff;
         text-decoration: none;
+        text-align: center;
+        transition: 0.3s;
+        padding: 8px 0;
+
+        &:hover {
+          background-color: #444;
+        }
+
+        // 768px以下の時
+        @media (max-width: 768px) {
+          padding: 6px 0;
+        }
       }
     }
 
