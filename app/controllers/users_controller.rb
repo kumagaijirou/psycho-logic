@@ -89,6 +89,12 @@ class UsersController < ApplicationController
     end
   end
   
+  def show_probably_a_hit
+    @user = User.find(params[:id])
+    @probably_a_hit = ProbablyAHit.where(user_id: current_user.id)
+  end
+
+
   private
 
     def user_params

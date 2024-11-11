@@ -76,7 +76,7 @@ class NovelsController < ApplicationController
   def status
     @novel = Novel.find(params[:id])
   end
-
+  
   def update_status
     @user = current_user
     @novel = Novel.find(params[:id])
@@ -97,6 +97,91 @@ class NovelsController < ApplicationController
     end
     redirect_to novel_path(@novel[:id])
   end
+
+  def novel_probably_a_hit
+    @user = current_user
+    @novel = Novel.find(params[:novel_id])
+    if @user.dice_point >= 5000
+      @user.dice_point -= 5000
+      @user.save!
+      PointLog.create({
+          user_id: current_user.id,
+          service_name: "小説感想",
+          category: "小説を多分売れるした費用",
+          dice_point: -5000,
+          service_id: @novel.id })
+
+      if @novel.accumulation_dice_point >= 0 && @novel.accumulation_dice_point <= 10000
+        ProbablyAHit.create({
+        user_id: @current_user.id,
+        service_name: "小説感想",
+        service_id: @novel.id,
+        creater_user_id: @novel.user_id,
+        rank: "プラチナ"
+      })
+      elsif @novel.accumulation_dice_point > 10001 && @novel.accumulation_dice_point <= 100000
+        ProbablyAHit.create({
+        user_id: @current_user.id,
+        service_name: "小説感想",
+        service_id: @novel.id,
+        creater_user_id: @novel.user_id,
+        rank: "ゴールド"
+      })
+      elsif @novel.accumulation_dice_point > 100001 && @novel.accumulation_dice_point <= 1000000
+        ProbablyAHit.create({
+          user_id: @current_user.id,
+          service_name: "小説感想",
+          service_id: @novel.id,
+          creater_user_id: @novel.user_id,
+          rank: "シルバー"
+        }) 
+      elsif @novel.accumulation_dice_point > 1000001 && @novel.accumulation_dice_point <= 5000000
+        ProbablyAHit.create({
+          user_id: @current_user.id,
+          service_name: "小説感想",
+          service_id: @novel.id,
+          creater_user_id: @novel.user_id,
+          rank: "ブロンズ"
+        }) 
+      else
+        ProbablyAHit.create({
+          user_id: @current_user.id,
+          service_name: "小説感想",
+          service_id: @novel.id,
+          creater_user_id: @novel.user_id,
+          rank: "ノーマル"
+        }) 
+      end
+      usera = User.find(@novel.user_id)
+      usera.dice_point += 4500
+      usera.save!
+        PointLog.create({
+          user_id: @novel.user_id,
+          service_name: "小説感想",
+          category: "小説を多分売れるされたポイント",
+          dice_point: 4500,
+          service_id: @novel.id }
+        )
+      userb = User.find(1)
+      userb.dice_point += 500
+      userb.save!
+        PointLog.create({
+          user_id: 1,
+          service_name: "小説感想",
+          category: "小説を多分売れるされたポイントの手数料",
+          dice_point: 500,
+          service_id: @novel.id }
+        )
+        @novel.accumulation_dice_point += 5000
+        @novel.save!
+    else
+      flash.now[:alert] = "ダイスポイントが足りません。"
+      
+    end
+    
+  end
+
+
 
   private
 

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_28_103609) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_10_135842) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_28_103609) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -117,6 +117,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_28_103609) do
     t.index ["user_id"], name: "index_point_mails_on_user_id"
   end
 
+  create_table "probably_a_hits", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "service_name"
+    t.integer "service_id"
+    t.integer "creater_user_id"
+    t.string "rank"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_probably_a_hits_on_user_id"
+  end
+
   create_table "quizzes", force: :cascade do |t|
     t.integer "user_id"
     t.text "question"
@@ -186,4 +197,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_28_103609) do
   add_foreign_key "mini_know_hows", "users"
   add_foreign_key "novels_supports", "users"
   add_foreign_key "point_mails", "users"
+  add_foreign_key "probably_a_hits", "users"
 end

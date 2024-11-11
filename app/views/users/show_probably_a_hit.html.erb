@@ -1,0 +1,44 @@
+<% provide(:title,  @user.name) %>
+<div class="row">
+  <aside class="wallper">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+        <%= @user.dice_point %><br><br>
+       
+      </h1>
+
+      <!-- ポイントログのテーブル表示 -->
+      <div class="log_table">
+        <table>
+          <thead>
+            <tr>
+              <th>サービス</th>
+              <th>多分売れるしたID</th>
+              <th>作者のID</th>
+              <th>ランク</th>
+              <th>設定時間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @probably_a_hit.each do |probably_a_hit| %>
+            <tr>
+              <td><%= probably_a_hit.service_name %></td>
+              <td><%= probably_a_hit.service_id %> 
+              <% if probably_a_hit.service_name == "小説感想" %>
+              <% novela = Novel.find(probably_a_hit.service_id) %>
+              <%= novela.work_name %>
+              <% end %>
+              </td>
+              <td><%= probably_a_hit.creater_user_id %> <% usera = User.find(probably_a_hit.creater_user_id) %><%=  usera.name %></td>
+              <td><%= probably_a_hit.rank %></td>
+              <td><%= probably_a_hit.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </aside>
+</div>

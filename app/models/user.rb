@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :point_mails
   has_many :mini_know_hows
   has_many :point_codes
+  has_many :probably_a_hits
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest

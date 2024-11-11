@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post   "/login",   to: "sessions#create"
   delete "/logout",  to: "sessions#destroy"
   get "users/ranking", to: "users#ranking"
+  get "users/:id/show_probably_a_hit", to: "users#show_probably_a_hit", as: "users_show_probably_a_hit"
   get "tasks/index"
   get "tasks/index2"
   get "tasks/:id/last_message", to: "tasks#last_message",  as: 'tasks_last_message'
@@ -45,6 +46,7 @@ Rails.application.routes.draw do
   get "thoughts/new", to: "thoughts#new", as: 'thoughts_new'
   get "thoughts/:thought_id", to: "thoughts#show", as: 'thoughts_show'
   get "novels/:novel_id/thoughts/:thought_id/update", to: "thoughts#update", as: 'thoughts_update'
+  get "novels/:novel_id/novel_probably_a_hit", to: "novels#novel_probably_a_hit", as: "novels_novel_probably_a_hit"
   get "favorites/:user_id/tasks_show", to:"favorites#tasks_show", as: 'favorites_tasks_show'
   get "favorites/:user_id/quizzes_show", to:"favorites#quizzes_show", as: 'favorites_quizzes_show'
   get "favorites/:user_id/novels_show", to:"favorites#novels_show", as: 'favorites_novels_show'
