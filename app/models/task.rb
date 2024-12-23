@@ -12,7 +12,6 @@ class Task < ApplicationRecord
   
   def date_before_start
     return if :deadline_at.blank?
-    errors.add(:deadline_at, "は今日以降のものを選択してください") if deadline_at < Date.today
   end
 
 end

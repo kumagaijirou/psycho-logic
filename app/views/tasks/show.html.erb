@@ -14,8 +14,7 @@
         かけるダイス数　<%= @task.amount_bet %><br>
         <% if @task.status == '実行中' && @task.user_id == current_user.id %>
           <%= button_to '実行完了？', task_status_run_path(@task), method: :patch, class: 'btn btn-primary' %>
-          <%= link_to '応援', new_task_support_path(task_id: @task.id), method: :get %>
-          <%= button_to '立候補する', tasks_candidate_path(@task),method: :patch, class:'btn btn-primary' %>
+          
         <% elsif @task.status == '成功' || @task.status == '失敗' %>
 
           <%# コメント：成功か失敗を表示する %>
@@ -33,6 +32,16 @@
         <% else %>
         <% end %>
         
+        <% if @task.status == '実行中' %>
+          <%= link_to '応援', new_task_support_path(task_id: @task.id), method: :get %><br>
+        <% else %>
+        <% end %>
+
+        <% if @task.status == '実行中' && @task.bet_user_id == 1 && @task.user_id != current_user.id %>
+          <%= button_to '立候補する', tasks_candidate_path(@task),method: :patch, class:'btn btn-primary' %><br><br>
+        <% else %>
+        <% end %>
+
         <% @supports.each do |support| %>
           <%= support.comment %>
           <%= support.support_fee %><br>

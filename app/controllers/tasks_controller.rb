@@ -84,6 +84,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.status == '実行中' && Time.now < @task.deadline_at
       @task.status = '成功'
+      @task.save!
       PointLog.create({
           user_id: current_user.id,
           service_name: "タスク",
@@ -109,8 +110,10 @@ class TasksController < ApplicationController
       # ベットと応援費合計をcurrent_userのdice_pointに代入
       @current_user.dice_point += @task.amount_bet + support_fees
       @current_user.save
-    else
+
+    elsif @task.status == '実行中' && Time.now > @task.deadline_at
       @task.status = '失敗'
+      @task.save!
       # 問題の箇所２
       # bet_userがポイントを取得
       # bet_userはview側で使う必要のない変数のため、パフォーマンスの観点からローカル変数で定義している
@@ -137,7 +140,7 @@ class TasksController < ApplicationController
           service_name: "タスク",
           category: "応援したタスクの失敗",
           dice_point: support.support_fee,
-          service_id: @support.id  }
+          service_id: support.id  }
           )
           end
         end
@@ -149,7 +152,7 @@ class TasksController < ApplicationController
         @user.dice_point_expiry_date = @usera.dice_point_expiry_date
         @user.save
       end
-
+    else
     end
 
     @task.last_time_at = Time.now
@@ -159,16 +162,10 @@ class TasksController < ApplicationController
 
   def candidate
     @task = Task.find(params[:id])
-    if  @task.bet_user_id == 1
-    @task.bet_user_id = current_user.id
-    @task.save
+    @task.update(bet_user_id: current_user.id) 
+    @task.save  
     redirect_to task_path(@task[:id])
     flash[:notice] = "ダイスをもらえる権利に立候補しました。"
-
-    else
-      "立候補できません。"
-      redirect_to tasks_path(@task[:id])
-    end
   end
 
   def last_message
