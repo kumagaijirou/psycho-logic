@@ -163,7 +163,7 @@ class TasksController < ApplicationController
   def candidate
     @task = Task.find(params[:id])
     @task.update(bet_user_id: current_user.id) 
-    @task.save  
+    @task.save!
     redirect_to task_path(@task[:id])
     flash[:notice] = "ダイスをもらえる権利に立候補しました。"
   end
