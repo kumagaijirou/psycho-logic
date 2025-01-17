@@ -1,5 +1,14 @@
-<li><%= link_to novel.work_name, novels_show_path(novel) %></li>
+<li><% if logged_in? %>
+<%= link_to novel.work_name, novels_show_path(novel) %>
+<% else %>
+<%= novel.work_name %>
+<% end %>
+</li>
+<% if logged_in? %>
 <span class="user">名前 <%= link_to novel.user.name, novel.user %></span><br>
+<% else %>
+<span class="user">名前 <%= novel.user.name %></span><br>
+<% end %>
   <span class="synopsis"> <%= novel.synopsis %></span><br>
   <span class="url1"> url1 <%= link_to novel.url1 , novel.url1 %></span><br>
   <span class="url2"> url2 <%= link_to novel.url2 , novel.url2 %></span><br>

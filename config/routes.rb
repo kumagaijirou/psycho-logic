@@ -38,6 +38,8 @@ Rails.application.routes.draw do
   get "novels/new"
   get "novels/search_result/", to: "novels#search_result", as: 'novels_search_result'
   get "novels/search/", to: "novels#search", as: 'novels_search'
+  get "novels/index2", to: "novels#index2", as: 'novels_index2'
+  get "novels/:novel_id/show2", to:"novels#show2", as: 'novels_show2'
   get "novels/:novel_id", to: "novels#show", as:'novels_show'
   get "novels/:id/status", to: "novels#status", as:'novels_status'
   patch "novels/:id/status", to: "novels#update_status"

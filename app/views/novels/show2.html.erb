@@ -1,0 +1,38 @@
+<% provide(:title, @novel.work_name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <%= link_to "小説へのリンク集", novels_path %><br>
+      
+        小説名 <%= @novel.work_name %><br>
+        作者 <%= @novel.user.name %><br>
+        あらすじ <%= @novel.synopsis %><br>
+        URL1 <%= link_to @novel.url1 , @novel.url1 %><br>
+        URL2 <%= link_to @novel.url2 , @novel.url2 %><br>
+        URL3 <%= link_to @novel.url3 , @novel.url3 %><br>
+        今までもらった応援ダイスポイント<%= @novel.accumulation_dice_point %><br>
+        <%= @novel.status %>個の感想を募集中<br><br>
+
+        <% if @thoughts.size >= 1 %>
+            <%= puts = "【感想】" %><br>
+        <br>
+            <% end %>
+        <% @thoughts.each do |thought| %>
+          <%= thought.user.name %><br>
+          <%= thought.thoughts %><br>
+          <% end %>
+          
+       
+          <% if @novels_supports.size >= 1 %>
+            <%= puts = "【応援コメント】" %><br>
+        <br>
+            <% end %>
+        <% @novels_supports.each do |novels_support| %>
+          <%= novels_support.user.name %><br>
+          <%= novels_support.comment %>
+          <%= novels_support.support_fee %><br>
+        <% end %>
+      </h1>
+    </section>
+  </aside>
+</div>

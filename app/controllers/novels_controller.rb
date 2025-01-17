@@ -63,6 +63,10 @@ class NovelsController < ApplicationController
     @novels = Novel.all.order(accumulation_dice_point: "DESC").paginate(page: params[:page])
   end
 
+  def index2
+    @novels = Novel.all.order(accumulation_dice_point: "DESC").paginate(page: params[:page])
+  end
+
   def show
     @novel = Novel.find(params[:novel_id]) 
     @thoughts = @novel.thoughts
@@ -71,6 +75,12 @@ class NovelsController < ApplicationController
     @favorite = Favorite.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id)
     @novels_supports = @novel.novels_supports
     @novels_support = NovelsSupport.find_by(user_id: current_user.id)
+  end
+
+  def novels_show2
+    @novel = Novel.find(params[:novel_id]) 
+    @thoughts = @novel.thoughts
+    @novels_supports = @novel.novels_supports
   end
 
   def status
