@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  comment: MyText
+  number_of_people: 1
+  deadline: 2025-01-18 09:11:07
+  phase: MyString
+
+two:
+  user: two
+  comment: MyText
+  number_of_people: 1
+  deadline: 2025-01-18 09:11:07
+  phase: MyString

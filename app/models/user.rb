@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :mini_know_hows
   has_many :point_codes
   has_many :probably_a_hits
+  has_many :praise_mes
+  has_many :praises
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest

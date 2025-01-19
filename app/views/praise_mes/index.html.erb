@@ -1,0 +1,13 @@
+<% provide(:title, 'ほめて！') %>
+<h1>ほめて！</h1>
+
+<%= link_to "新しいほめて！を作る", new_praise_me_path %><br>
+
+<%= will_paginate %>
+
+<ul class="praise_mes">
+  <%= render @praise_mes %>
+  
+</ul>
+
+<%= will_paginate %>

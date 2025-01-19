@@ -1,0 +1,12 @@
+<%= form_with url: {controller: 'praise_mes', action: 'create' } do  |f| %>
+    <%= f.label :ほめて欲しいコメント %>
+    <%= f.text_area :comment, class: 'form-control', rows: 10 %>
+
+    <%= f.label :ほめて欲しい人数 %>
+    <%= f.number_field :number_of_people, class: 'form-control' %>
+
+    <%= f.label :締め切り %>
+    <%= f.datetime_field :deadline, class: 'form-control' %>
+
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

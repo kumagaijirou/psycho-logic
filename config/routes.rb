@@ -73,8 +73,9 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :tasks,               only: [:create, :edit, :show, :update, :destroy ,:index, :new] do
-    resources :supports,            only: [:new, :create, :show, :index]
+    resources :supports,          only: [:new, :create, :show, :index]
   end
-
-
+  resources :praise_mes,          only:[:new, :create, :show, :index, :destroy] do
+    resources :praise,            only:[:new, :create, :show, :index]
+  end
 end

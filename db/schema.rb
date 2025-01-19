@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_10_135842) do
+ActiveRecord::Schema[7.0].define(version: 2025_01_18_091707) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -117,6 +117,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_10_135842) do
     t.index ["user_id"], name: "index_point_mails_on_user_id"
   end
 
+  create_table "praise_mes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "comment"
+    t.integer "number_of_people"
+    t.datetime "deadline"
+    t.string "phase"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_praise_mes_on_user_id"
+  end
+
+  create_table "praises", force: :cascade do |t|
+    t.integer "praise_me_id"
+    t.integer "user_id", null: false
+    t.text "praise_comment"
+    t.boolean "adopt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_praises_on_user_id"
+  end
+
   create_table "probably_a_hits", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "service_name"
@@ -197,5 +218,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_10_135842) do
   add_foreign_key "mini_know_hows", "users"
   add_foreign_key "novels_supports", "users"
   add_foreign_key "point_mails", "users"
+  add_foreign_key "praise_mes", "users"
+  add_foreign_key "praises", "users"
   add_foreign_key "probably_a_hits", "users"
 end

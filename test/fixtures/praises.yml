@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  praise_me_id: 1
+  user: one
+  praise_comment: MyText
+  adopt: false
+
+two:
+  praise_me_id: 1
+  user: two
+  praise_comment: MyText
+  adopt: false

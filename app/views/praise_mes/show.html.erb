@@ -1,0 +1,31 @@
+<% provide(:title, @praise_me.user.name) %>
+<% provide(:button_text, 'コメントを入力') %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="praise_me_info">
+      <h1>
+        
+        ほめて！ID <%= @praise_me.id %><br>
+        ユーザーID <%= @praise_me.user_id %><br>
+        名前 <%= link_to @praise_me.user.name, @praise_me.user %><br>
+        ほめて欲しいコメント<br><br>
+        <%= @praise_me.comment %>
+        <span class="timestamp">
+        Posted <%= time_ago_in_words(@praise_me.created_at) %> ago.</span>
+      </h1>
+      <% if @praise_me.deadline < Time.now &&  @praise_me.user != current_user.id %>
+      <%= link_to "褒めるコメントを入力する", new_praise_me_praise_path(@praise_me) %><br>
+      
+
+      
+      <% @praises.each do |praise| %>
+          <%= praise.user.name %><br>
+          <%= praise.praise_comment %><br>
+        <% end %>
+      <% else %>
+      <% end %>
+    
+
+    </section>
+  </aside>
+</div>

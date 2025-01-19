@@ -1,0 +1,12 @@
+<li id="praise-<%= praise.id %>">
+    <%= link_to gravatar_for(praise_me.user, size: 50), praise.user %><br>
+    <% usera = User.find(praise.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <span class="praise_comment">ほめたコメント<%= link_to praise.praise_comment %></span><br>
+    
+    
+  
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(praise_me.created_at) %> ago.
+    </span><br>
+</li>

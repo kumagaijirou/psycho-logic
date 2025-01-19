@@ -1,0 +1,7 @@
+<%= @praise_me.comment %>
+<%= form_with model: @praise, url: {controller: 'praise', action: 'create' } do  |f| %>
+      <%= f.hidden_field :praise_me_id, value: @praise_me.id %>
+      <%= f.label  :褒めているコメント %>
+      <%= f.text_area :praise_comment, class: 'form-control', rows: 10 %>
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+      <% end %>
