@@ -53,12 +53,19 @@ Rails.application.routes.draw do
   get "favorites/:user_id/quizzes_show", to:"favorites#quizzes_show", as: 'favorites_quizzes_show'
   get "favorites/:user_id/novels_show", to:"favorites#novels_show", as: 'favorites_novels_show'
   get "favorites/:user_id/mini_know_hows_show", to:"favorites#mini_know_hows_show", as: 'favorites_mini_know_hows_show'
+  get "favorites/:user_id/praise_mes_show", to:"favorites#praise_mes_show", as: 'favorites_praise_mes_show'
   get "point_mails/index2"
   get "mini_know_hows/:id/favorites_add/", to: "mini_know_hows#favorites_add", as: 'mini_know_hows_favorites_add'
   delete "mini_know_hows/:id/favorites_delete/", to: "mini_know_hows#favorites_delete", as: 'mini_know_hows_favorites_delete'
   delete "mini_know_hows/:id/refund", to:"mini_know_hows#refund", as: 'mini_know_hows_refund'
   get "mini_know_hows/search_result/", to: "mini_know_hows#search_result", as: 'mini_know_hows_search_result'
   get "mini_know_hows/search/", to: "mini_know_hows#search", as: 'mini_know_hows_search'
+  get "praise_mes/:praise_me_id/praise/:praise_id/comment_adopt", to:"praise#comment_adopt", as: 'praise_comment_adopt'
+  get "praise_mes/:praise_me_id/rest0", to:"praise_mes#rest0", as: 'praise_mes_rest0'
+  get "praise_mes/search/", to: "praise_mes#search", as: 'praise_mes_search'
+  get "praise_mes/search_result/", to: "praise_mes#search_result", as: 'praise_mes_search_result'
+  get "praise_mes/:id/favorites_add/", to: "praise_mes#favorites_add", as: 'praise_mes_favorites_add'
+  delete "praise_mes/:id/favorites_delete/", to: "praise_mes#favorites_delete", as: 'praise_mes_favorites_delete'
 
   resources :novels,              only: [:new, :create, :show, :edit, :update, :index, :update] do
     resources :thoughts, param: :thought_id,only: [:create, :new, :show, :index, :update, :edit]

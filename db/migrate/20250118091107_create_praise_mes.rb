@@ -6,6 +6,8 @@ class CreatePraiseMes < ActiveRecord::Migration[7.0]
       t.integer :number_of_people
       t.datetime :deadline
       t.string :phase
+      t.integer :rest_number_of_people
+      t.integer :number_of_times_seen
 
       t.timestamps
     end

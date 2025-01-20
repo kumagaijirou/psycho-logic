@@ -5,6 +5,6 @@ class Novel < ApplicationRecord
   validates :user_id, presence: true, numericality: {only_integer: true}
   validates :work_name, presence: true, length: { maximum: 255 }
   validates :synopsis, presence: true, length: { maximum: 1500 }
-  validates :url1, presence: true,
-  validates :status, presence: true,
+  validates :url1, presence: true
+  validates :status, presence: true
 end

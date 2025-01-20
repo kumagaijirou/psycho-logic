@@ -33,6 +33,7 @@ class NovelsSupportsController < ApplicationController
 
       userb = User.find(1)
       userb.dice_point += @novels_support.support_fee * 0.1
+      userb.save
         PointLog.create({
           user_id: 1,
           service_name: "小説感想",

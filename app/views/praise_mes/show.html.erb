@@ -13,18 +13,68 @@
         <span class="timestamp">
         Posted <%= time_ago_in_words(@praise_me.created_at) %> ago.</span>
       </h1>
-      <% if @praise_me.deadline < Time.now &&  @praise_me.user != current_user.id %>
-      <%= link_to "褒めるコメントを入力する", new_praise_me_praise_path(@praise_me) %><br>
-      
-
-      
+      <% if @praise_me.phase == "公開中" %>
       <% @praises.each do |praise| %>
+      <br>
+        <% if praise.adopt == true %>
+          <%= "⚫︎" %>
+          <%= praise.user.name %><br>
+          <%= praise.praise_comment %><br>
+          <% else %>
+          <%= praise.user.name %><br>
+          <%= praise.praise_comment %><br>
+          <% end %>
+         <% end %> 
+      <% elsif @praise_me.deadline < Time.now && @praise_me.user.id == current_user.id  && @praise_me.rest_number_of_people > 0 && Praise.where(praise_me_id: @praise_me.id, adopt: false ).count == 0 %>
+      <% @praises.each do |praise| %>
+      <br>
+        <% if praise.adopt == true %>
+          <%= "⚫︎" %>
+          <%= praise.user.name %><br>
+          <%= praise.praise_comment %><br>
+          <% else %>
           <%= praise.user.name %><br>
           <%= praise.praise_comment %><br>
         <% end %>
-      <% else %>
       <% end %>
-    
+          <%= link_to "あげる候補がもうない", praise_mes_rest0_path(praise_me_id: @praise_me.id),method: :patch %>
+
+      <% elsif @praise_me.deadline > Time.now &&  @praise_me.user.id != current_user.id %>
+      
+          <% if Praise.where(praise_me_id: @praise_me.id,user_id: current_user.id,).count == 0 %>
+          <%= link_to "褒めるコメントを入力する", new_praise_me_praise_path(@praise_me) %><br>
+          <% else %>
+          褒めるコメントは一つのコメントにつき一つしか書き込めません。
+          <% end %>
+
+      <% elsif @praise_me.deadline < Time.now && @praise_me.user.id == current_user.id && @praise_me.rest_number_of_people > 0 %>
+
+      <br><br><br>
+      ダイスをあげたい褒めるコメントを選んでね。<br>
+      残り<%= @praise_me.rest_number_of_people %>人
+      
+      <% @praises.each do |praise| %>
+      <br>
+          <% if praise.adopt == true %>
+          <%= "⚫︎" %>
+          <%= praise.user.name %><br>
+          <%= praise.praise_comment %><br>
+          <% else %>
+          <%= praise.user.name %><br>
+          <%= link_to praise.praise_comment, praise_comment_adopt_path(praise_me_id: @praise_me.id, praise_id: praise.id),method: :patch %><br>
+          <% end %>
+        <% end %>
+
+        <% else %>
+        まだ褒めるコメントを集めている段階です。もうちょっと待っててください。<br>
+        <%= @praise_me.deadline %><br>
+      <% end %>
+
+      <% if @favorite.present? %>
+          <%= button_to 'お気に入りを削除', praise_mes_favorites_delete_path(@praise_me), method: :delete,class: 'btn btn-primary' %>
+        <% else %>
+          <%= button_to 'お気に入りに追加', praise_mes_favorites_add_path(@praise_me), method: :get, class: 'btn btn-primary' %>
+        <% end %>
 
     </section>
   </aside>

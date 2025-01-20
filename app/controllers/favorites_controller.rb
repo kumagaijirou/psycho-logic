@@ -24,4 +24,10 @@ class FavoritesController < ApplicationController
     @mini_know_hows = MiniKnowHow.where(id: @favorites.pluck(:service_id))
   end
 
+  def praise_mes_show
+    @favorites = Favorite.where(user_id: current_user.id, service_name: "ほめて！").paginate(page: params[:page]) 
+    @praise_mes = PraiseMe.where(id: @favorites.pluck(:service_id))
+  end
+
+
 end
