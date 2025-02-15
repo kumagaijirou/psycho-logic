@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   get "favorites/:user_id/novels_show", to:"favorites#novels_show", as: 'favorites_novels_show'
   get "favorites/:user_id/mini_know_hows_show", to:"favorites#mini_know_hows_show", as: 'favorites_mini_know_hows_show'
   get "favorites/:user_id/praise_mes_show", to:"favorites#praise_mes_show", as: 'favorites_praise_mes_show'
+  get "favorites/:user_id/hyakuhyakus_show", to:"favorites#hyakuhyakus_show", as: 'favorites_hyakuhyakus_show'
   get "point_mails/index2"
   get "mini_know_hows/:id/favorites_add/", to: "mini_know_hows#favorites_add", as: 'mini_know_hows_favorites_add'
   delete "mini_know_hows/:id/favorites_delete/", to: "mini_know_hows#favorites_delete", as: 'mini_know_hows_favorites_delete'
@@ -66,6 +67,11 @@ Rails.application.routes.draw do
   get "praise_mes/search_result/", to: "praise_mes#search_result", as: 'praise_mes_search_result'
   get "praise_mes/:id/favorites_add/", to: "praise_mes#favorites_add", as: 'praise_mes_favorites_add'
   delete "praise_mes/:id/favorites_delete/", to: "praise_mes#favorites_delete", as: 'praise_mes_favorites_delete'
+  get "hyakuhyakus/:id/favorites_add/", to: "hyakuhyakus#favorites_add", as: 'hyakuhyakus_favorites_add'
+  delete "hyakuhyakus/:id/favorites_delete/", to: "hyakuhyakus#favorites_delete", as: 'hyakuhyakus_favorites_delete'
+  delete "hyakuhyakus/:id/refund", to:"hyakuhyakus#refund", as: 'hyakuhyakus_refund'
+  get "hyakuhyakus/search_result/", to: "hyakuhyakus#search_result", as: 'hyakuhyakus_search_result'
+  get "hyakuhyakus/search/", to: "hyakuhyakus#search", as: 'hyakuhyakus_search'
 
   resources :novels,              only: [:new, :create, :show, :edit, :update, :index, :update] do
     resources :thoughts, param: :thought_id,only: [:create, :new, :show, :index, :update, :edit]
@@ -85,4 +91,5 @@ Rails.application.routes.draw do
   resources :praise_mes,          only:[:new, :create, :show, :index, :destroy] do
     resources :praise,            only:[:new, :create, :show, :index]
   end
+  resources :hyakuhyakus,          only: [:new, :create, :index, :show]
 end

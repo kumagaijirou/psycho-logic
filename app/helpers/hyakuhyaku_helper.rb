@@ -1,0 +1,2 @@
+module HyakuhyakuHelper
+end

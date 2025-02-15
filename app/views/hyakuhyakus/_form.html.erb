@@ -1,0 +1,9 @@
+<%= form_with url: {controller: 'hyakuhyakus', action: 'create' } do |f| %>
+  <%= f.label :前半の百文字 %>
+  <%= f.text_area :front_comment, class: 'form-control', rows: 10 %>
+
+  <%= f.label :後半の百文字 %>
+  <%= f.text_area :back_comment, class: 'form-control', rows: 10 %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

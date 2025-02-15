@@ -31,8 +31,8 @@ class MiniKnowHowsController < ApplicationController
     @usera = current_user
     @mini_know_how = MiniKnowHow.find((params[:id]))
     @favorite = Favorite.where(user_id: current_user.id, service_name: "ミニノウハウ" , service_id: @mini_know_how.id)
-    if PointLog.find_by(service_name: "ミニノウハウ",service_id:@mini_know_how.id).present?
-      @point_log = PointLog.find_by(service_name: "ミニノウハウ",service_id:@mini_know_how.id)
+    if PointLog.find_by(user_id: current_user.id,service_name: "ミニノウハウ",service_id:@mini_know_how.id).present?
+      @point_log = PointLog.find_by(user_id: current_user.id,service_name: "ミニノウハウ",service_id:@mini_know_how.id)
     elsif @usera.dice_point >=  @mini_know_how.viewing_fee
       @usera.dice_point = @usera.dice_point - @mini_know_how.viewing_fee
       @usera.save

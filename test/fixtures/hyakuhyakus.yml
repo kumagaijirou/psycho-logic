@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  front_comment: MyText
+  back_comment: MyText
+  number_of_times_seen: 1
+  number_of_refunds: 1
+
+two:
+  user: two
+  front_comment: MyText
+  back_comment: MyText
+  number_of_times_seen: 1
+  number_of_refunds: 1

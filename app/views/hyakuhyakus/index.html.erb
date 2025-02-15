@@ -1,0 +1,15 @@
+<% provide(:title, '百百') %>
+<h1>百百</h1>
+
+<%= link_to "新しい百百を投稿する", new_hyakuhyaku_path %><br>
+<%= link_to "百百をID検索する", hyakuhyakus_search_path %><br>
+
+
+<%= will_paginate %>
+
+<ul class="hyakuhyakus">
+  <%= render @hyakuhyakus %>
+  
+</ul>
+
+<%= will_paginate %>

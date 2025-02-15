@@ -29,5 +29,9 @@ class FavoritesController < ApplicationController
     @praise_mes = PraiseMe.where(id: @favorites.pluck(:service_id))
   end
 
+  def hyakuhyakus_show
+    @favorites = Favorite.where(user_id: current_user.id, service_name: "百百").paginate(page: params[:page]) 
+    @hyakuhyakus = Hyakuhyaku.where(id: @favorites.pluck(:service_id))
+  end
 
 end

@@ -1,0 +1,71 @@
+<% if PointLog.find_by(user_id:@current_user.id,service_name: "百百",service_id:@hyakuhyaku.id).present? %>
+<li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
+    <%= link_to gravatar_for(@hyakuhyaku.user, size: 50), @hyakuhyaku.user %><br>
+    <% usera = User.find(@hyakuhyaku.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <span class="front_comment">上<%= @hyakuhyaku.front_comment %></span><br>
+    <span class="back_comment">下<%= @hyakuhyaku.back_comment %></span><br>
+    <span class="number_of_times_seen">見られた回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>
+    <span class="number_of_refunds">返金された回数 <%= @hyakuhyaku.number_of_refunds %> 回</span><br>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@hyakuhyaku.created_at) %> ago.
+    </span><br>
+
+  <% if Time.now < @point_log.created_at + 600 %>
+    <%= button_to '返品する', hyakuhyakus_refund_path(@hyakuhyaku), method: :delete, class: 'btn btn-primary' %>
+  <% end %>
+
+
+  <% if @favorite.present? %>
+        <%= button_to 'お気に入りを削除', hyakuhyakus_favorites_delete_path(@hyakuhyaku), method: :delete,class: 'btn btn-primary' %>
+      <% else %>
+        <%= button_to 'お気に入りに追加', hyakuhyakus_favorites_add_path(@hyakuhyaku), method: :get, class: 'btn btn-primary' %>
+    <% end %>
+</li>
+<% elsif @hyakuhyaku.user_id == current_user.id %>
+  <li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
+    <%= link_to gravatar_for(@hyakuhyaku.user, size: 50), @hyakuhyaku.user %><br>
+    <% usera = User.find(@hyakuhyaku.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <span class="front_comment">上<%= @hyakuhyaku.front_comment %></span><br>
+    <span class="back_comment">下<%= @hyakuhyaku.back_comment %></span><br>
+    <span class="number_of_times_seen">見られた回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>
+    <span class="number_of_refunds">返金された回数 <%= @hyakuhyaku.number_of_refunds %> 回</span><br>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@hyakuhyaku.created_at) %> ago.
+    </span><br>
+    <% if @favorite.present? %>
+        <%= button_to 'お気に入りを削除', hyakuhyakus_favorites_delete_path(@hyakuhyaku), method: :delete,class: 'btn btn-primary' %>
+      <% else %>
+        <%= button_to 'お気に入りに追加', hyakuhyakus_favorites_add_path(@hyakuhyaku), method: :get, class: 'btn btn-primary' %>
+    <% end %>
+
+</li>
+
+<% elsif @usera.dice_point >= 50 %>
+<li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
+    <%= link_to gravatar_for(@hyakuhyaku.user, size: 50), @hyakuhyaku.user %><br>
+    <% usera = User.find(@hyakuhyaku.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <span class="front_comment">上<%= @hyakuhyaku.front_comment %></span><br>
+    <span class="back_comment">下<%= @hyakuhyaku.back_comment %></span><br>
+    <span class="number_of_times_seen">見られた回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>
+    <span class="number_of_refunds">返金された回数 <%= @hyakuhyaku.number_of_refunds %> 回</span><br>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@hyakuhyaku.created_at) %> ago.
+    </span><br>
+
+  <% if Time.now < @point_log.created_at + 600 %>
+    <%= button_to '返品する', hyakuhyakus_refund_path(@hyakuhyaku), method: :delete, class: 'btn btn-primary' %>
+  <% end %>
+
+  <% if @favorite.present? %>
+        <%= button_to 'お気に入りを削除', hyakuhyakus_favorites_delete_path(@hyakuhyaku), method: :delete,class: 'btn btn-primary' %>
+      <% else %>
+        <%= button_to 'お気に入りに追加', hyakuhyakus_favorites_add_path(@hyakuhyaku), method: :get, class: 'btn btn-primary' %>
+    <% end %>
+</li>
+
+<% else %>
+ダイスポイントが足りません。
+<% end %>
