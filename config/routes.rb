@@ -92,4 +92,7 @@ Rails.application.routes.draw do
     resources :praise,            only:[:new, :create, :show, :index]
   end
   resources :hyakuhyakus,          only: [:new, :create, :index, :show]
+  resources :feedback_and_inquiries, param: :feedback_and_inquiries_id, only: [:new,:create,:index, :show] do
+    resources :responses_to_comments_and_inquiries, only: [:new,:create,:index,:show] 
+  end
 end

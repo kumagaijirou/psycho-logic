@@ -1,0 +1,9 @@
+<%= form_with url: {controller: 'responses_to_comments_and_inquiries', action: 'create' } do |f| %>
+  <%= f.label :返信内容 %>
+  <%= f.text_area :content, class: 'form-control', rows: 15 %>
+
+  <%= f.label :プレゼントするダイスポイント %>
+  <%= f.number_field :present_dice_point, class: 'form-control',value: '2000' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,15 @@
+<% provide(:title, 'フィードバックと問い合わせ') %>
+<h1>フィードバックと問い合わせ</h1>
+
+<%= link_to "フィードバックと問い合わせをする", new_feedback_and_inquiry_path %><br>
+
+
+
+<%= will_paginate %>
+
+<ul class="feedback_and_inquiries">
+  <%= render @feedback_and_inquiries %>
+  
+</ul>
+
+<%= will_paginate %>

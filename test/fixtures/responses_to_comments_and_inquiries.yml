@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feedback_and_inquiries_id: 1
+  present_dice_point: 1
+  content: MyText
+
+two:
+  feedback_and_inquiries_id: 1
+  present_dice_point: 1
+  content: MyText

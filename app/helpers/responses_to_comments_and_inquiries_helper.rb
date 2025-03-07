@@ -1,0 +1,2 @@
+module ResponsesToCommentsAndInquiriesHelper
+end

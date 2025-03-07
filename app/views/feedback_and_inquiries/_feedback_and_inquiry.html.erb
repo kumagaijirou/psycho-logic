@@ -1,0 +1,11 @@
+<li id="feedback_and_inquiry-<%= feedback_and_inquiry.id %>">
+    <%= link_to gravatar_for(feedback_and_inquiry.user, size: 50), feedback_and_inquiry.user %><br>
+    <% usera = User.find(feedback_and_inquiry.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <span class="service_name">サービス名 <%= feedback_and_inquiry.service_name %></span><br>
+    <span class="content">内容<%= link_to feedback_and_inquiry.content, feedback_and_inquiry_path(feedback_and_inquiry.id) %></span><br><br>
+
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(feedback_and_inquiry.created_at) %> ago.
+    </span><br>
+</li>

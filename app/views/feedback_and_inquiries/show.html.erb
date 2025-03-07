@@ -1,0 +1,35 @@
+<% provide(:title, @feedback_and_inquiry.user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+
+
+<li id="feedback_and_inquiry-<%= @feedback_and_inquiry.id %>">
+    <%= link_to gravatar_for(@feedback_and_inquiry.user, size: 50), @feedback_and_inquiry.user %><br>
+    <% usera = User.find(@feedback_and_inquiry.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <span class="service_name">サービス名 <%= @feedback_and_inquiry.service_name %></span><br>
+    <span class="content">内容 <%= @feedback_and_inquiry.content %></span><br>
+
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@feedback_and_inquiry.created_at) %> ago.<br><br>
+
+      <% if current_user.admin? %>
+        <%= link_to 'フィードバックや感想に返答をする', new_feedback_and_inquiry_responses_to_comments_and_inquiry_path(@feedback_and_inquiry) %><br>
+      <% end %>
+     
+       <% if @responses_to_comments_and_inquiries.present? %>
+     <% @responses_to_comments_and_inquiries.each do |responses_to_comments_and_inquiry| %>
+       <%= responses_to_comments_and_inquiry.content %><br>
+       <%= responses_to_comments_and_inquiry.present_dice_point %><br>
+     <% end %>
+   <% end %>
+   
+    </span><br>
+</li>
+
+      </h1>
+    </section>
+  </aside>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_14_122748) do
+ActiveRecord::Schema[7.0].define(version: 2025_02_23_121808) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_14_122748) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "service_id"], name: "index_favorites_on_user_id_and_service_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "feedback_and_inquiries", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "service_name"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_feedback_and_inquiries_on_user_id"
   end
 
   create_table "hyakuhyakus", force: :cascade do |t|
@@ -173,6 +182,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_14_122748) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "responses_to_comments_and_inquiries", force: :cascade do |t|
+    t.integer "feedback_and_inquiries_id"
+    t.integer "present_dice_point"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "supports", force: :cascade do |t|
     t.integer "task_id"
     t.integer "user_id"
@@ -228,6 +245,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_14_122748) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "users"
+  add_foreign_key "feedback_and_inquiries", "users"
   add_foreign_key "hyakuhyakus", "users"
   add_foreign_key "mini_know_hows", "users"
   add_foreign_key "novels_supports", "users"

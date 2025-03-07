@@ -21,7 +21,7 @@ class PointLogsController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @point_logs = PointLog.where(user_id: current_user.id)
+    @point_logs = PointLog.where(user_id: @user.id)
   end
 
 

@@ -64,8 +64,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if@user.dice_point = @user.dice_point + 1000 
-      @user.update(user_params)
+    if @user.update(user_params)
       # 更新に成功した場合を扱う
       redirect_to @user
     else
@@ -91,7 +90,7 @@ class UsersController < ApplicationController
   
   def show_probably_a_hit
     @user = User.find(params[:id])
-    @probably_a_hit = ProbablyAHit.where(user_id: current_user.id)
+    @probably_a_hit = ProbablyAHit.where(user_id: @user.id)
   end
 
 

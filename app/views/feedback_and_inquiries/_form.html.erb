@@ -1,0 +1,9 @@
+<%= form_with url: {controller: 'feedback_and_inquiries', action: 'create' } do |f| %>
+  <%= f.label :サービス名 %>
+  <%= f.text_field :service_name, class: 'form-control'%>
+
+  <%= f.label :内容 %>
+  <%= f.text_area :content, class: 'form-control', rows: 10 %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
