@@ -1,0 +1,17 @@
+<% provide(:title, '有料サービス５％レビュー') %>
+<h1>有料サービス５％レビュー</h1>
+
+<b>レビューはログインすると読んだり書き込んだりできます。<br>
+レビューを読むには有料サービスの定価の５％がかかります。<br>
+レビューは第三者に読まれると５％のうち９割があなたのポイントになります。<br>
+ログインは無料です。<br>
+是非会員になってあなたのレビューを投稿してください。</b><br>
+
+<%= will_paginate %>
+
+<ul class="five_percentage_review">
+  <%= render @five_percentage_reviews %>
+  
+</ul>
+
+<%= will_paginate %>

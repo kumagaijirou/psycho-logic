@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :praise_mes
   has_many :praises
   has_many :hyakuhyakus
+  has_many :five_percentage_reviews
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest

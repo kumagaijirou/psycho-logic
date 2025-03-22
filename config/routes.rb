@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   get "favorites/:user_id/mini_know_hows_show", to:"favorites#mini_know_hows_show", as: 'favorites_mini_know_hows_show'
   get "favorites/:user_id/praise_mes_show", to:"favorites#praise_mes_show", as: 'favorites_praise_mes_show'
   get "favorites/:user_id/hyakuhyakus_show", to:"favorites#hyakuhyakus_show", as: 'favorites_hyakuhyakus_show'
+  get "favorites/:user_id/five_percentage_reviews_show", to:"favorites#five_percentage_reviews_show", as: 'favorites_five_percentage_reviews_show'
   get "point_mails/index2"
   get "mini_know_hows/:id/favorites_add/", to: "mini_know_hows#favorites_add", as: 'mini_know_hows_favorites_add'
   delete "mini_know_hows/:id/favorites_delete/", to: "mini_know_hows#favorites_delete", as: 'mini_know_hows_favorites_delete'
@@ -72,7 +73,13 @@ Rails.application.routes.draw do
   delete "hyakuhyakus/:id/refund", to:"hyakuhyakus#refund", as: 'hyakuhyakus_refund'
   get "hyakuhyakus/search_result/", to: "hyakuhyakus#search_result", as: 'hyakuhyakus_search_result'
   get "hyakuhyakus/search/", to: "hyakuhyakus#search", as: 'hyakuhyakus_search'
+  get "five_percentage_reviews/search_result/", to: "five_percentage_reviews#search_result", as: 'five_percentage_reviews_search_result'
+  get "five_percentage_reviews/search/", to: "five_percentage_reviews#search", as: 'five_percentage_reviews_search'
+  get "five_percentage_reviews/:id/favorites_add/", to: "five_percentage_reviews#favorites_add", as: 'five_percentage_reviews_favorites_add'
+  delete "five_percentage_reviews/:id/favorites_delete/", to: "five_percentage_reviews#favorites_delete", as: 'five_percentage_reviews_favorites_delete'
+  get "five_percentage_reviews/index2", to: "five_percentage_reviews#index2", as: 'five_percentage_reviews_index2'
 
+  resources :five_percentage_reviews, param: :five_percentage_review_id,  only: [:new, :create, :edit, :update,:show, :index]
   resources :novels,              only: [:new, :create, :show, :edit, :update, :index, :update] do
     resources :thoughts, param: :thought_id,only: [:create, :new, :show, :index, :update, :edit]
     resources :novels_supports,            only: [:new, :create, :show, :index]

@@ -1,8 +1,14 @@
+<% provide(:title, '百百') %>
+<h1>百百</h1>
+
+<%= link_to "新しい百百を投稿する", new_hyakuhyaku_path %><br>
+<%= link_to "百百をID検索する", hyakuhyakus_search_path %><br>
+
 <% if PointLog.find_by(user_id:@current_user.id,service_name: "百百",service_id:@hyakuhyaku.id).present? %>
 <li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
     <%= link_to gravatar_for(@hyakuhyaku.user, size: 50), @hyakuhyaku.user %><br>
-    <% usera = User.find(@hyakuhyaku.user_id) %><br>
-    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <% userz = User.find(@hyakuhyaku.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= userz.name %></span><br>
     <span class="front_comment">上<%= @hyakuhyaku.front_comment %></span><br>
     <span class="back_comment">下<%= @hyakuhyaku.back_comment %></span><br>
     <span class="number_of_times_seen">見られた回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>
@@ -25,8 +31,8 @@
 <% elsif @hyakuhyaku.user_id == current_user.id %>
   <li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
     <%= link_to gravatar_for(@hyakuhyaku.user, size: 50), @hyakuhyaku.user %><br>
-    <% usera = User.find(@hyakuhyaku.user_id) %><br>
-    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <% userz = User.find(@hyakuhyaku.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= userz.name %></span><br>
     <span class="front_comment">上<%= @hyakuhyaku.front_comment %></span><br>
     <span class="back_comment">下<%= @hyakuhyaku.back_comment %></span><br>
     <span class="number_of_times_seen">見られた回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>
@@ -45,8 +51,8 @@
 <% elsif @usera.dice_point >= 50 %>
 <li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
     <%= link_to gravatar_for(@hyakuhyaku.user, size: 50), @hyakuhyaku.user %><br>
-    <% usera = User.find(@hyakuhyaku.user_id) %><br>
-    <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
+    <% userz = User.find(@hyakuhyaku.user_id) %><br>
+    <span class="user_id">作成したユーザー名<%= userz.name %></span><br>
     <span class="front_comment">上<%= @hyakuhyaku.front_comment %></span><br>
     <span class="back_comment">下<%= @hyakuhyaku.back_comment %></span><br>
     <span class="number_of_times_seen">見られた回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>

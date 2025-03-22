@@ -1,0 +1,15 @@
+<% provide(:title, 'お気に入りの有料サービス５％レビュー') %>
+<h1>お気に入りの有料サービス５％レビュー</h1>
+
+<%= link_to "新しい有料サービス５％レビューを投稿する", new_five_percentage_review_path %><br>
+<%= link_to "有料サービス５％レビューをID検索する", five_percentage_reviews_search_path %><br>
+
+
+<%= will_paginate %>
+
+<ul class="five_percentage_reviews">
+  <%= render @five_percentage_reviews %>
+  
+</ul>
+
+<%= will_paginate %>

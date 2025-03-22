@@ -34,4 +34,8 @@ class FavoritesController < ApplicationController
     @hyakuhyakus = Hyakuhyaku.where(id: @favorites.pluck(:service_id))
   end
 
+  def five_percentage_reviews_show
+    @favorites = Favorite.where(user_id: current_user.id, service_name: "５％レビュー").paginate(page: params[:page]) 
+    @five_percentage_reviews = FivePercentageReview.where(id: @favorites.pluck(:service_id))
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_02_23_121808) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_20_052724) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,19 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_23_121808) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_feedback_and_inquiries_on_user_id"
+  end
+
+  create_table "five_percentage_reviews", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "service_name"
+    t.string "url"
+    t.integer "price"
+    t.string "price_supplement"
+    t.string "status"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_five_percentage_reviews_on_user_id"
   end
 
   create_table "hyakuhyakus", force: :cascade do |t|
@@ -246,6 +259,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_23_121808) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "favorites", "users"
   add_foreign_key "feedback_and_inquiries", "users"
+  add_foreign_key "five_percentage_reviews", "users"
   add_foreign_key "hyakuhyakus", "users"
   add_foreign_key "mini_know_hows", "users"
   add_foreign_key "novels_supports", "users"

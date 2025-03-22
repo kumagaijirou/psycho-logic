@@ -1,0 +1,11 @@
+<div class="id search_form">
+  <%= form_with url: five_percentage_reviews_search_result_path, local: true, method: :get do |f| %>
+  <div class="form_inner">
+    <div class="flex">
+    <%= f.number_field :id_number %>
+    <%= f.select :range, options_for_select([["有料サービス５％レビューのIDを入力する","five_percentage_review_id"], ["有料サービス５％レビューの制作者IDを検索する","user_id"]]) %>
+    </div>
+    <%= f.submit "検索", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>
