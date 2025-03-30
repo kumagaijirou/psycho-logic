@@ -7,7 +7,7 @@
         タスクID <%= @task.id %><br><br>
         ユーザーID　<%= @task.user_id %><br>
         名前　<%= @task.user.name %><br>
-        タスクの内容　<%= @task.content %><br>
+        タスクの内容　<%= simple_format(@task.content) %><br>
         かけるユーザーのID　<%= @task.bet_user_id %><br>
         名前 <%= @user.name %><br>
         タスクの締切　<%= @task.deadline_at.strftime('%Y/%m/%d %H:%M:%S') %><br>

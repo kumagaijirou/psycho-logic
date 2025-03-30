@@ -14,7 +14,7 @@
     <span class="price">価格（円） <%= @five_percentage_review.price %></span><br>
     <span class="price_supplement">価格(これを書いた日の日付、限定個数などの補足情報）<br><%= @five_percentage_review.price_supplement %></span><br>
     <span class="status">販売状況（今現在発売中か否か） <%= @five_percentage_review.status %></span><br>
-    <span class="content">レビューの文字数 <%= @five_percentage_review.content.size %>文字</span><br>
+    <span class="content_size">レビューの文字数 <%= @five_percentage_review.content.size %>文字</span><br>
     <span class="content">レビュー内容 <%= @five_percentage_review.content %></span><br>
   
     <% usera = User.find(@five_percentage_review.user_id) %><br>

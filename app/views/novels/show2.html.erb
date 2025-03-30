@@ -6,7 +6,7 @@
       
         小説名 <%= @novel.work_name %><br>
         作者 <%= @novel.user.name %><br>
-        あらすじ <%= @novel.synopsis %><br>
+        あらすじ <p class="content"><%= @novel.synopsis %></p><br>
         URL1 <%= link_to @novel.url1 , @novel.url1 %><br>
         URL2 <%= link_to @novel.url2 , @novel.url2 %><br>
         URL3 <%= link_to @novel.url3 , @novel.url3 %><br>
@@ -19,7 +19,7 @@
             <% end %>
         <% @thoughts.each do |thought| %>
           <%= thought.user.name %><br>
-          <%= thought.thoughts %><br>
+          <p class="content"><%= thought.thoughts %></p><br>
           <% end %>
           
        
@@ -29,7 +29,7 @@
             <% end %>
         <% @novels_supports.each do |novels_support| %>
           <%= novels_support.user.name %><br>
-          <%= novels_support.comment %>
+          <p class="content"><%= novels_support.comment %></p><br>
           <%= novels_support.support_fee %><br>
         <% end %>
       </h1>

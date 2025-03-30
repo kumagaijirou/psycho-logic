@@ -1,7 +1,7 @@
 <li id="task-<%= task.id %>">
   <%= link_to gravatar_for(task.user, size: 50), task.user %>
   <span class="create_time"><%= link_to task.created_at.strftime('%Y/%m/%d %H:%M:%S'), task_path(task.id) %></span>
-  <span class="content">内容 <%= task.content %></span>  
+  <span class="content">内容 <%= simple_format(task.content) %></span>  
   <span class="user">名前 <%= link_to task.user.name, task.user %></span>
   <span class="bet_user_id">あげるかもしれないユーザーID <%= task.bet_user_id %></span>
   <% usera = User.find(task.bet_user_id) %>
