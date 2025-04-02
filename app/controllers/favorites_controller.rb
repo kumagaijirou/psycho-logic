@@ -38,4 +38,9 @@ class FavoritesController < ApplicationController
     @favorites = Favorite.where(user_id: current_user.id, service_name: "５％レビュー").paginate(page: params[:page]) 
     @five_percentage_reviews = FivePercentageReview.where(id: @favorites.pluck(:service_id))
   end
+
+  def one_yen_articles_show
+    @favorites = Favorite.where(user_id: current_user.id, service_name: "１円記事").paginate(page: params[:page]) 
+    @one_yen_articles = OneYenArticle.where(id: @favorites.pluck(:service_id))
+  end
 end

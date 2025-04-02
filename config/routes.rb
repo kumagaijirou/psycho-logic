@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   get "favorites/:user_id/praise_mes_show", to:"favorites#praise_mes_show", as: 'favorites_praise_mes_show'
   get "favorites/:user_id/hyakuhyakus_show", to:"favorites#hyakuhyakus_show", as: 'favorites_hyakuhyakus_show'
   get "favorites/:user_id/five_percentage_reviews_show", to:"favorites#five_percentage_reviews_show", as: 'favorites_five_percentage_reviews_show'
+  get "favorites/:user_id/one_yen_articles_show", to:"favorites#one_yen_articles_show", as: 'favorites_one_yen_articles_show'
   get "point_mails/index2"
   get "mini_know_hows/:id/favorites_add/", to: "mini_know_hows#favorites_add", as: 'mini_know_hows_favorites_add'
   delete "mini_know_hows/:id/favorites_delete/", to: "mini_know_hows#favorites_delete", as: 'mini_know_hows_favorites_delete'
@@ -78,6 +79,11 @@ Rails.application.routes.draw do
   get "five_percentage_reviews/:id/favorites_add/", to: "five_percentage_reviews#favorites_add", as: 'five_percentage_reviews_favorites_add'
   delete "five_percentage_reviews/:id/favorites_delete/", to: "five_percentage_reviews#favorites_delete", as: 'five_percentage_reviews_favorites_delete'
   get "five_percentage_reviews/index2", to: "five_percentage_reviews#index2", as: 'five_percentage_reviews_index2'
+  get "one_yen_articles/:id/prompt_show", to: "one_yen_articles#prompt_show", as: 'one_yen_articles_prompt_show'
+  get "one_yen_articles/search_result/", to: "one_yen_articles#search_result", as: 'one_yen_articles_search_result'
+  get "one_yen_articles/search/", to: "one_yen_articles#search", as: 'one_yen_articles_search'
+  get "one_yen_articles/:id/favorites_add/", to: "one_yen_articles#favorites_add", as: 'one_yen_articles_favorites_add'
+  delete "one_yen_articles/:id/favorites_delete/", to: "one_yen_articles#favorites_delete", as: 'one_yen_articles_favorites_delete'
 
   resources :five_percentage_reviews, param: :five_percentage_review_id,  only: [:new, :create, :edit, :update,:show, :index]
   resources :novels,              only: [:new, :create, :show, :edit, :update, :index, :update] do
@@ -102,4 +108,5 @@ Rails.application.routes.draw do
   resources :feedback_and_inquiries, param: :feedback_and_inquiries_id, only: [:new,:create,:index, :show] do
     resources :responses_to_comments_and_inquiries, only: [:new,:create,:index,:show] 
   end
+  resources :one_yen_articles,     only: [:new, :create, :destroy,:show, :index, :edit]
 end

@@ -8,13 +8,10 @@
 
     <span class="viewing_fee">閲覧に必要なポイント <%= @mini_know_how.viewing_fee %></span><br>
     <span class="number_of_times_seen">見られた回数 <%= @mini_know_how.number_of_times_seen %> 回</span><br>
-    <span class="number_of_refunds">返金された回数 <%= @mini_know_how.number_of_refunds %> 回</span><br>  
     <span class="timestamp">
       Posted <%= time_ago_in_words(@mini_know_how.created_at) %> ago.
     </span><br>
-    <% if Time.now < @point_log.created_at + 1800 %>
-    <%= button_to '返品する', mini_know_hows_refund_path(@mini_know_how), method: :delete, class: 'btn btn-primary' %>
-    <% end %>
+    
 
     <% if @favorite.present? %>
         <%= button_to 'お気に入りを削除', mini_know_hows_favorites_delete_path(@mini_know_how), method: :delete,class: 'btn btn-primary' %>
@@ -33,7 +30,6 @@
 
     <span class="viewing_fee">閲覧に必要なポイント <%= @mini_know_how.viewing_fee %></span><br>
     <span class="number_of_times_seen">見られた回数 <%= @mini_know_how.number_of_times_seen %> 回</span><br>
-    <span class="number_of_refunds">返金された回数 <%= @mini_know_how.number_of_refunds %> 回</span><br>  
     <span class="timestamp">
       Posted <%= time_ago_in_words(@mini_know_how.created_at) %> ago.
     </span><br>
@@ -56,16 +52,11 @@
 
     <span class="viewing_fee">閲覧に必要なポイント <%= @mini_know_how.viewing_fee %><br>
     <span class="number_of_times_seen">見られた回数 <%= @mini_know_how.number_of_times_seen %> 回<br>
-    <span class="number_of_refunds">返金された回数 <%= @mini_know_how.number_of_refunds %> 回<br>
-      
 
     <span class="timestamp">
       Posted <%= time_ago_in_words(@mini_know_how.created_at) %> ago.
     </span><br>
 
-    <% if Time.now < @point_log.created_at + 1800 %>
-    <%= button_to '返品する', mini_know_hows_refund_path(@mini_know_how), method: :delete, class: 'btn btn-primary' %>
-    <% end %>
     <% if @favorite.present? %>
         <%= button_to 'お気に入りを削除', mini_know_hows_favorites_delete_path(@mini_know_how), method: :delete,class: 'btn btn-primary' %>
       <% else %>

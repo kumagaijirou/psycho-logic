@@ -90,22 +90,4 @@ class HyakuhyakusController < ApplicationController
     redirect_to hyakuhyakus_path(@hyakuhyaku[:id])
   end
 
-  def refund
-    @hyakuhyaku = Hyakuhyaku.find(params[:id])
-    @usera = current_user
-    @usera.dice_point = @usera.dice_point + 50
-    @usera.save
-    PointLog.find_by(user_id: @usera.id, service_name: "百百" , service_id: @hyakuhyaku.id).destroy
-    @userb = User.find(@hyakuhyaku.user_id)
-    @userb.dice_point = @userb.dice_point - 45
-    @userb.save
-    PointLog.find_by(user_id: @userb.id, service_name: "百百" , service_id: @hyakuhyaku.id).destroy
-    @userc = User.find(1)
-    @userc.dice_point = @userc.dice_point - 5
-    @userc.save
-    PointLog.where(user_id: @userc.id, service_name: "百百" , service_id: @hyakuhyaku.id).destroy_all
-    @hyakuhyaku.number_of_refunds += 1
-    @hyakuhyaku.save
-    redirect_to hyakuhyakus_path
-  end
 end

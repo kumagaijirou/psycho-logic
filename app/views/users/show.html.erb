@@ -18,6 +18,7 @@
         <%= Task.where(user_id: @user.id, status: "失敗").count %>
         <%= "回" %><br>
 
+         <li><%= link_to "プロフィールの編集", edit_user_path(current_user) %></li>
         <%= link_to '多分売れる履歴', users_show_probably_a_hit_path(@user) %><br>
         <% if current_user?(@user) %>
         <%= link_to 'ポイントのログ', point_log_path(user_id: @user.id) %><br>

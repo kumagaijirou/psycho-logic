@@ -1,0 +1,15 @@
+<% provide(:title, '１円記事') %>
+<h1>お気に入りの１円記事</h1>
+
+<%= link_to "新しい１円記事を投稿する", new_one_yen_article_path %><br>
+<%= link_to "１円記事をID検索する", one_yen_articles_search_path %><br>
+
+
+<%= will_paginate %>
+
+<ul class="one_yen_articles">
+  <%= render @one_yen_articles %>
+  
+</ul>
+
+<%= will_paginate %>

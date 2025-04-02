@@ -1,0 +1,12 @@
+<%= form_with url: {controller: 'one_yen_articles', action: 'create' } do |f| %>
+  <%= f.label :記事のタイトル %>
+  <%= f.text_area :title, class: 'form-control', rows: 3 %>
+
+  <%= f.label :記事 %>
+  <%= f.text_area :article, class: 'form-control', rows: 10 %>
+
+  <%= f.label :記事を生成したプロンプト %>
+  <%= f.text_area :article_prompt, class: 'form-control', rows: 5 %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

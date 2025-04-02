@@ -96,22 +96,4 @@ class MiniKnowHowsController < ApplicationController
     redirect_to mini_know_hows_path(@mini_know_how[:id])
   end
 
-  def refund
-    @mini_know_how = MiniKnowHow.find(params[:id])
-    @usera = current_user
-    @usera.dice_point = @usera.dice_point + @mini_know_how.viewing_fee
-    @usera.save
-    PointLog.find_by(user_id: @usera.id, service_name: "ミニノウハウ" , service_id: @mini_know_how.id).destroy
-    @userb = User.find(@mini_know_how.user_id)
-    @userb.dice_point = @userb.dice_point - @mini_know_how.viewing_fee * 0.9
-    @userb.save
-    PointLog.find_by(user_id: @userb.id, service_name: "ミニノウハウ" , service_id: @mini_know_how.id).destroy
-    @userc = User.find(1)
-    @userc.dice_point = @userc.dice_point - @mini_know_how.viewing_fee * 0.1
-    @userc.save
-    PointLog.where(user_id: @userc.id, service_name: "ミニノウハウ" , service_id: @mini_know_how.id).destroy_all
-    @mini_know_how.number_of_refunds += 1
-    @mini_know_how.save
-    redirect_to mini_know_hows_path
-  end
 end

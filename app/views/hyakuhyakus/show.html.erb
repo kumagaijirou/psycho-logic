@@ -17,9 +17,6 @@
       Posted <%= time_ago_in_words(@hyakuhyaku.created_at) %> ago.
     </span><br>
 
-  <% if Time.now < @point_log.created_at + 600 %>
-    <%= button_to '返品する', hyakuhyakus_refund_path(@hyakuhyaku), method: :delete, class: 'btn btn-primary' %>
-  <% end %>
 
 
   <% if @favorite.present? %>
@@ -60,10 +57,6 @@
     <span class="timestamp">
       Posted <%= time_ago_in_words(@hyakuhyaku.created_at) %> ago.
     </span><br>
-
-  <% if Time.now < @point_log.created_at + 600 %>
-    <%= button_to '返品する', hyakuhyakus_refund_path(@hyakuhyaku), method: :delete, class: 'btn btn-primary' %>
-  <% end %>
 
   <% if @favorite.present? %>
         <%= button_to 'お気に入りを削除', hyakuhyakus_favorites_delete_path(@hyakuhyaku), method: :delete,class: 'btn btn-primary' %>

@@ -14,4 +14,5 @@
   <span class="url2"> url2 <%= link_to novel.url2 , novel.url2 %></span><br>
   <span class="url3"> url3 <%= link_to novel.url3 , novel.url3 %></span><br>
   <span class="accumulation_dice_point"> 今までもらった応援ダイスポイント <%= novel.accumulation_dice_point %></span><br>
-  <span class="status"> <%= novel.status %><%= "個の感想募集中" %></span><br><br>
+  <span class="status"> <%= novel.status %><%= "個の感想募集中" %></span><br>
+  <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: novel.id,service_name: "小説感想").count %><br><br>

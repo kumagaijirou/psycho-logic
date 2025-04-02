@@ -1,6 +1,7 @@
 <% provide(:title, 'お気に入り') %>
 <h1>お気に入り</h1>
 
+<%= link_to "１円記事", favorites_one_yen_articles_show_path(current_user) %><br>
 <%= link_to "有料サービス５％レビュー", favorites_five_percentage_reviews_show_path(current_user) %><br>
 <%= link_to "努力で夢を叶えたい（task)", favorites_tasks_show_path(current_user) %><br>
 <%= link_to "みんなのクイズ", favorites_quizzes_show_path(current_user) %><br>
