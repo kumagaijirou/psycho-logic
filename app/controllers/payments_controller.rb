@@ -13,8 +13,8 @@ class PaymentsController < ApplicationController
         quantity: 1
       }],
       mode: 'payment',
-      success_url: "#{root_url}?success=true",
-      cancel_url: "#{root_url}?canceled=true"
+      success_url: "#{https://psycho-logic.jp/}?success=true",
+      cancel_url: "#{https://psycho-logic.jp/}?canceled=true"
     )
     redirect_to session.url, allow_other_host: true
   end
