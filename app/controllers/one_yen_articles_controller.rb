@@ -24,7 +24,7 @@ class OneYenArticlesController < ApplicationController
   def prompt_show
     @usera = current_user
     @one_yen_article = OneYenArticle.find((params[:id]))
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "１円記事", service_id: @one_yen_article.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "１円記事", service_id: @one_yen_article.id)
     @point_log = PointLog.find_by(user_id: current_user.id,service_name: "１円記事", service_id: @one_yen_article.id)
     if PointLog.find_by(user_id: current_user.id,service_name: "１円記事",service_id:@one_yen_article.id,dice_point:-500).present?
     elsif @one_yen_article.user_id == current_user.id  
@@ -66,7 +66,7 @@ class OneYenArticlesController < ApplicationController
   def show
     @usera = current_user
     @one_yen_article = OneYenArticle.find((params[:id]))
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "１円記事", service_id: @one_yen_article.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "１円記事", service_id: @one_yen_article.id)
     @point_log = PointLog.find_by(user_id: current_user.id,service_name: "１円記事", service_id: @one_yen_article.id)
     if PointLog.find_by(user_id: current_user.id,service_name: "１円記事",service_id:@one_yen_article.id,dice_point:-10).present?
     elsif @one_yen_article.user_id == current_user.id  
@@ -121,15 +121,15 @@ class OneYenArticlesController < ApplicationController
     end
   end
 
-  def favorites_delete
+  def okiniiris_delete
     @one_yen_article = OneYenArticle.find(params[:id])
-    Favorite.where(user_id: current_user.id, service_name: "１円記事" , service_id: @one_yen_article.id).destroy_all
+    Okiniiri.where(user_id: current_user.id, service_name: "１円記事" , service_id: @one_yen_article.id).destroy_all
     redirect_to one_yen_articles_path(@one_yen_article[:id])
   end
 
-  def favorites_add
+  def okiniiris_add
     @one_yen_article = OneYenArticle.find(params[:id])
-    Favorite.create({
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "１円記事",
       service_id: @one_yen_article.id}

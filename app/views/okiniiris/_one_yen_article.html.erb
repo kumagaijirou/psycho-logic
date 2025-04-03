@@ -5,7 +5,7 @@
     <span class="タイトル">タイトル<%= link_to one_yen_article.title, one_yen_article_path(one_yen_article.id) %></span><br><br>
     <span class="ビュー">ビュー <%= one_yen_article.views %> 回</span><br>
     <span class="プロンプトのビュー">プロンプトのビュー <%= one_yen_article.prompt_views %> 回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: one_yen_article.id,service_name: "１円記事").count %><br>
+    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: one_yen_article.id,service_name: "１円記事").count %><br>
   
     <span class="timestamp">
       Posted <%= time_ago_in_words(one_yen_article.created_at) %> ago.

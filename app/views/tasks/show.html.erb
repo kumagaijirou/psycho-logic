@@ -47,10 +47,10 @@
           <%= support.support_fee %><br>
         <% end %>
 
-        <% if @favorite.present? %>
-          <%= button_to 'お気に入りを削除', tasks_favorites_delete_path(@task), method: :delete,class: 'btn btn-primary' %>
+        <% if @okiniiri.present? %>
+          <%= button_to 'お気に入りを削除', tasks_okiniiris_delete_path(@task), method: :delete,class: 'btn btn-primary' %>
         <% else %>
-          <%= button_to 'お気に入りに追加', tasks_favorites_add_path(@task), method: :get, class: 'btn btn-primary' %>
+          <%= button_to 'お気に入りに追加', tasks_okiniiris_add_path(@task), method: :get, class: 'btn btn-primary' %>
         <% end %>
       </h1>
     </section>

@@ -49,7 +49,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @user = User.find(@task.bet_user_id)
     @supports = @task.supports
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "タスク" , service_id: @task.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "タスク" , service_id: @task.id)
   end
 
   def search
@@ -64,15 +64,15 @@ class TasksController < ApplicationController
     end
   end
 
-  def favorites_delete
+  def okiniiris_delete
     @task = Task.find(params[:id])
-    Favorite.where(user_id: current_user.id, service_name: "タスク" , service_id: @task.id).destroy_all
+    Okiniiri.where(user_id: current_user.id, service_name: "タスク" , service_id: @task.id).destroy_all
     redirect_to tasks_path(@task[:id])
   end
 
-  def favorites_add
+  def okiniiris_add
     @task = Task.find(params[:id])
-    Favorite.create({
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "タスク",
       service_id: @task.id}

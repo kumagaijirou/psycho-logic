@@ -46,7 +46,7 @@ class FivePercentageReviewsController < ApplicationController
   def show
     @usera = current_user
     @five_percentage_review = FivePercentageReview.find(params[:five_percentage_review_id])
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "５％レビュー" , service_id: @five_percentage_review.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "５％レビュー" , service_id: @five_percentage_review.id)
     @point_log = PointLog.find_by(user_id: current_user.id,service_name: "５％レビュー",service_id:@five_percentage_review.id)
     if PointLog.find_by(user_id: current_user.id,service_name: "５％レビュー",service_id:@five_percentage_review.id).present?
     elsif @five_percentage_review.user_id == current_user.id  
@@ -95,20 +95,20 @@ class FivePercentageReviewsController < ApplicationController
     end
   end
 
-  def favorites_delete
+  def okiniiris_delete
     @five_percentage_review = FivePercentageReview.find(params[:five_percentage_review_id])
-    Favorite.where(user_id: current_user.id, service_name: "５％レビュー" , service_id: @five_percentage_review.id).destroy_all
-    redirect_to five_percentage_reviews_path(@five_percentage_review[:five_percentage_review_id])
+    Okiniiri.where(user_id: current_user.id, service_name: "５％レビュー" , service_id: @five_percentage_review.id).destroy_all
+    redirect_to five_percentage_review_path(@five_percentage_review)
   end
 
-  def favorites_add
+  def okiniiris_add
     @five_percentage_review = FivePercentageReview.find(params[:five_percentage_review_id])
-    Favorite.create({
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "５％レビュー",
       service_id: @five_percentage_review.id}
     )
-    redirect_to five_percentage_reviews_path(@five_percentage_review[:five_percentage_review_id])
+    redirect_to five_percentage_review_path(@five_percentage_review)
   end
 
   private

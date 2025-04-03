@@ -14,15 +14,15 @@
     <span class="url3"> url3 <%= link_to @novel_service.url3 , @novel_service.url3 %></span><br>
     <span class="content"> <%= @novel_service.content %></span><br>
     <span class="views">閲覧数 <%= @novel_service.views %>回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
+    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
 
     <span class="timestamp">
       Posted <%= time_ago_in_words(@novel_service.created_at) %> ago.
     </span><br>
-  <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', novel_services_favorites_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
+  <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', novel_services_okiniiris_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', novel_services_favorites_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', novel_services_okiniiris_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
     <% end %>
 </li>
 <% elsif @novel_service.user_id == current_user.id %>
@@ -36,16 +36,16 @@
     <span class="url3"> url3 <%= link_to @novel_service.url3 , @novel_service.url3 %></span><br>
     <span class="content"> <%= @novel_service.content %></span><br>
     <span class="views">閲覧数 <%= @novel_service.views %>回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
+    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
 
     <span class="timestamp">
       Posted <%= time_ago_in_words(@novel_service.created_at) %> ago.
     </span><br>
 
-    <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', novel_services_favorites_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
+    <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', novel_services_okiniiris_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', novel_services_favorites_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', novel_services_okiniiris_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
     <% end %>
 
 </li>
@@ -60,16 +60,16 @@
     <span class="url2"> url2 <%= link_to @novel_service.url2 , @novel_service.url2 %></span><br>
     <span class="url3"> url3 <%= link_to @novel_service.url3 , @novel_service.url3 %></span><br>
     <span class="content"> <%= @novel_service.content %></span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
+    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
 
     <span class="timestamp">
       Posted <%= time_ago_in_words(@novel_service.created_at) %> ago.
     </span><br>
 
-  <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', novel_services_favorites_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
+  <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', novel_services_okiniiris_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', novel_services_favorites_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', novel_services_okiniiris_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
     <% end %>
 </li>
 

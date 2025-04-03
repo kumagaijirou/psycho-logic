@@ -70,10 +70,10 @@
         <%= @praise_me.deadline %><br>
       <% end %>
 
-      <% if @favorite.present? %>
-          <%= button_to 'お気に入りを削除', praise_mes_favorites_delete_path(@praise_me), method: :delete,class: 'btn btn-primary' %>
+      <% if @okiniiri.present? %>
+          <%= button_to 'お気に入りを削除', praise_mes_okiniiris_delete_path(@praise_me), method: :delete,class: 'btn btn-primary' %>
         <% else %>
-          <%= button_to 'お気に入りに追加', praise_mes_favorites_add_path(@praise_me), method: :get, class: 'btn btn-primary' %>
+          <%= button_to 'お気に入りに追加', praise_mes_okiniiris_add_path(@praise_me), method: :get, class: 'btn btn-primary' %>
         <% end %>
 
     </section>

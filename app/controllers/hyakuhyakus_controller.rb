@@ -23,7 +23,7 @@ class HyakuhyakusController < ApplicationController
   def show
     @usera = current_user
     @hyakuhyaku = Hyakuhyaku.find((params[:id]))
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "百百" , service_id: @hyakuhyaku.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "百百" , service_id: @hyakuhyaku.id)
     @point_log = PointLog.find_by(user_id: current_user.id,service_name: "百百",service_id:@hyakuhyaku.id)
     if PointLog.find_by(user_id: current_user.id,service_name: "百百",service_id:@hyakuhyaku.id).present?
     elsif @hyakuhyaku.user_id == current_user.id  
@@ -74,20 +74,20 @@ class HyakuhyakusController < ApplicationController
     end
   end
 
-  def favorites_delete
+  def okiniiris_delete
     @hyakuhyaku = Hyakuhyaku.find(params[:id])
-    Favorite.where(user_id: current_user.id, service_name: "百百" , service_id: @hyakuhyaku.id).destroy_all
-    redirect_to hyakuhyakus_path(@hyakuhyaku[:id])
+    Okiniiri.where(user_id: current_user.id, service_name: "百百" , service_id: @hyakuhyaku.id).destroy_all
+    redirect_to hyakuhyaku_path(@hyakuhyaku[:id])
   end
 
-  def favorites_add
+  def okiniiris_add
     @hyakuhyaku = Hyakuhyaku.find(params[:id])
-    Favorite.create({
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "百百",
       service_id: @hyakuhyaku.id}
     )
-    redirect_to hyakuhyakus_path(@hyakuhyaku[:id])
+    redirect_to hyakuhyaku_path(@hyakuhyaku[:id])
   end
 
 end

@@ -17,5 +17,5 @@
   <span class="url3"> url3 <%= link_to novel_service.url3 , novel_service.url3 %></span><br>
   <span class="content">おまけの文字数 <%= novel_service.content.size %>字</span><br>
   <span class="views">閲覧数 <%= novel_service.views %></span><br>
-  <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: novel_service.id,service_name: "小説のおまけ").count %><br><br>
+  <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: novel_service.id,service_name: "小説のおまけ").count %><br><br>
 </li>  

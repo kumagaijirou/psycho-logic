@@ -28,10 +28,10 @@
     <%= link_to '編集する', edit_five_percentage_review_path(@five_percentage_review), method: :post ,class: 'btn btn-primary' %><br><br>
     <% end %>
     
-  <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', five_percentage_reviews_favorites_delete_path(@five_percentage_review), method: :delete,class: 'btn btn-primary' %>
+  <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', five_percentage_reviews_okiniiris_delete_path(@five_percentage_review), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', five_percentage_reviews_favorites_add_path(@five_percentage_review), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', five_percentage_reviews_okiniiris_add_path(@five_percentage_review), method: :get, class: 'btn btn-primary' %>
     <% end %>
 </li>
 <% elsif @five_percentage_review.user_id == current_user.id %>
@@ -54,10 +54,10 @@
 
     <%= link_to'編集する', edit_five_percentage_review_path(@five_percentage_review),class: 'btn btn-primary' %><br><br>
 
-  <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', five_percentage_reviews_favorites_delete_path(@five_percentage_review), method: :delete,class: 'btn btn-primary' %>
+  <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', five_percentage_reviews_okiniiris_delete_path(@five_percentage_review), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', five_percentage_reviews_favorites_add_path(@five_percentage_review), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', five_percentage_reviews_okiniiris_add_path(@five_percentage_review), method: :get, class: 'btn btn-primary' %>
     <% end %>
 </li>
 
@@ -79,10 +79,10 @@
       Posted <%= time_ago_in_words(@five_percentage_review.created_at) %> ago.
     </span><br>
 
-  <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', five_percentage_reviews_favorites_delete_path(@five_percentage_review), method: :delete,class: 'btn btn-primary' %>
+  <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', five_percentage_reviews_okiniiris_delete_path(@five_percentage_review), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', five_percentage_reviews_favorites_add_path(@five_percentage_review), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', five_percentage_reviews_okiniiris_add_path(@five_percentage_review), method: :get, class: 'btn btn-primary' %>
     <% end %>
 </li>
 

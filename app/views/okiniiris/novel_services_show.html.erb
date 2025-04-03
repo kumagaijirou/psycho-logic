@@ -1,0 +1,16 @@
+<% provide(:title, '小説のおまけ') %>
+<h1>小説のおまけ</h1>
+
+<%= link_to "小説のおまけのリンク集", novel_services_path %><br>
+<%= link_to "小説のおまけを作成する", new_novel_service_path %><br>
+<%= link_to "小説のおまけをID検索をする", novel_services_search_path %><br>
+
+
+<%= will_paginate %>
+
+<ul class="novel_services">
+  <%= render @novel_services %>
+  
+</ul>
+
+<%= will_paginate %>

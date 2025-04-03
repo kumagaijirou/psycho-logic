@@ -47,15 +47,15 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def favorites_delete
+  def okiniiris_delete
     @quiz = Quiz.find(params[:id])
-    Favorite.where(user_id: current_user.id, service_name: "クイズ" , service_id: @quiz.id).destroy_all
+    Okiniiri.where(user_id: current_user.id, service_name: "クイズ" , service_id: @quiz.id).destroy_all
     redirect_to quizzes_path(@quiz[:id])
   end
 
-  def favorites_add
+  def okiniiris_add
     @quiz = Quiz.find(params[:id])
-    Favorite.create({
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "クイズ",
       service_id: @quiz.id}
@@ -66,7 +66,7 @@ class QuizzesController < ApplicationController
   def answer
     @quiz = Quiz.find(params[:quizzes_id])
     @user = User.find(current_user.id)
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "クイズ" , service_id: @quiz.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "クイズ" , service_id: @quiz.id)
   end
 
   def create_answer

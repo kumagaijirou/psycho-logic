@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_04_02_215808) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_03_022527) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -129,6 +129,15 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_02_215808) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_novels_supports_on_user_id"
+  end
+
+  create_table "okiniiris", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "service_name"
+    t.integer "service_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_okiniiris_on_user_id"
   end
 
   create_table "one_yen_articles", force: :cascade do |t|
@@ -290,6 +299,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_04_02_215808) do
   add_foreign_key "mini_know_hows", "users"
   add_foreign_key "novel_services", "users"
   add_foreign_key "novels_supports", "users"
+  add_foreign_key "okiniiris", "users"
   add_foreign_key "one_yen_articles", "users"
   add_foreign_key "point_mails", "users"
   add_foreign_key "praise_mes", "users"

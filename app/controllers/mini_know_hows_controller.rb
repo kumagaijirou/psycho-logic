@@ -30,7 +30,7 @@ class MiniKnowHowsController < ApplicationController
   def show
     @usera = current_user
     @mini_know_how = MiniKnowHow.find((params[:id]))
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "ミニノウハウ" , service_id: @mini_know_how.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "ミニノウハウ" , service_id: @mini_know_how.id)
     if PointLog.find_by(user_id: current_user.id,service_name: "ミニノウハウ",service_id:@mini_know_how.id).present?
       @point_log = PointLog.find_by(user_id: current_user.id,service_name: "ミニノウハウ",service_id:@mini_know_how.id)
     elsif @usera.dice_point >=  @mini_know_how.viewing_fee
@@ -80,15 +80,15 @@ class MiniKnowHowsController < ApplicationController
     end
   end
 
-  def favorites_delete
+  def okiniiris_delete
     @mini_know_how = MiniKnowHow.find(params[:id])
-    Favorite.where(user_id: current_user.id, service_name: "ミニノウハウ" , service_id: @mini_know_how.id).destroy_all
+    Okiniiri.where(user_id: current_user.id, service_name: "ミニノウハウ" , service_id: @mini_know_how.id).destroy_all
     redirect_to mini_know_hows_path(@mini_know_how[:id])
   end
 
-  def favorites_add
+  def okiniiris_add
     @mini_know_how = MiniKnowHow.find(params[:id])
-    Favorite.create({
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "ミニノウハウ",
       service_id: @mini_know_how.id}

@@ -11,7 +11,7 @@
     <span class="タイトル">タイトル<%= @one_yen_article.title %></span><br><br>
     <span class="ビュー">ビュー <%= @one_yen_article.views %> 回</span><br>
     <span class="プロンプトのビュー">プロンプトのビュー <%= @one_yen_article.prompt_views %> 回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @one_yen_article.id,service_name: "１円記事").count %><br>
+    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @one_yen_article.id,service_name: "１円記事").count %><br>
     <span class="記事">記事<%= simple_format(@one_yen_article. article) %></span><br>
     <span class="プロンプトを見る"><%= link_to 'プロンプトを見る-500ダイス', one_yen_articles_prompt_show_path(@one_yen_article) %></span><br>
     <span class="timestamp">
@@ -20,10 +20,10 @@
 
 
 
-  <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', one_yen_articles_favorites_delete_path(@one_yen_article), method: :delete,class: 'btn btn-primary' %>
+  <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', one_yen_articles_okiniiris_delete_path(@one_yen_article), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', one_yen_articles_favorites_add_path(@one_yen_article), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', one_yen_articles_okiniiris_add_path(@one_yen_article), method: :get, class: 'btn btn-primary' %>
     <% end %>
 </li>
 <% elsif @one_yen_article.user_id == current_user.id %>
@@ -34,17 +34,17 @@
     <span class="タイトル">タイトル<%= @one_yen_article.title %></span><br><br>
     <span class="ビュー">ビュー <%= @one_yen_article.views %> 回</span><br>
     <span class="プロンプトのビュー">プロンプトのビュー <%= @one_yen_article.prompt_views %> 回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @one_yen_article.id,service_name: "１円記事").count %><br>
+    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @one_yen_article.id,service_name: "１円記事").count %><br>
     <span class="記事">記事<%= simple_format(@one_yen_article. article) %></span><br>
     <span class="プロンプトを見る"><%= link_to 'プロンプトを見る', one_yen_articles_prompt_show_path(@one_yen_article) %></span><br>
     <span class="timestamp">
       Posted <%= time_ago_in_words(@one_yen_article.created_at) %> ago.
     </span><br>
 
-    <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', one_yen_articles_favorites_delete_path(@one_yen_article), method: :delete,class: 'btn btn-primary' %>
+    <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', one_yen_articles_okiniiris_delete_path(@one_yen_article), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', one_yen_articles_favorites_add_path(@one_yen_article), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', one_yen_articles_okiniiris_add_path(@one_yen_article), method: :get, class: 'btn btn-primary' %>
     <% end %>
 
 </li>
@@ -57,7 +57,7 @@
     <span class="タイトル">タイトル<%= @one_yen_article.title %></span><br><br>
     <span class="ビュー">ビュー <%= @one_yen_article.views %> 回</span><br>
     <span class="プロンプトのビュー">プロンプトのビュー <%= @one_yen_article.prompt_views %> 回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @one_yen_article.id,service_name: "１円記事").count %><br>
+    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @one_yen_article.id,service_name: "１円記事").count %><br>
     <span class="記事">記事<%= simple_format(@one_yen_article. article) %></span><br>
     <span class="プロンプトを見る"><%= link_to 'プロンプトを見る-500ダイス', one_yen_articles_prompt_show_path(@one_yen_article) %></span><br>
     <span class="timestamp">
@@ -66,10 +66,10 @@
 
 
 
-  <% if @favorite.present? %>
-        <%= button_to 'お気に入りを削除', one_yen_articles_favorites_delete_path(@one_yen_article), method: :delete,class: 'btn btn-primary' %>
+  <% if @okiniiri.present? %>
+        <%= button_to 'お気に入りを削除', one_yen_articles_okiniiris_delete_path(@one_yen_article), method: :delete,class: 'btn btn-primary' %>
       <% else %>
-        <%= button_to 'お気に入りに追加', one_yen_articles_favorites_add_path(@one_yen_article), method: :get, class: 'btn btn-primary' %>
+        <%= button_to 'お気に入りに追加', one_yen_articles_okiniiris_add_path(@one_yen_article), method: :get, class: 'btn btn-primary' %>
     <% end %>
 </li>
 

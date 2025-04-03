@@ -62,10 +62,10 @@
           <%= novels_support.support_fee %><br>
         <% end %>
 
-        <% if @favorite.present? %>
-          <%= button_to 'お気に入りを削除', novels_favorites_delete_path(@novel), method: :delete,class: 'btn btn-primary' %>
+        <% if @okiniiri.present? %>
+          <%= button_to 'お気に入りを削除', novels_okiniiris_delete_path(@novel), method: :delete,class: 'btn btn-primary' %>
         <% else %>
-          <%= button_to 'お気に入りに追加', novels_favorites_add_path(@novel), method: :get, class: 'btn btn-primary' %>
+          <%= button_to 'お気に入りに追加', novels_okiniiris_add_path(@novel), method: :get, class: 'btn btn-primary' %>
         <% end %>
       </h1>
     </section>

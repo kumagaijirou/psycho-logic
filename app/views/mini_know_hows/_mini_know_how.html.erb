@@ -3,9 +3,8 @@
     <% usera = User.find(mini_know_how.user_id) %><br>
     <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
     <span class="title">タイトル<%= link_to mini_know_how.title, mini_know_how_path(mini_know_how.id) %></span><br>
-    <span class="viewing_fee">送られたダイスポイント <%= mini_know_how.viewing_fee %></span><br>
+    <span class="viewing_fee">閲覧に必要なポイント <%= mini_know_how.viewing_fee %></span><br>
     <span class="number_of_times_seen">見られた回数 <%= mini_know_how.number_of_times_seen %> 回</span><br>
-    <span class="number_of_refunds">返金された回数 <%= mini_know_how.number_of_refunds %> 回</span><br>
     
   
     <span class="timestamp">

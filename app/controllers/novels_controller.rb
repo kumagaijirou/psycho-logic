@@ -43,15 +43,15 @@ class NovelsController < ApplicationController
   end
 
   
-  def favorites_delete
+  def okiniiris_delete
     @novel = Novel.find(params[:id])
-    Favorite.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id).destroy_all
+    Okiniiri.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id).destroy_all
     redirect_to novels_path(@novel[:id])
   end
 
-  def favorites_add
+  def okiniiris_add
     @novel = Novel.find(params[:id])
-    Favorite.create({
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "小説感想",
       service_id: @novel.id}
@@ -72,7 +72,7 @@ class NovelsController < ApplicationController
     @thoughts = @novel.thoughts
     @thought1 = Thought.find_by(user_id: current_user.id)
     @thought = @novel.thoughts.find_by(user_id: current_user.id) if current_user
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "小説感想" , service_id: @novel.id)
     @novels_supports = @novel.novels_supports
     @novels_support = NovelsSupport.find_by(user_id: current_user.id)
   end

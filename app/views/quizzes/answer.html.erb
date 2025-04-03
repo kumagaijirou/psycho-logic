@@ -6,10 +6,10 @@
     <%= render 'form_answer' %><br><br>
     <%= link_to "答えを見る（１００ダイスかかります）", quizzes_see_answer_path %><br>
   
-  <% if @favorite.present? %>
-    <%= button_to 'お気に入りを削除', quizzes_favorites_delete_path(@quiz), method: :delete,class: 'btn btn-primary' %>
+  <% if @okiniiri.present? %>
+    <%= button_to 'お気に入りを削除', quizzes_okiniiris_delete_path(@quiz), method: :delete,class: 'btn btn-primary' %>
   <% else %>
-    <%= button_to 'お気に入りに追加', quizzes_favorites_add_path(@quiz), method: :get, class: 'btn btn-primary' %>
+    <%= button_to 'お気に入りに追加', quizzes_okiniiris_add_path(@quiz), method: :get, class: 'btn btn-primary' %>
   <% end %>
   </div>
 </div>

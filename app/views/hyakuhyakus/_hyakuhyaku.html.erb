@@ -2,10 +2,11 @@
     <%= link_to gravatar_for(hyakuhyaku.user, size: 50), hyakuhyaku.user %><br>
     <% userz = User.find(hyakuhyaku.user_id) %><br>
     <span class="user_id">作成したユーザー名<%= userz.name %></span><br>
-    <span class="front_comment">上<%= link_to hyakuhyaku.front_comment, hyakuhyaku_path(hyakuhyaku.id) %></span><br><br>
-    <span class="number_of_times_seen">見られた回数 <%= hyakuhyaku.number_of_times_seen %> 回</span><br>
-    <span class="number_of_refunds">返金された回数 <%= hyakuhyaku.number_of_refunds %> 回</span><br>
-  
+    <span class="content">
+    <%= link_to hyakuhyaku.front_comment, hyakuhyaku_path(hyakuhyaku.id) %></span><br><br>
+    <span class="number_of_times_seen">閲覧回数 <%= hyakuhyaku.number_of_times_seen %> 回</span><br>
+    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: hyakuhyaku.id,service_name: "百百").count %><br>
+
     <span class="timestamp">
       Posted <%= time_ago_in_words(hyakuhyaku.created_at) %> ago.
     </span><br>

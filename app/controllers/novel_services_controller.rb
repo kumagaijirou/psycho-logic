@@ -44,7 +44,7 @@ class NovelServicesController < ApplicationController
   def show
     @usera = current_user
     @novel_service = NovelService.find((params[:id]))
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "小説のおまけ", service_id: @novel_service.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "小説のおまけ", service_id: @novel_service.id)
     @point_log = PointLog.find_by(user_id: current_user.id,service_name: "小説のおまけ", service_id: @novel_service.id)
     if PointLog.find_by(user_id: current_user.id,service_name: "小説のおまけ",service_id:@novel_service.id,dice_point:-100).present?
     elsif @novel_service.user_id == current_user.id  
@@ -101,19 +101,19 @@ class NovelServicesController < ApplicationController
     end
   end
 
-  def favorites_delete
-    @novel_service = NovelService.find(params[:novel_service_id])
-    Favorite.where(user_id: current_user.id, service_name: "小説のおまけ" , service_id: @novel_service.id).destroy_all
-    redirect_to novel_services_path(@novel_service[:novel_service_id])
+  def okiniiris_delete
+    @novel_service = NovelService.find(params[:id])
+    Okiniiri.where(user_id: current_user.id, service_name: "小説のおまけ" , service_id: @novel_service.id).destroy_all
+    redirect_to novel_service_path(@novel_service[:id])
   end
 
-  def favorites_add
-    @novel_service = NovelService.find(params[:novel_service_id])
-    Favorite.create({
+  def okiniiris_add
+    @novel_service = NovelService.find(params[:id])
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "小説のおまけ",
       service_id: @novel_service.id}
     )
-    redirect_to novel_services_path(@novel_service[:novel_service_id])
+    redirect_to novel_service_path(@novel_service[:id])
   end
 end

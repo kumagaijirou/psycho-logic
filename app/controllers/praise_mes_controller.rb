@@ -40,7 +40,7 @@ class PraiseMesController < ApplicationController
   def show
     @praise_me = PraiseMe.find(params[:id])
     @praises = @praise_me.praises
-    @favorite = Favorite.where(user_id: current_user.id, service_name: "ほめて！" , service_id: @praise_me.id)
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "ほめて！" , service_id: @praise_me.id)
   end
 
   def new
@@ -76,15 +76,15 @@ class PraiseMesController < ApplicationController
     end
   end
 
-  def favorites_delete
+  def okiniiris_delete
     @praise_me = PraiseMe.find(params[:id])
-    Favorite.where(user_id: current_user.id, service_name: "ほめて！" , service_id: @praise_me.id).destroy_all
+    Okiniiri.where(user_id: current_user.id, service_name: "ほめて！" , service_id: @praise_me.id).destroy_all
     redirect_to praise_mes_path(@praise_me[:id])
   end
 
-  def favorites_add
+  def okiniiris_add
     @praise_me = PraiseMe.find(params[:id])
-    Favorite.create({
+    Okiniiri.create({
       user_id: current_user.id,
       service_name: "ほめて！",
       service_id: @praise_me.id}
