@@ -81,7 +81,7 @@ Rails.application.configure do
   config.action_dispatch.default_headers = {
     'X-Frame-Options' => "ALLOW-FROM #{pf_domain}"
   }
-
+  Stripe.api_key= ENV['STRIPE_SECRET_KEY']
   config.assets.debug = true
 
   # Raises error for missing translations.

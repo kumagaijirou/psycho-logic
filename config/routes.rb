@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/webhooks/stripe', to: 'webhooks#stripe'
   post 'checkout', to: 'payments#checkout'
   get '/success', to: 'payments#success'
   get '/cancel', to: 'payments#cancel'
