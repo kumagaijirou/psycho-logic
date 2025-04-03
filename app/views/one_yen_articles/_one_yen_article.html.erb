@@ -1,5 +1,9 @@
 <li id="one_yen_article-<%= one_yen_article.id %>">
-    <%= link_to gravatar_for(one_yen_article.user, size: 50), one_yen_article.user %><br>
+    <% if one_yen_article.user.avatar.attached? %>
+    <%= link_to image_tag(one_yen_article.user.avatar.variant(resize_to_fill: [50, 50]).processed),one_yen_article.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "50x50"),one_yen_article.user %>
+    <% end %><br>
     <% userz = User.find(one_yen_article.user_id) %><br>
     <span class="user_id">作成したユーザー名<%= userz.name %></span><br>
     <span class="タイトル">タイトル<%= link_to one_yen_article.title, one_yen_article_path(one_yen_article.id) %></span><br><br>

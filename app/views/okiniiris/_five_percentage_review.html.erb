@@ -13,7 +13,11 @@
 
   
     <% usera = User.find(five_percentage_review.user_id) %><br>
-    <%= link_to gravatar_for(five_percentage_review.user, size: 50), five_percentage_review.user %><br>
+    <% if five_percentage_review.user.avatar.attached? %>
+    <%= link_to image_tag(five_percentage_review.user.avatar.variant(resize_to_fill: [50, 50]).processed),five_percentage_review.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "50x50"),five_percentage_review.user %>
+    <% end %><br>
     <span class="user_id">情報提供したユーザー名<%= usera.name %></span><br>
     <span class="timestamp">
       Posted <%= time_ago_in_words(five_percentage_review.created_at) %> ago.

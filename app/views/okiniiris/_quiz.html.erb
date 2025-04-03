@@ -1,6 +1,10 @@
 <%= link_to quiz.id, quizzes_answer_path(quiz) %><br>
   <%= link_to quiz.question, quizzes_answer_path(quiz) %><br>
-  <%= link_to gravatar_for(quiz.user, size: 50), quiz.user %><br>  
+  <% if quiz.user.avatar.attached? %>
+    <%= link_to image_tag(quiz.user.avatar.variant(resize_to_fill: [50, 50]).processed),quiz.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "50x50"),quiz.user %>
+    <% end %><br>  
   <span class="user">名前 <%= link_to quiz.user.name, quiz.user %></span><br>
   <span class="number_of_times_solved">解答された回数 <%= quiz.number_of_times_solved %></span><br>
   <span class="number_of_correct_answers">正解の回数 <%= quiz.number_of_correct_answers %></span><br>

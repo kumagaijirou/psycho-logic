@@ -3,7 +3,11 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= gravatar_for @user %>
+          <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar.variant(resize_to_fill: [100, 100]) %>
+          <% else %>
+            <%= image_tag "default_avatar.png", size: "100x100" %>
+          <% end %>
         <% if current_user.admin? %>
         <%= @user.email %><br>
         <% end %>

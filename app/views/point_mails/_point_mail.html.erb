@@ -1,7 +1,11 @@
 <% if Time.now > point_mail.send_date %>
 
   <li id="point_mails-<%= point_mail.id %>">
-    <%= link_to gravatar_for(point_mail.user, size: 50), point_mail.user %><br>
+    <% if point_mail.user.avatar.attached? %>
+    <%= link_to image_tag(point_mail.user.avatar.variant(resize_to_fill: [50, 50]).processed),point_mail.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "50x50"),point_mail.user %>
+    <% end %><br>
     <% usera = User.find(point_mail.user_id) %><br>
     <span class="user_id">送ったユーザー名<%= usera.name %></span><br>
     <span class="title">タイトル<%= link_to point_mail.title, point_mail_path(point_mail.id) %></span><br>

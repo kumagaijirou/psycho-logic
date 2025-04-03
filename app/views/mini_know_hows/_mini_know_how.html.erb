@@ -1,5 +1,9 @@
 <li id="mini_know_how-<%= mini_know_how.id %>">
-    <%= link_to gravatar_for(mini_know_how.user, size: 50), mini_know_how.user %><br>
+    <% if mini_know_how.user.avatar.attached? %>
+    <%= link_to image_tag(mini_know_how.user.avatar.variant(resize_to_fill: [50, 50]).processed),mini_know_how.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "50x50"),mini_know_how.user %>
+    <% end %><br>
     <% usera = User.find(mini_know_how.user_id) %><br>
     <span class="user_id">作成したユーザー名<%= usera.name %></span><br>
     <span class="title">タイトル<%= link_to mini_know_how.title, mini_know_how_path(mini_know_how.id) %></span><br>
