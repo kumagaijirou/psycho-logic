@@ -18,6 +18,8 @@ gem "jbuilder",        "2.11.5"
 gem "puma",            "5.6.5"
 gem "bootsnap",        "1.16.0", require: false
 gem "sqlite3",         "1.6.1"
+gem 'mini_magick'
+gem 'ruby-vips'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 

@@ -16,5 +16,8 @@
 <%= f.label :簡単なプロフィール %>
 <%= f.text_area :profile, class: 'form-control', rows: 5 %>
 
+  <%= f.label :avatar, "アイコン画像" %>
+  <%= f.file_field :avatar %>
+
 <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

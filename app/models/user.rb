@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one_attached :avatar
   #has_many :Tasks, dependent: :destroy
   has_many :tasks
   has_many :supports

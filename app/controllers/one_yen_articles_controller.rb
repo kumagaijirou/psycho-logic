@@ -1,19 +1,24 @@
 class OneYenArticlesController < ApplicationController
 
   def create
-    @one_yen_article = OneYenArticle.new(
-    user_id: current_user.id,
-    title: params[:title],
-    article: params[:article],
-    article_prompt: params[:article_prompt],
-    views: 0,
-    prompt_views: 0
-    )
-    if @one_yen_article.save
-      redirect_to one_yen_articles_path
-    else
-      flash.now[:alert] = "ダイスが足りません。"
-      render 'new', status: :unprocessable_entity
+    if OneYenArticle.where(user_id: current_user.id, created_at: Time.zone.today.all_day).count >= 3
+      redirect_to one_yen_articles_path, alert: "１円記事は1日に投稿できるのは3回までです"
+    return
+
+      @one_yen_article = OneYenArticle.new(
+      user_id: current_user.id,
+      title: params[:title],
+      article: params[:article],
+      article_prompt: params[:article_prompt],
+      views: 0,
+      prompt_views: 0
+      )
+      if @one_yen_article.save
+        redirect_to one_yen_articles_path
+      else
+        flash.now[:alert] = "ダイスが足りません。"
+        render 'new', status: :unprocessable_entity
+      end 
     end
   end
   
