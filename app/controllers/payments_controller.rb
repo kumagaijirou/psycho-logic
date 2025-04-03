@@ -5,17 +5,18 @@ class PaymentsController < ApplicationController
       line_items: [{
         price_data: {
           currency: 'jpy',
-          unit_amount: 500, # 500円
+          unit_amount: 500, # ← 金額（例：500円）
           product_data: {
-            name: "おまけ記事購入"
+            name: 'おまけ記事購入'
           }
         },
         quantity: 1
       }],
       mode: 'payment',
-      success_url: "#{https://psycho-logic.jp/}?success=true",
-      cancel_url: "#{https://psycho-logic.jp/}?canceled=true"
+      success_url: "https://psycho-logic.jp/?success=true",
+      cancel_url:  "https://psycho-logic.jp/?canceled=true"
     )
+
     redirect_to session.url, allow_other_host: true
   end
 end
