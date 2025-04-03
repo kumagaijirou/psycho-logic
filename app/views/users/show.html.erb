@@ -26,6 +26,7 @@
         <%= link_to '多分売れる履歴', users_show_probably_a_hit_path(@user) %><br>
         <% if current_user?(@user) %>
         <%= link_to 'ポイントのログ', point_log_path(user_id: @user.id) %><br>
+        <%= button_to 'クレジットカードで支払う', checkout_path, method: :post %>
 
         <% end %><br>
         <% if current_user.admin? %>

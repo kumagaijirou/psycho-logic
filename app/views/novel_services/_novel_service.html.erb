@@ -1,21 +1,43 @@
-<li><%= novel_service.title %><br>
+<li class="novel-card">
+  <div class="card-flex">
+    <div class="avatar">
+  <% if novel_service.user.avatar.attached? %>
+    <%= link_to image_tag(novel_service.user.avatar.variant(resize_to_fill: [100,100]).processed),novel_service.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "50x50"),novel_service.user %>
+    <% end %>
+  </div>
 
-<% if logged_in? %>
+  <div class="card-body">
+  <div class="title"><i class="fa-solid fa-book"></i><%= novel_service.title %></div>
+
+<div class="subtitle"><% if logged_in? %>
 <%= link_to novel_service.subtitle, novel_service_path(novel_service) %>
 <% else %>
 <%= novel_service.subtitle %>
-<% end %><br>
+<% end %></div>
 
-<% if logged_in? %>
-<span class="user">名前 <%= link_to novel_service.user.name, novel_service.user %></span><br>
+<div class="user"><i class="fa-solid fa-user"></i><% if logged_in? %>
+名前 <%= link_to novel_service.user.name, novel_service.user %>
 <% else %>
-<span class="user">名前 <%= novel_service.user.name %></span><br>
-<% end %><br>
+名前 <%= novel_service.user.name %>
+<% end %></div>
   
-  <span class="url1"> url1 <%= link_to novel_service.url1 , novel_service.url1 %></span><br>
-  <span class="url2"> url2 <%= link_to novel_service.url2 , novel_service.url2 %></span><br>
-  <span class="url3"> url3 <%= link_to novel_service.url3 , novel_service.url3 %></span><br>
-  <span class="content">おまけの文字数 <%= novel_service.content.size %>字</span><br>
-  <span class="views">閲覧数 <%= novel_service.views %></span><br>
-  <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: novel_service.id,service_name: "小説のおまけ").count %><br><br>
+  <div class="url1">
+  <i class="fa-solid fa-link"></i>
+  <%= link_to novel_service.url1, novel_service.url1, target: "_blank", rel: "noopener" %></div>
+  <div class="url1">
+  <i class="fa-solid fa-link"></i>
+  <%= link_to novel_service.url2, novel_service.url2, target: "_blank", rel: "noopener" %></div>
+  <div class="url1">
+  <i class="fa-solid fa-link"></i>
+  <%= link_to novel_service.url3, novel_service.url3, target: "_blank", rel: "noopener" %></div>
+
+ <div class="meta-row">
+  <div class="meta-item"><div class="content"><i class="fa-solid fa-pen"></i> おまけの文字数： <%= novel_service.content.size %>字 </div> 
+  <div class="meta-item"><div class="views"><i class="fa-solid fa-eye"></i>閲覧数： <%= novel_service.views %> </div>
+  <div class="meta-item"><div class="okiniiri"><i class="fa-solid fa-heart"></i>お気に入り： <%= Okiniiri.where(service_id: novel_service.id,service_name: "小説のおまけ").count %></div>
+  </div>
+  </div>
+</div>
 </li>  

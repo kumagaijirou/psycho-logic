@@ -5,7 +5,11 @@
 
 <% if PointLog.find_by(user_id:@current_user.id,service_name: "小説のおまけ", service_id:@novel_service.id,dice_point:-10).present? %>
 <li id="novel_service-<%= @novel_service.id %>">
-    <%= link_to gravatar_for(@novel_service.user, size: 50), @novel_service.user %><br>
+    <% if @novel_service.user.avatar.attached? %>
+    <%= link_to image_tag(@novel_service.user.avatar.variant(resize_to_fill: [100,100]).processed),@novel_service.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "100x100"),@novel_service.user %>
+    <% end %><br>
     <%= @novel_service.title %><br>
     <%= @novel_service.subtitle %><br>
     <span class="user">名前 <%= link_to @novel_service.user.name, @novel_service.user %></span><br>
@@ -27,7 +31,11 @@
 </li>
 <% elsif @novel_service.user_id == current_user.id %>
   <li id="novel_service-<%= @novel_service.id %>">
-    <%= link_to gravatar_for(@novel_service.user, size: 50), @novel_service.user %><br>
+    <% if @novel_service.user.avatar.attached? %>
+    <%= link_to image_tag(@novel_service.user.avatar.variant(resize_to_fill: [100,100]).processed),@novel_service.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "100x100"),@novel_service.user %>
+    <% end %><br>
     <%= @novel_service.title %><br>
     <%= @novel_service.subtitle %><br>
     <span class="user">名前 <%= link_to @novel_service.user.name, @novel_service.user %></span><br>
@@ -52,7 +60,11 @@
 
 <% elsif @usera.dice_point >= 10 %>
 <li id="novel_service-<%= @novel_service.id %>">
-    <%= link_to gravatar_for(@novel_service.user, size: 50), @novel_service.user %><br>
+    <% if @novel_service.user.avatar.attached? %>
+    <%= link_to image_tag(@novel_service.user.avatar.variant(resize_to_fill: [100,100]).processed),@novel_service.user %>
+    <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "100x100"),@novel_service.user %>
+    <% end %><br>
     <%= @novel_service.title %><br>
     <%= @novel_service.subtitle %><br>
     <span class="user">名前 <%= link_to @novel_service.user.name, @novel_service.user %></span><br>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'checkout', to: 'payments#checkout'
   get 'password_resets/new'
   get 'password_resets/edit'
   get 'sessions/new'
