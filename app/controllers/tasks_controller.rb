@@ -101,7 +101,7 @@ class TasksController < ApplicationController
             user_id: current_user.id,
             service_name: "タスク",
             category: "タスクの成功の応援",
-            dice_point: support.support_fee,
+            dice_point: support_fees,
             service_id: @support.id  }
         )
         end

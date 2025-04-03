@@ -1,0 +1,21 @@
+<li><%= novel_service.title %><br>
+
+<% if logged_in? %>
+<%= link_to novel_service.subtitle, novel_service_path(novel_service) %>
+<% else %>
+<%= novel_service.subtitle %>
+<% end %><br>
+
+<% if logged_in? %>
+<span class="user">名前 <%= link_to novel_service.user.name, novel_service.user %></span><br>
+<% else %>
+<span class="user">名前 <%= novel_service.user.name %></span><br>
+<% end %><br>
+  
+  <span class="url1"> url1 <%= link_to novel_service.url1 , novel_service.url1 %></span><br>
+  <span class="url2"> url2 <%= link_to novel_service.url2 , novel_service.url2 %></span><br>
+  <span class="url3"> url3 <%= link_to novel_service.url3 , novel_service.url3 %></span><br>
+  <span class="content">おまけの文字数 <%= novel_service.content.size %>字</span><br>
+  <span class="views">閲覧数 <%= novel_service.views %></span><br>
+  <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: novel_service.id,service_name: "小説のおまけ").count %><br><br>
+</li>  

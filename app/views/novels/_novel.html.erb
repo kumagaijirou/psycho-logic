@@ -3,7 +3,7 @@
 <% else %>
 <%= novel.work_name %>
 <% end %>
-</li>
+
 <% if logged_in? %>
 <span class="user">名前 <%= link_to novel.user.name, novel.user %></span><br>
 <% else %>
@@ -16,3 +16,4 @@
   <span class="accumulation_dice_point"> 今までもらった応援ダイスポイント <%= novel.accumulation_dice_point %></span><br>
   <span class="status"> <%= novel.status %><%= "個の感想募集中" %></span><br>
   <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: novel.id,service_name: "小説感想").count %><br><br>
+  </li>

@@ -1,0 +1,23 @@
+<%= form_with url: {controller: 'novel_services', action: 'create' } do |f| %>
+  <%= f.label :小説タイトル %>
+  <%= f.text_area :title, class: 'form-control', rows: 1 %>
+
+  <%= f.label :章タイトル %>
+  <%= f.text_area :subtitle, class: 'form-control', rows: 1 %>
+
+  <%= f.label :URL1 %>
+  <%= f.text_field :url1, class: 'form-control' %>
+
+  <%= f.label :URL2 %>
+  <%= f.text_field :url2, class: 'form-control' %>
+
+  <%= f.label :URL3 %>
+  <%= f.text_field :url3, class: 'form-control' %>
+
+  <%= f.label :おまけ本文 %>
+  <%= f.text_area :content, class: 'form-control', rows: 15 %>
+  
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_30_081451) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_02_215808) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -92,6 +92,20 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_30_081451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_mini_know_hows_on_user_id"
+  end
+
+  create_table "novel_services", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "title"
+    t.text "subtitle"
+    t.string "url1"
+    t.string "url2"
+    t.string "url3"
+    t.text "content"
+    t.integer "views"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_novel_services_on_user_id"
   end
 
   create_table "novels", force: :cascade do |t|
@@ -274,6 +288,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_30_081451) do
   add_foreign_key "five_percentage_reviews", "users"
   add_foreign_key "hyakuhyakus", "users"
   add_foreign_key "mini_know_hows", "users"
+  add_foreign_key "novel_services", "users"
   add_foreign_key "novels_supports", "users"
   add_foreign_key "one_yen_articles", "users"
   add_foreign_key "point_mails", "users"

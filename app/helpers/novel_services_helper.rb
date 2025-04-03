@@ -1,0 +1,2 @@
+module NovelServicesHelper
+end

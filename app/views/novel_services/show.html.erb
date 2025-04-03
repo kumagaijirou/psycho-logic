@@ -1,0 +1,78 @@
+<% provide(:title, '小説のおまけ') %>
+<h1>小説のおまけ</h1>
+
+<%= link_to "新しい小説のおまけを投稿する", new_novel_service_path %><br>
+
+<% if PointLog.find_by(user_id:@current_user.id,service_name: "小説のおまけ", service_id:@novel_service.id,dice_point:-10).present? %>
+<li id="novel_service-<%= @novel_service.id %>">
+    <%= link_to gravatar_for(@novel_service.user, size: 50), @novel_service.user %><br>
+    <%= @novel_service.title %><br>
+    <%= @novel_service.subtitle %><br>
+    <span class="user">名前 <%= link_to @novel_service.user.name, @novel_service.user %></span><br>
+    <span class="url1"> url1 <%= link_to @novel_service.url1 , @novel_service.url1 %></span><br>
+    <span class="url2"> url2 <%= link_to @novel_service.url2 , @novel_service.url2 %></span><br>
+    <span class="url3"> url3 <%= link_to @novel_service.url3 , @novel_service.url3 %></span><br>
+    <span class="content"> <%= @novel_service.content %></span><br>
+    <span class="views">閲覧数 <%= @novel_service.views %>回</span><br>
+    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
+
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@novel_service.created_at) %> ago.
+    </span><br>
+  <% if @favorite.present? %>
+        <%= button_to 'お気に入りを削除', novel_services_favorites_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
+      <% else %>
+        <%= button_to 'お気に入りに追加', novel_services_favorites_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
+    <% end %>
+</li>
+<% elsif @novel_service.user_id == current_user.id %>
+  <li id="novel_service-<%= @novel_service.id %>">
+    <%= link_to gravatar_for(@novel_service.user, size: 50), @novel_service.user %><br>
+    <%= @novel_service.title %><br>
+    <%= @novel_service.subtitle %><br>
+    <span class="user">名前 <%= link_to @novel_service.user.name, @novel_service.user %></span><br>
+    <span class="url1"> url1 <%= link_to @novel_service.url1 , @novel_service.url1 %></span><br>
+    <span class="url2"> url2 <%= link_to @novel_service.url2 , @novel_service.url2 %></span><br>
+    <span class="url3"> url3 <%= link_to @novel_service.url3 , @novel_service.url3 %></span><br>
+    <span class="content"> <%= @novel_service.content %></span><br>
+    <span class="views">閲覧数 <%= @novel_service.views %>回</span><br>
+    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
+
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@novel_service.created_at) %> ago.
+    </span><br>
+
+    <% if @favorite.present? %>
+        <%= button_to 'お気に入りを削除', novel_services_favorites_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
+      <% else %>
+        <%= button_to 'お気に入りに追加', novel_services_favorites_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
+    <% end %>
+
+</li>
+
+<% elsif @usera.dice_point >= 10 %>
+<li id="novel_service-<%= @novel_service.id %>">
+    <%= link_to gravatar_for(@novel_service.user, size: 50), @novel_service.user %><br>
+    <%= @novel_service.title %><br>
+    <%= @novel_service.subtitle %><br>
+    <span class="user">名前 <%= link_to @novel_service.user.name, @novel_service.user %></span><br>
+    <span class="url1"> url1 <%= link_to @novel_service.url1 , @novel_service.url1 %></span><br>
+    <span class="url2"> url2 <%= link_to @novel_service.url2 , @novel_service.url2 %></span><br>
+    <span class="url3"> url3 <%= link_to @novel_service.url3 , @novel_service.url3 %></span><br>
+    <span class="content"> <%= @novel_service.content %></span><br>
+    <span class="お気に入り登録数">お気に入り登録数 <%= Favorite.where(service_id: @novel_service.id,service_name: "小説のおまけ").count %><br><br> 
+
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@novel_service.created_at) %> ago.
+    </span><br>
+
+  <% if @favorite.present? %>
+        <%= button_to 'お気に入りを削除', novel_services_favorites_delete_path(@novel_service), method: :delete,class: 'btn btn-primary' %>
+      <% else %>
+        <%= button_to 'お気に入りに追加', novel_services_favorites_add_path(@novel_service), method: :get, class: 'btn btn-primary' %>
+    <% end %>
+</li>
+
+<% else %>
+ダイスポイントが足りません。
+<% end %>

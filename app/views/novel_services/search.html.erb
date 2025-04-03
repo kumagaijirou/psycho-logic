@@ -1,0 +1,10 @@
+<div class="id search_form">
+  <%= form_with url: novel_services_search_result_path, local: true, method: :get do |f| %>
+  <div class="form_inner">
+    <div class="flex">
+    <%= f.number_field :id_number %>
+    <%= f.select :range, options_for_select([["小説のおまけのIDを入力する","novel_service_id"], ["小説のおまけの制作者IDを検索する","user_id"]]) %>
+    </div>
+    <%= f.submit "検索", class: "btn btn-primary" %></div>
+  <% end %>
+</div>

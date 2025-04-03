@@ -84,6 +84,11 @@ Rails.application.routes.draw do
   get "one_yen_articles/search/", to: "one_yen_articles#search", as: 'one_yen_articles_search'
   get "one_yen_articles/:id/favorites_add/", to: "one_yen_articles#favorites_add", as: 'one_yen_articles_favorites_add'
   delete "one_yen_articles/:id/favorites_delete/", to: "one_yen_articles#favorites_delete", as: 'one_yen_articles_favorites_delete'
+  get "novel_services/:id/favorites_add/", to: "novel_services#favorites_add", as: 'novel_services_favorites_add'
+  delete "novel_services/:id/favorites_delete/", to: "novel_services#favorites_delete", as: 'novel_services_favorites_delete'
+  get "novel_services/search_result/", to: "novel_services#search_result", as: 'novel_services_search_result'
+  get "novel_services/search/", to: "novel_services#search", as: 'novel_services_search'
+  
 
   resources :five_percentage_reviews, param: :five_percentage_review_id,  only: [:new, :create, :edit, :update,:show, :index]
   resources :novels,              only: [:new, :create, :show, :edit, :update, :index, :update] do
@@ -109,4 +114,5 @@ Rails.application.routes.draw do
     resources :responses_to_comments_and_inquiries, only: [:new,:create,:index,:show] 
   end
   resources :one_yen_articles,     only: [:new, :create, :destroy,:show, :index, :edit]
+  resources :novel_services,     only: [:new, :create, :destroy,:show, :index, :edit]
 end
