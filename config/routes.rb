@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   post 'checkout', to: 'payments#checkout'
+  get '/success', to: 'payments#success'
+  get '/cancel', to: 'payments#cancel'
   get 'password_resets/new'
   get 'password_resets/edit'
   get 'sessions/new'
