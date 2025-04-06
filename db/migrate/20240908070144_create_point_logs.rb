@@ -8,6 +8,7 @@ class CreatePointLogs < ActiveRecord::Migration[7.0]
       t.integer :dice_point
 
       t.timestamps
+      add_index :point_logs, [:user_id, :service_name, :service_id], unique: true
     end
   end
 end
