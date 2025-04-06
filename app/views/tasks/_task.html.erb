@@ -1,9 +1,9 @@
 <li id="task-<%= task.id %>">
 
   <% if task.user.avatar.attached? %>
-  <%= link_to image_tag(task.user.avatar.variant(resize_to_fill: [50, 50]).processed),task.user %>
+  <%= link_to image_tag(task.user.avatar.variant(resize_to_fill: [50, 50])), task.user %>
   <% else %>
-    <%= link_to image_tag("default_avatar.png", size: "50x50"),task.user %>
+  <%= link_to image_tag("default_avatar.png", size: "50x50"), task.user %>
   <% end %>
   <span class="task_id"><%= link_to task.id, task_path(task.id) %></span>
   <span class="create_time"><%= link_to task.created_at.strftime('%Y/%m/%d %H:%M:%S'), task_path(task.id) %></span>
