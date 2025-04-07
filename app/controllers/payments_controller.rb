@@ -15,8 +15,8 @@ class PaymentsController < ApplicationController
         quantity: 1
       }],
       mode: 'payment',
-      success_url: "https://shiny-umbrella-j9vrp4p9vx2qrp7-3000.app.github.dev/success",
-      cancel_url: "https://shiny-umbrella-j9vrp4p9vx2qrp7-3000.app.github.dev/cancel",
+      success_url: "https://psycho-logic.jp/success",
+      cancel_url: "https://psycho-logic.jp/cancel",
       metadata: {
       user_id: current_user.id
       } 
