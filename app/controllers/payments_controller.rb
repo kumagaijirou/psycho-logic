@@ -28,21 +28,32 @@ class PaymentsController < ApplicationController
   end
 
   def success
-    session_id = params[:session_id] # Stripe Checkoutから受け取る
-
-    # すでに処理済みならスキップ（重複防止）
-    if PointLog.where(user_id:current_user,created_at:Date.today).present?
-    else
-    @user = User.find(current_user.id)
-    @user.dice_point += 1000
-    @user.save
-    PointLog.create(
-      user_id: @user.id,
+    session_id = params[:session_id]
+  
+    # Stripeから返ってきた決済セッションを使って、重複防止
+    already_logged_today = PointLog.exists?(
+      user_id: current_user.id,
       service_name: "その他",
       category: "ポイントの購入",
-      dice_point: 1000,
-      service_id: session_id
+      created_at: Time.zone.today.all_day
     )
+  
+    return if already_logged_today
+  
+    # Stripeからセッションを取得（必要なら）
+    session = Stripe::Checkout::Session.retrieve(session_id)
+  
+    # 購入確認（本当に支払いが済んでるか）
+    if session.payment_status == "paid"
+      current_user.increment!(:dice_point, 1000)
+  
+      PointLog.create!(
+        user_id: current_user.id,
+        service_name: "その他",
+        category: "ポイントの購入",
+        dice_point: 1000,
+        service_id: session_id
+      )
     end
   end
 
