@@ -30,18 +30,18 @@ class WebhooksController < ApplicationController
       user = User.find_by(id: user_id)
 
       if user
-        user.increment!(:dice_point, 5000)
+        user.increment!(:dice_point, 1000)
 
         # ポイントログを作成（任意）
         PointLog.create!(
           user_id: user.id,
           service_name: "その他",
           category: "ポイントの購入",
-          dice_point: 5000,
+          dice_point: 1000,
           service_id: nil
         )
 
-        Rails.logger.info "✅ ユーザー #{user.name} に5000ポイント追加完了"
+        Rails.logger.info "✅ ユーザー #{user.name} に1000ポイント追加完了"
       else
         Rails.logger.warn "❌ 該当ユーザーが見つかりませんでした: ID=#{user_id}"
       end
