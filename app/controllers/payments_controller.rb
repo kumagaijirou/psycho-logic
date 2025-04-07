@@ -31,8 +31,8 @@ class PaymentsController < ApplicationController
     session_id = params[:session_id] # Stripe Checkoutから受け取る
 
     # すでに処理済みならスキップ（重複防止）
-    return if PointLog.where(user_id:current_user,craete_at:Date.today).exist?
-
+    if PointLog.where(user_id:current_user,craete_at:Date.today).present?
+    else
     @user = User.find(current_user.id)
     @user.dice_point += 1000
     @user.save
@@ -43,6 +43,7 @@ class PaymentsController < ApplicationController
       dice_point: 1000,
       service_id: session_id
     )
+    end
   end
 
   private
