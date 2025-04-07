@@ -60,5 +60,4 @@ class PaymentsController < ApplicationController
       @user = User.find(current_user.id)
       redirect_to(root_url, status: :see_other) unless current_user?(@user)
     end
-  end
 end
