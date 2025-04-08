@@ -133,12 +133,12 @@ class UsersController < ApplicationController
       if user.referred_user_id.present?
         referred_user = User.find_by(id: user.referred_user_id)
         if referred_user
-          referred_user.increment!(:dice_point, 2000)
+          referred_user.increment!(:dice_point, 1000)
           PointLog.create!(
             user_id: referred_user.id,
             service_name: "その他",
             category: "紹介したユーザーの入会",
-            dice_point: 2000,
+            dice_point: 1000,
             service_id: user.id
           )
         end
