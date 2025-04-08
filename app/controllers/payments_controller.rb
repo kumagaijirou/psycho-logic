@@ -22,8 +22,12 @@ class PaymentsController < ApplicationController
       metadata: {
       user_id: current_user.id
       } 
-    )
-  
+      custom_text: {
+      submit: {
+        message: 'psycho-logicでお支払い'
+      }
+    }
+  )
     redirect_to session.url, allow_other_host: true
   end
 

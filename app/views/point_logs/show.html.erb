@@ -10,12 +10,6 @@
           <% end %>
         <%= @user.name %>
         <%= @user.dice_point %><br><br>
-        ダイスポイントの利用期限<br>
-        <% if @user.dice_point_expiry_date.nil? %>
-        ダイスポイントを購入していません。<br><br>
-        <% else %>
-        <%= @user.dice_point_expiry_date.strftime('%Y年%m月%d日') %><br><br>
-        <% end %>
       </h1>
 
       <!-- ポイントログのテーブル表示 -->
