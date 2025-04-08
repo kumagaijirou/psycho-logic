@@ -48,6 +48,7 @@
     <span class="timestamp">
       Posted <%= time_ago_in_words(@one_yen_article.created_at) %> ago.
     </span><br>
+    <%= link_to "再編集する", edit_one_yen_article_path(@one_yen_article),class: 'btn btn-primary' %><br><br>
 
     <% if @okiniiri.present? %>
         <%= button_to 'お気に入りを削除', one_yen_articles_okiniiris_delete_path(@one_yen_article), method: :delete,class: 'btn btn-primary' %>

@@ -1,4 +1,4 @@
-<%= form_with url: {controller: 'novels', action: 'update' } do  |f| %>
+  <%= form_with(model: @novel) do |f| %>
   
   <%= f.label :小説タイトル %>
   <%= f.text_area :work_name, class: 'form-control', rows: 3 %>

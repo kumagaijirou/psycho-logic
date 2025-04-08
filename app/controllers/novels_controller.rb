@@ -12,15 +12,15 @@ class NovelsController < ApplicationController
     status: params[:status],
     accumulation_dice_point: 0,
     )
-    if @novel.status * 2000 <= @current_user.dice_point
-      @current_user.dice_point = @current_user.dice_point - @novel.status * 2000
+    if @novel.status * 1000 <= @current_user.dice_point
+      @current_user.dice_point = @current_user.dice_point - @novel.status * 1000
       @current_user.save
       @novel.save!
       PointLog.create({
           user_id: @current_user.id,
           service_name: "小説感想",
           category: "#{@novel.status}個の小説の感想を募集",
-          dice_point: -2000 * @novel.status,
+          dice_point: -1000 * @novel.status,
           service_id: @novel.id }
         )
       redirect_to novel_path(@novel.id)
@@ -83,6 +83,20 @@ class NovelsController < ApplicationController
     @novels_supports = @novel.novels_supports
   end
 
+  def edit
+    @novel = Novel.find(params[:id])
+  end
+
+  def update
+    @novel = Novel.find(params[:id])
+    if @novel.update(novel_params)
+      # 更新に成功した場合を扱う
+      redirect_to @novel
+    else
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   def status
     @novel = Novel.find(params[:id])
   end
@@ -91,17 +105,17 @@ class NovelsController < ApplicationController
     @user = current_user
     @novel = Novel.find(params[:id])
     @novel.update!(status: params[:status])
-    if @user.dice_point < @novel.status * 2000
+    if @user.dice_point < @novel.status * 1000
        @novel.update!(status: 0 )
        flash.now[:alert] = "ダイスが足りません。"
     else
-      @user.dice_point -= @novel.status * 2000
+      @user.dice_point -= @novel.status * 1000
       @user.save
       PointLog.create({
           user_id: @current_user.id,
           service_name: "小説感想",
           category: "#{@novel.status}個の小説の感想を募集",
-          dice_point: -2000 * @novel.status,
+          dice_point: -1000 * @novel.status,
           service_id: @novel.id }
         )
     end
@@ -111,14 +125,14 @@ class NovelsController < ApplicationController
   def novel_probably_a_hit
     @user = current_user
     @novel = Novel.find(params[:novel_id])
-    if @user.dice_point >= 5000
-      @user.dice_point -= 5000
+    if @user.dice_point >= 1000
+      @user.dice_point -= 1000
       @user.save!
       PointLog.create({
           user_id: current_user.id,
           service_name: "小説感想",
           category: "小説を多分売れるした費用",
-          dice_point: -5000,
+          dice_point: -1000,
           service_id: @novel.id })
 
       if @novel.accumulation_dice_point >= 0 && @novel.accumulation_dice_point <= 10000
@@ -163,26 +177,26 @@ class NovelsController < ApplicationController
         }) 
       end
       usera = User.find(@novel.user_id)
-      usera.dice_point += 4500
+      usera.dice_point += 900
       usera.save!
         PointLog.create({
           user_id: @novel.user_id,
           service_name: "小説感想",
           category: "小説を多分売れるされたポイント",
-          dice_point: 4500,
+          dice_point: 900,
           service_id: @novel.id }
         )
       userb = User.find(1)
-      userb.dice_point += 500
+      userb.dice_point += 100
       userb.save!
         PointLog.create({
           user_id: 1,
           service_name: "小説感想",
           category: "小説を多分売れるされたポイントの手数料",
-          dice_point: 500,
+          dice_point: 100,
           service_id: @novel.id }
         )
-        @novel.accumulation_dice_point += 5000
+        @novel.accumulation_dice_point += 1000
         @novel.save!
     else
       flash.now[:alert] = "ダイスポイントが足りません。"
@@ -196,7 +210,7 @@ class NovelsController < ApplicationController
   private
 
     def novel_params
-        params.permit(:novel => [:work_name, :synopsis, :url1, :url2, :url3, :status])
+        params.require(:novel).permit(:work_name, :synopsis, :url1, :url2, :url3, :status)
       end
     
     # ログイン済みユーザーかどうか確認

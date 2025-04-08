@@ -2,7 +2,7 @@
 <%= link_to novel.work_name, novels_show_path(novel) %>
 <% else %>
 <%= novel.work_name %>
-<% end %>
+<% end %><br>
 
 <% if logged_in? %>
 <span class="user">名前 <%= link_to novel.user.name, novel.user %></span><br>

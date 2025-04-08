@@ -30,6 +30,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
+  gem 'letter_opener_web'
   gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
 end
 

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+  
   post '/webhooks/stripe', to: 'webhooks#stripe'
   post 'checkout', to: 'payments#checkout'
   get '/success', to: 'payments#success'
@@ -118,6 +123,6 @@ Rails.application.routes.draw do
   resources :feedback_and_inquiries, param: :feedback_and_inquiries_id, only: [:new,:create,:index, :show] do
     resources :responses_to_comments_and_inquiries, only: [:new,:create,:index,:show] 
   end
-  resources :one_yen_articles,     only: [:new, :create, :destroy,:show, :index, :edit]
+  resources :one_yen_articles,     only: [:new, :create, :destroy,:show, :index, :edit, :update]
   resources :novel_services,     only: [:new, :create, :destroy,:show, :index, :edit]
 end

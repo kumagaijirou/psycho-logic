@@ -9,9 +9,9 @@ class PaymentsController < ApplicationController
       line_items: [{
         price_data: {
           currency: 'jpy',
-          unit_amount: 100,
+          unit_amount: 200,
           product_data: {
-            name: '100円分のダイスポイント'
+            name: '200円分のダイスポイント'
           }
         },
         quantity: 1
@@ -45,13 +45,13 @@ class PaymentsController < ApplicationController
   
     # 購入確認（本当に支払いが済んでるか）
     if session.payment_status == "paid"
-      current_user.increment!(:dice_point, 1000)
+      current_user.increment!(:dice_point, 2000)
   
       PointLog.create!(
         user_id: current_user.id,
         service_name: "その他",
         category: "ポイントの購入",
-        dice_point: 1000,
+        dice_point: 2000,
         service_id: session_id
       )
     end

@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :five_percentage_reviews
   has_many :one_yen_articles
   has_many :novel_servises
+  belongs_to :referred_user, class_name: 'User', optional: true
+  has_many :referrals, class_name: 'User', foreign_key: 'referred_user_id'
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest

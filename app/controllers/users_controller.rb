@@ -20,39 +20,42 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    @user.referred_user_id = params[:referred_user_id]
   end
 
   def create
     @user = User.new(user_params)
-    @user.dice_point = 0
-      if @user.save && @user.final_answer == ""
-        flash[:info] = "入力したアドレスで届いたメールをチェックしてアカウントを有効にして下さい。"
-        @user.send_activation_email
-        redirect_to root_url
-      elsif @user.save
-        flash[:info] = "入力したアドレスで届いたメールをチェックしてアカウントを有効にして下さい。"
-        @user.send_activation_email
-        point = PointCode.find_by!(code: params[:user][:final_answer], used_at: nil).point
-        if point == nil
-          point = 0
-        else
-        end
-        @user.dice_point += point
-        @user.save
-        code = PointCode.find_by!(code: params[:user][:final_answer], used_at: nil)
-        code.used_at = Time.now
-        code.save
-        PointLog.create({
+    @user.dice_point = 1000
+  
+    if @user.save && @user.final_answer.blank?
+      flash[:info] = "入力したアドレスで届いたメールをチェックしてアカウントを有効にして下さい。"
+      @user.send_activation_email
+      handle_referral(@user)
+      redirect_to root_url
+  
+    elsif @user.save
+      flash[:info] = "入力したアドレスで届いたメールをチェックしてアカウントを有効にして下さい。"
+      @user.send_activation_email
+  
+      code = PointCode.find_by(code: params[:user][:final_answer], used_at: nil)
+      point = code&.point || 0
+  
+      @user.increment!(:dice_point, point)
+  
+      if code
+        code.update!(used_at: Time.current)
+        PointLog.create!(
           user_id: @user.id,
           service_name: "ポイントメール",
           category: "ポイント送付メールのポイント",
           dice_point: point,
-          service_id: code.id }
+          service_id: code.id
         )
-          @usera = User.find(code.user_id)
-          @user.dice_point_expiry_date = @usera.dice_point_expiry_date
-          @user.save
-        redirect_to root_url
+      end
+  
+      handle_referral(@user)
+      redirect_to root_url
+  
     else
       render 'new', status: :unprocessable_entity
     end
@@ -74,7 +77,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "ユーザーを消去しました。"
     redirect_to users_url, status: :see_other
   end
 
@@ -97,9 +100,11 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation,:profile,:dice_point,
-                                 :final_answer,:avatar)
+      params.require(:user).permit(
+        :name, :email, :password, :password_confirmation,
+        :final_answer, :referred_user_id, # ← これ絶対必要！！
+        :avatar
+      )
     end
 
         # beforeフィルタ
@@ -122,5 +127,21 @@ class UsersController < ApplicationController
     # 管理者かどうか確認
     def admin_user
       redirect_to(root_url, status: :see_other) unless current_user.admin?
+    end
+
+    def handle_referral(user)
+      if user.referred_user_id.present?
+        referred_user = User.find_by(id: user.referred_user_id)
+        if referred_user
+          referred_user.increment!(:dice_point, 2000)
+          PointLog.create!(
+            user_id: referred_user.id,
+            service_name: "その他",
+            category: "紹介したユーザーの入会",
+            dice_point: 2000,
+            service_id: user.id
+          )
+        end
+      end
     end
   end

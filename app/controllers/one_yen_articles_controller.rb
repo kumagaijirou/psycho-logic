@@ -4,7 +4,7 @@ class OneYenArticlesController < ApplicationController
     if OneYenArticle.where(user_id: current_user.id, created_at: Time.zone.today.all_day).count >= 3
       redirect_to one_yen_articles_path, alert: "１円記事は1日に投稿できるのは3回までです"
     return
-
+    else
       @one_yen_article = OneYenArticle.new(
       user_id: current_user.id,
       title: params[:title],
@@ -114,6 +114,17 @@ class OneYenArticlesController < ApplicationController
     @one_yen_article = OneYenArticle.find((params[:id]))
   end
 
+  def update
+    @one_yen_article = OneYenArticle.find(params[:id])
+    puts params.inspect
+    if @one_yen_article.update(one_yen_article_params)
+      # 更新に成功した場合を扱う
+      redirect_to one_yen_articles_path(@one_yen_article)
+    else
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   def search
   end
 
@@ -141,5 +152,10 @@ class OneYenArticlesController < ApplicationController
     )
     redirect_to one_yen_articles_path(@one_yen_article[:id])
   end
+  
+  private
 
+    def one_yen_article_params
+      params.require(:one_yen_article).permit(:title,:article,:article_prompt)
+    end
 end
