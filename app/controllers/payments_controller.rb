@@ -21,7 +21,7 @@ class PaymentsController < ApplicationController
       cancel_url: "https://psycho-logic.jp/cancel",
       metadata: {
       user_id: current_user.id
-      } 
+      },
       custom_text: {
       submit: {
         message: 'psycho-logicでお支払い'
