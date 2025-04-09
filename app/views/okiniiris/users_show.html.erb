@@ -1,0 +1,12 @@
+<% provide(:title, 'お気に入りユーザー') %>
+<h1>お気に入りユーザー</h1>
+<%= link_to "dice_ranking", users_ranking_path %><br><br>
+
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>

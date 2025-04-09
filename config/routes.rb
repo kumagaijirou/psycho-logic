@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   delete "/logout",  to: "sessions#destroy"
   get "users/ranking", to: "users#ranking"
   get "users/:id/show_probably_a_hit", to: "users#show_probably_a_hit", as: "users_show_probably_a_hit"
+  get "users/:id/okiniiris_add/", to: "users#okiniiris_add", as: 'users_okiniiris_add'
+  delete "users/:id/okiniiris_delete/", to: "users#okiniiris_delete", as: 'users_okiniiris_delete'
   get "tasks/index"
   get "tasks/index2"
   get "tasks/:id/last_message", to: "tasks#last_message",  as: 'tasks_last_message'
@@ -59,6 +61,7 @@ Rails.application.routes.draw do
   get "thoughts/:thought_id", to: "thoughts#show", as: 'thoughts_show'
   get "novels/:novel_id/thoughts/:thought_id/update", to: "thoughts#update", as: 'thoughts_update'
   get "novels/:novel_id/novel_probably_a_hit", to: "novels#novel_probably_a_hit", as: "novels_novel_probably_a_hit"
+  get "okiniiris/:user_id/users_show", to:"okiniiris#users_show", as: 'okiniiris_users_show'
   get "okiniiris/:user_id/tasks_show", to:"okiniiris#tasks_show", as: 'okiniiris_tasks_show'
   get "okiniiris/:user_id/quizzes_show", to:"okiniiris#quizzes_show", as: 'okiniiris_quizzes_show'
   get "okiniiris/:user_id/novels_show", to:"okiniiris#novels_show", as: 'okiniiris_novels_show'

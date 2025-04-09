@@ -30,7 +30,12 @@
         <% if current_user.admin? %>
           <%= link_to 'ポイントのログ', point_log_path(@user) %><br>
           <%= link_to 'ポイントのプラス', new_point_log_path %><br>
+        <% end %>
 
+        <% if @okiniiri.present? %>
+          <%= button_to 'お気に入りを削除', users_okiniiris_delete_path(@user), method: :delete,class: 'btn btn-primary' %>
+        <% else %>
+          <%= button_to 'お気に入りに追加', users_okiniiris_add_path(@user), method: :get, class: 'btn btn-primary' %>
         <% end %>
 
       </h1>

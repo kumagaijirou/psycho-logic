@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @task1 = Task.where(user_id: params[@user.id], status: "成功" )
     @task2 = Task.where(user_id: params[@user.id], status: "失敗" )
+    @okiniiri = Okiniiri.where(user_id: current_user.id, service_name: "ユーザー" , service_id: @user.id)
   end
   
   def new
@@ -94,6 +95,22 @@ class UsersController < ApplicationController
   def show_probably_a_hit
     @user = User.find(params[:id])
     @probably_a_hit = ProbablyAHit.where(user_id: @user.id)
+  end
+
+  def okiniiris_delete
+    @user = User.find(params[:id])
+    Okiniiri.where(user_id: current_user.id, service_name: "ユーザー", service_id: @user.id).destroy_all
+    redirect_to user_path(@user[:id])
+  end
+
+  def okiniiris_add
+    @user = User.find(params[:id])
+    Okiniiri.create({
+      user_id: current_user.id,
+      service_name: "ユーザー",
+      service_id: @user.id}
+    )
+    redirect_to user_path(@user[:id])
   end
 
 

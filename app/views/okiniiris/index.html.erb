@@ -1,6 +1,8 @@
 <% provide(:title, 'お気に入り') %>
 <h1>お気に入り</h1>
 
+<%= link_to "ユーザー", okiniiris_users_show_path(current_user) %><br><br>
+
 <%= link_to "１円記事", okiniiris_one_yen_articles_show_path(current_user) %><br>
 <%= link_to "有料サービス５％レビュー", okiniiris_five_percentage_reviews_show_path(current_user) %><br>
 <%= link_to "努力で夢を叶えたい（task)", okiniiris_tasks_show_path(current_user) %><br>

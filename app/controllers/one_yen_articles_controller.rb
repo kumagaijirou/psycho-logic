@@ -23,7 +23,11 @@ class OneYenArticlesController < ApplicationController
   end
   
   def index
-    @one_yen_articles = OneYenArticle.all.paginate(page: params[:page])
+    if params[:keyword].present?
+      @one_yen_articles = OneYenArticle.title_contains(params[:keyword]).order_by_views.paginate(page: params[:page])
+    else
+      @one_yen_articles = OneYenArticle.all.order_by_views.paginate(page: params[:page])
+    end
   end
 
   def prompt_show
