@@ -54,6 +54,11 @@ class AudioReadingsController < ApplicationController
           )
       @audio_reading.play_count += 1
       @audio_reading.save
+      @novel = Novel.find_by(work_name:@audio_reading.title, user_id:@audio_reading.author_user_id)
+        if @novel.present?
+        @novel.accumulation_dice_point += 100
+        @novel.save
+        end
     end
   end
 
