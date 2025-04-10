@@ -1,0 +1,14 @@
+<h2><%= audio_reading.title %></h2>
+<span class="subtitle"> <%= audio_reading.subtitle %></span><br>
+  <span class="user_id"> 朗読者名 <%= audio_reading.user.name %></span><br>
+  <span class="user_id"> 小説の制作者名 <% userz = User.find(audio_reading.author_user_id) %><%= userz.name %></span><br>
+  <span class="play count"> 聴取回数 <%= audio_reading.play_count %>回</span><br>
+  <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: audio_reading.id,service_name: "小説朗読").count %><br><br>
+<%= audio_tag url_for(audio_reading.audio_file), controls: true if audio_reading.audio_file.attached? %><br><br>
+
+<%# お気に入りボタンも含める場合は、変数で渡す %>
+  <% if okiniiri.present? %>
+    <%= button_to "お気に入りを解除", audio_readings_okiniiris_delete_path(audio_reading), method: :delete, class: "btn btn-primary" %>
+  <% else %>
+    <%= button_to "お気に入りに追加", audio_readings_okiniiris_add_path(audio_reading), method: :get, class: "btn btn-primary" %>
+  <% end %>

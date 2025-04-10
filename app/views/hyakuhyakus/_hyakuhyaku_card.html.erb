@@ -1,0 +1,20 @@
+<li id="hyakuhyaku-<%= hyakuhyaku.id %>">
+  <% if hyakuhyaku.user.avatar.attached? %>
+    <%= link_to image_tag(hyakuhyaku.user.avatar.variant(resize_to_fill: [100, 100])), hyakuhyaku.user %>
+  <% else %>
+    <%= link_to image_tag("default_avatar.png", size: "100x100"), hyakuhyaku.user %>
+  <% end %>
+  <span class="user_id">作成したユーザー名 <%= hyakuhyaku.user.name %></span><br>
+  <span class="content"><%= hyakuhyaku.front_comment %></span><br>
+  <span class="content"><%= hyakuhyaku.back_comment %></span><br>
+  <span class="number_of_times_seen">👁 <%= hyakuhyaku.number_of_times_seen %> 回</span><br>
+  <span class="favorites">お気に入り登録数：<%= Okiniiri.where(service_id: hyakuhyaku.id, service_name: "百百").count %></span><br>
+  <span class="timestamp">Posted <%= time_ago_in_words(hyakuhyaku.created_at) %> ago.</span><br>
+
+  <%# お気に入りボタンも含める場合は、変数で渡す %>
+  <% if okiniiri.present? %>
+    <%= button_to "お気に入りを解除", hyakuhyakus_okiniiris_delete_path(hyakuhyaku), method: :delete, class: "btn btn-primary" %>
+  <% else %>
+    <%= button_to "お気に入りに追加", hyakuhyakus_okiniiris_add_path(hyakuhyaku), method: :get, class: "btn btn-primary" %>
+  <% end %>
+</li>

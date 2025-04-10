@@ -1,0 +1,11 @@
+<div class="id search_form">
+  <%= form_with url: audio_readings_search_result_path, local: true, method: :get do |f| %>
+  <div class="form_inner">
+    <div class="flex">
+    <%= f.number_field :id_number %>
+    <%= f.select :range, options_for_select([["小説朗読のIDを入力する","audio_reading_id"], ["小説朗読の制作者IDを検索する","user_id"]]) %>
+    </div>
+    <%= f.submit "検索", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>

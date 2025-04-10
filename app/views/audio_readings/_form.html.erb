@@ -1,0 +1,25 @@
+<% if @audio_reading.errors.any? %>
+  <div class="alert alert-danger">
+    <h4>エラーがあります：</h4>
+    <ul>
+      <% @audio_reading.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= form_with model: @audio_reading, local: true, multipart: true do |form| %>
+  <%= form.label :title, "タイトル" %>
+  <%= form.text_field :title %>
+
+  <%= form.label :subtitle, "サブタイトル" %>
+  <%= form.text_field :subtitle %>
+
+  <%= form.label :author_user_id, "小説作者のユーザーID" %>
+  <%= form.number_field :author_user_id %>
+
+  <%= form.label :audio_file, "音声ファイル" %>
+  <%= form.file_field :audio_file, accept: "audio/*" %>
+
+  <%= form.submit "アップロード" %>
+<% end %>

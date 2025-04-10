@@ -53,4 +53,10 @@ class OkiniirisController < ApplicationController
     @okiniiris = Okiniiri.where(user_id: current_user.id, service_name: "ユーザー").paginate(page: params[:page]) 
     @users = User.where(id: @okiniiris.pluck(:service_id)).order(dice_point: :desc).paginate(page: params[:page]) 
   end
+
+  def audio_readings_show
+    @okiniiris = Okiniiri.where(user_id: current_user.id, service_name: "小説朗読").paginate(page: params[:page]) 
+    @audio_readings = AudioReading.where(id: @okiniiris.pluck(:service_id)).paginate(page: params[:page]) 
+  end
+
 end

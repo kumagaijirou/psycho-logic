@@ -4,79 +4,8 @@
 <%= link_to "新しい百百を投稿する", new_hyakuhyaku_path %><br>
 <%= link_to "百百をID検索する", hyakuhyakus_search_path %><br>
 
-<% if PointLog.find_by(user_id:@current_user.id,service_name: "百百",service_id:@hyakuhyaku.id).present? %>
-<li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
-    <% if @hyakuhyaku.user.avatar.attached? %>
-      <%= link_to image_tag(@hyakuhyaku.user.avatar.variant(resize_to_fill: [100, 100])), @hyakuhyaku.user %>
-    <% else %>
-      <%= link_to image_tag("default_avatar.png", size: "100x100"), @hyakuhyaku.user %>
-    <% end %><br>
-    <% userz = User.find(@hyakuhyaku.user_id) %><br>
-    <span class="user_id">作成したユーザー名<%= userz.name %></span><br>
-    <span class="content"><%= @hyakuhyaku.front_comment %></span><br><br>
-    <span class="content"><%= @hyakuhyaku.back_comment %></span><br><br>
-    <span class="number_of_times_seen">閲覧回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @hyakuhyaku.id,service_name: "百百").count %><br>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(@hyakuhyaku.created_at) %> ago.
-    </span><br>
-
-
-
-  <% if @okiniiri.present? %>
-        <%= button_to 'お気に入りを削除', hyakuhyakus_okiniiris_delete_path(@hyakuhyaku), method: :delete,class: 'btn btn-primary' %>
-      <% else %>
-        <%= button_to 'お気に入りに追加', hyakuhyakus_okiniiris_add_path(@hyakuhyaku), method: :get, class: 'btn btn-primary' %>
-    <% end %>
-</li>
-<% elsif @hyakuhyaku.user_id == current_user.id %>
-  <li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
-    <% if @hyakuhyaku.user.avatar.attached? %>
-      <%= link_to image_tag(@hyakuhyaku.user.avatar.variant(resize_to_fill: [100, 100])), @hyakuhyaku.user %>
-    <% else %>
-      <%= link_to image_tag("default_avatar.png", size: "100x100"), @hyakuhyaku.user %>
-    <% end %><br>
-    <% userz = User.find(@hyakuhyaku.user_id) %><br>
-    <span class="user_id">作成したユーザー名<%= userz.name %></span><br>
-    <span class="content"><%= @hyakuhyaku.front_comment %></span><br><br>
-    <span class="content"><%= @hyakuhyaku.back_comment %></span><br><br>
-    <span class="number_of_times_seen">閲覧回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @hyakuhyaku.id,service_name: "百百").count %><br>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(@hyakuhyaku.created_at) %> ago.
-    </span><br>
-    <% if @okiniiri.present? %>
-        <%= button_to 'お気に入りを削除', hyakuhyakus_okiniiris_delete_path(@hyakuhyaku), method: :delete,class: 'btn btn-primary' %>
-      <% else %>
-        <%= button_to 'お気に入りに追加', hyakuhyakus_okiniiris_add_path(@hyakuhyaku), method: :get, class: 'btn btn-primary' %>
-    <% end %>
-
-</li>
-
-<% elsif @usera.dice_point >= 50 %>
-<li id="hyakuhyaku-<%= @hyakuhyaku.id %>">
-    <% if @hyakuhyaku.user.avatar.attached? %>
-      <%= link_to image_tag(@hyakuhyaku.user.avatar.variant(resize_to_fill: [100, 100])), @hyakuhyaku.user %>
-    <% else %>
-      <%= link_to image_tag("default_avatar.png", size: "100x100"), @hyakuhyaku.user %>
-    <% end %><br>
-    <% userz = User.find(@hyakuhyaku.user_id) %><br>
-    <span class="user_id">作成したユーザー名<%= userz.name %></span><br>
-    <span class="content"><%= @hyakuhyaku.front_comment %></span><br><br>
-    <span class="content"><%= @hyakuhyaku.back_comment %></span><br><br>
-    <span class="number_of_times_seen">閲覧回数 <%= @hyakuhyaku.number_of_times_seen %> 回</span><br>
-    <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: @hyakuhyaku.id,service_name: "百百").count %><br>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(@hyakuhyaku.created_at) %> ago.
-    </span><br>
-
-  <% if @okiniiri.present? %>
-        <%= button_to 'お気に入りを削除', hyakuhyakus_okiniiris_delete_path(@hyakuhyaku), method: :delete,class: 'btn btn-primary' %>
-      <% else %>
-        <%= button_to 'お気に入りに追加', hyakuhyakus_okiniiris_add_path(@hyakuhyaku), method: :get, class: 'btn btn-primary' %>
-    <% end %>
-</li>
-
+<% if @hyakuhyaku.user_id == current_user.id || already_purchased?(@hyakuhyaku) || user_can_afford? %>
+  <%= render "hyakuhyaku_card", hyakuhyaku: @hyakuhyaku, user: @user, okiniiri: @okiniiri %>
 <% else %>
-ダイスポイントが足りません。
+  <p>ダイスポイントが足りません。</p>
 <% end %>

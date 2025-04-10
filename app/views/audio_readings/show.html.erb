@@ -1,0 +1,11 @@
+<% provide(:title, '小説朗読') %>
+<h1>小説朗読</h1>
+
+<%= link_to "新しい小説朗読を投稿する", new_audio_reading_path %><br>
+<%= link_to "小説朗読をID検索する", audio_readings_search_path %><br>
+
+<% if @audio_reading.user_id == current_user.id || already_purchased?(@audio_reading) || user_can_afford_from_audio_reading? %>
+  <%= render "audio_reading_card", audio_reading: @audio_reading, user: @user, okiniiri: @okiniiri %>
+<% else %>
+  <p>ダイスポイントが足りません。</p>
+<% end %>

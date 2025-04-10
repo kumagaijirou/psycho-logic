@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  subtitle: MyString
+  user: one
+  novel: one
+  play_count: 1
+  author_user_id: 1
+
+two:
+  title: MyString
+  subtitle: MyString
+  user: two
+  novel: two
+  play_count: 1
+  author_user_id: 1

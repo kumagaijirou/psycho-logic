@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'audio_readings/index'
+  get 'audio_readings/show'
+  get 'audio_readings/new'
+  get 'audio_readings/create'
+  get 'audio_readings/edit'
+  get 'audio_readings/update'
+  get 'audio_readings/destroy'
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
@@ -71,6 +78,7 @@ Rails.application.routes.draw do
   get "okiniiris/:user_id/five_percentage_reviews_show", to:"okiniiris#five_percentage_reviews_show", as: 'okiniiris_five_percentage_reviews_show'
   get "okiniiris/:user_id/one_yen_articles_show", to:"okiniiris#one_yen_articles_show", as: 'okiniiris_one_yen_articles_show'
   get "okiniiris/:user_id/novel_services_show", to:"okiniiris#novel_services_show", as: 'okiniiris_novel_services_show'
+  get "okiniiris/:user_id/audio_readings_show", to:"okiniiris#audio_readings_show", as: 'okiniiris_audio_readings_show'
   get "point_mails/index2"
   get "mini_know_hows/:id/okiniiris_add/", to: "mini_know_hows#okiniiris_add", as: 'mini_know_hows_okiniiris_add'
   delete "mini_know_hows/:id/okiniiris_delete/", to: "mini_know_hows#okiniiris_delete", as: 'mini_know_hows_okiniiris_delete'
@@ -102,7 +110,10 @@ Rails.application.routes.draw do
   delete "novel_services/:id/okiniiris_delete/", to: "novel_services#okiniiris_delete", as: 'novel_services_okiniiris_delete'
   get "novel_services/search_result/", to: "novel_services#search_result", as: 'novel_services_search_result'
   get "novel_services/search/", to: "novel_services#search", as: 'novel_services_search'
-  
+  get "audio_readings/search_result/", to: "audio_readings#search_result", as: 'audio_readings_search_result'
+  get "audio_readings/search/", to: "audio_readings#search", as: 'audio_readings_search'
+  get "audio_readings/:id/okiniiris_add/", to: "audio_readings#okiniiris_add", as: 'audio_readings_okiniiris_add'
+  delete "audio_readings/:id/okiniiris_delete/", to: "audio_readings#okiniiris_delete", as: 'audio_readings_okiniiris_delete'
 
   resources :five_percentage_reviews, param: :five_percentage_review_id,  only: [:new, :create, :edit, :update,:show, :index]
   resources :novels,              only: [:new, :create, :show, :edit, :update, :index, :update] do
@@ -129,4 +140,5 @@ Rails.application.routes.draw do
   end
   resources :one_yen_articles,     only: [:new, :create, :destroy,:show, :index, :edit, :update]
   resources :novel_services,     only: [:new, :create, :destroy,:show, :index, :edit]
+  resources :audio_readings
 end

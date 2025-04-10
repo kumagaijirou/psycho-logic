@@ -1,0 +1,14 @@
+<% provide(:title, 'お気に入りの小説朗読') %>
+<h1>お気に入りの小説朗読</h1>
+
+<%= link_to "小説朗読へのリンク集", audio_readings_path %><br>
+<%= link_to "新しい小説朗読を作る", audio_readings_new_path %><br>
+
+<%= will_paginate %>
+
+<ul class="audio_readings">
+  <%= render @audio_readings %>
+  
+</ul>
+
+<%= will_paginate %>

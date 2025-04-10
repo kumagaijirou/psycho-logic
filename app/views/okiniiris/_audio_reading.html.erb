@@ -1,0 +1,9 @@
+<li>
+<%= link_to audio_reading.title, audio_reading_path(audio_reading) %><br>
+
+  <span class="subtitle"> <%= audio_reading.subtitle %></span><br>
+  <span class="user_id"> 朗読者名 <%= audio_reading.user.name %></span><br>
+  <span class="user_id"> 小説の制作者名 <% usera = User.find(audio_reading.author_user_id) %><%= usera.name %></span><br>
+  <span class="play count"> 聴取回数 <%= audio_reading.play_count %>回</span><br>
+  <span class="お気に入り登録数">お気に入り登録数 <%= Okiniiri.where(service_id: audio_reading.id,service_name: "小説朗読").count %><br><br>
+  </li>
